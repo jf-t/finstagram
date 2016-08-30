@@ -1,24 +1,5 @@
-# README
+#Finstagram
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Finstagram is a fake Instagram/AirBnB hybrid application. It takes the functionality of images, comments, and likes from instagram and adds it to the front end google maps interface with markers of AirBnB. This is a simple functioning application with authentication.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This application is currently under construction. The link to the live site will be at jft-finstagram.herokuapp.com
