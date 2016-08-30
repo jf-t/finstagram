@@ -29,4 +29,8 @@ class Image < ApplicationRecord
     through: :likes,
     source: :author
 
+    def self.all_following(user_id, offsetNum = 0)
+      @images = Image.all.where(user_id: user_id).order(:created_at).limit(30).offset(offsetNum)
+    end
+
 end

@@ -3,7 +3,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    userItem = session_params[:userItem]
+    userItem = session_params[:user_item]
     password = session_params[:password]
     if userItem.include?("@")
       @user = User.find_by_email_cred(userItem, password)
@@ -12,6 +12,9 @@ class Api::SessionsController < ApplicationController
     end
 
     if @user
+      render 'api/users/show'
+    else
+      render( json: ["Invalid username/password combination"],status: 401)
     end
   end
 
@@ -21,6 +24,6 @@ class Api::SessionsController < ApplicationController
 
   private
   def session_params
-    params.require(:session).permit(:userItem, :password)
+    params.require(:user).permit(:user_item, :password)
   end
 end
