@@ -15,8 +15,9 @@ class UserLogin extends React.Component {
   }
 
   loggedIn() {
-    if (this.props.user.user) {
-      hashHistory.push("/profile")
+    let user = this.props.user.user
+    if (user) {
+      hashHistory.push(`/profile/${user.id}`)
     }
   }
 
@@ -32,9 +33,14 @@ class UserLogin extends React.Component {
     }
   }
 
+  signInPage(e) {
+    hashHistory.push('/signup');
+  }
+
   render() {
     return(
       <div>
+        <a onClick={this.signInPage} href="#" className="sign-up">Sign Up</a>
         <form onSubmit={event => this.submitForm(event)}>
           <input type="text" onChange={this.update("user_item")} name="fullName" placeholder="Email or Username"></input>
           <input type="password" onChange={this.update("password")} name="email" placeholder="Password"></input>

@@ -1,4 +1,4 @@
-import { userConstants, receiveUser, receiveErrors } from '../actions/user_actions';
+import { userConstants, receiveUser, receivePageUser, receiveErrors } from '../actions/user_actions';
 import { login, signup, logout } from '../util/user_api_util';
 
 const UserMiddleware = ({getState, dispatch}) => next => action => {

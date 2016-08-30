@@ -13,7 +13,7 @@ export const login = (user, success, error) => {
 export const signup = (creds, success, error) => {
   $.ajax({
     method: "POST",
-    url: "api/user",
+    url: "api/users",
     data: {
       user: creds
     },
@@ -28,4 +28,12 @@ export const logout = (success) => {
     url: "api/session",
     success
   });
+};
+
+export const userfromId = (userId, success) => {
+  $.ajax({
+    method: "GET",
+    url: `api/users/${userId}`,
+    success
+  })
 };

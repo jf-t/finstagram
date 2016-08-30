@@ -3,7 +3,8 @@ export const userConstants = {
   LOGOUT: "LOGOUT",
   SIGNUP: "SIGNUP",
   RECEIVE_USER: "RECEIVE_USER",
-  RECEIVE_ERRORS: "RECEIVE_ERRORS"
+  RECEIVE_ERRORS: "RECEIVE_ERRORS",
+  RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER"
 }
 
 export const login = user => {
@@ -22,8 +23,17 @@ export const signup = user => ({
   user
 });
 
+export const requestUser = id => ({
+  type: userConstants.REQUEST_USER,
+  userId: id
+});
+
 export const receiveUser = user => ({
   type: userConstants.RECEIVE_USER,
+  user
+});
+export const receivePageUser = user => ({
+  type: userConstants.RECEIVE_PAGE_USER,
   user
 });
 

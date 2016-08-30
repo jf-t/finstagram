@@ -17,8 +17,9 @@ class UserSignup extends React.Component {
   }
 
   loggedIn() {
-    if (this.props.user.user) {
-      hashHistory.push("/profile")
+    let user = this.props.user.user
+    if (user) {
+      hashHistory.push(`/profile/${user.id}`)
     }
   }
 
