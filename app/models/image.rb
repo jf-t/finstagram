@@ -14,4 +14,19 @@
 #
 
 class Image < ApplicationRecord
+  validates :image_url, :user_id, :lat, :lng, presence: true
+
+  belongs_to :author,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :User
+
+  has_many :comments
+
+  has_many :likes
+
+  has_many :user_likes,
+    through: :likes,
+    source: :author
+
 end

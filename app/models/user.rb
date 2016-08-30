@@ -16,6 +16,18 @@ class User < ApplicationRecord
   validates :email, :username, :full_name, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  has_many :images
+  has_many :authored_comments,
+    primary_key: :id,
+    foreign_key: :comment_id,
+    class_name: :Comment
+
+  has_many :likes
+
+  has_many :liked_images,
+    through: :likes,
+    source: :image
+
   attr_reader :password
   after_initialize :generate_session_token
 
