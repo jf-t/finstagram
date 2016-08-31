@@ -5,7 +5,8 @@ export const userConstants = {
   RECEIVE_USER: "RECEIVE_USER",
   RECEIVE_ERRORS: "RECEIVE_ERRORS",
   RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER",
-  EDIT_USER: "EDIT_USER"
+  EDIT_USER: "EDIT_USER",
+  LOGGED_OUT: "LOGGED_OUT"
 }
 
 export const login = user => {
@@ -46,4 +47,8 @@ export const receiveErrors = errors => ({
 export const editUser = user => ({
   type: userConstants.EDIT_USER,
   user
+});
+
+export const loggedOutRender = () => ({
+  type: userConstants.LOGGED_OUT
 });

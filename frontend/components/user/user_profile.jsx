@@ -1,6 +1,8 @@
 import React from 'react';
 import { userfromId } from '../../util/user_api_util';
 import EditProfile from './edit_profile';
+import { hashHistory } from 'react-router';
+
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -14,14 +16,21 @@ class UserProfile extends React.Component {
       this.setState({user: user})
     });
   }
+  componentDidUpdate() {
+    if (!this.props.currentUser.user) {
+      hashHistory.push("/login");
+    }
+  }
 
   componentDidMount() {
-    console.log("yo");
     this.editStuff = (
       <div id="edit-pro-form">
         <EditProfile editUser={this.props.editUser} user={this.props.currentUser}/>
       </div>
     );
+    if (!this.props.currentUser.user) {
+      hashHistory.push('/login');
+    }
   }
 
   showEditForm() {
@@ -35,10 +44,9 @@ class UserProfile extends React.Component {
       user = this.props.currentUser.user
     }
     if (Object.keys(this.props.images).length > 0) {
-      console.log(this.props.images);
       this.feedItems = Object.keys(this.props.images).map((img) => {
         return (
-          <div className="feed-item">
+          <div key={this.props.images[img].id} className="feed-item">
             <div className="feed-img-cont">
               <img src={this.props.images[img].image_url} />
             </div>

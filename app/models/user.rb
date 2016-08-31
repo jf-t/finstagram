@@ -15,7 +15,7 @@
 class User < ApplicationRecord
   validates :email, :username, :full_name, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
-
+  validates :username, presence: true
   has_many :images
   has_many :authored_comments,
     primary_key: :id,

@@ -32,6 +32,10 @@ body {
   font-size: 30px;
   padding: 5px 10px;
 }
+.header h1 a {
+  padding: 8px 0;
+  display: block;
+}
 .header-nav ul {
   display: flex;
   padding: 0;
@@ -39,13 +43,16 @@ body {
   border-right: 1px solid $purple;
 }
 .header-nav li {
-  padding: 13px 20px;
   border-left: 1px solid $purple;
 }
 .header-nav li:hover {
   background-color: $purple;
   cursor: pointer;
   color: #333;
+}
+.header-nav a {
+  padding: 20px 20px;
+  display:block;
 }
 .header a {
   color: inherit;
@@ -119,14 +126,16 @@ body {
 .profile-info {
   margin: 0;
   position: relative;
+  margin-top: 30px;
 }
 
 .profile-pic {
   width: 250px;
   height: 249px;
-  border: 1px solid #ccc;
   padding: 0;
   border-top: none;
+  overflow: hidden;
+  border-radius: 70px;
 }
 .profile-pic img {
   width: 100%;
@@ -170,16 +179,23 @@ body {
   width: 900px;
   margin: 0 auto;
   margin-top: 100px;
+  border-top: 1px solid #ccc;
+  padding-top: 50px;
+}
+.image-feed::after {
+  content: " ";
+  clear: both;
+  visibility: hidden;
 }
 .feed-item {
   width: 300px;
   margin: 0 auto;
   padding: 30px 0;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  float: left;
 }
+
 .feed-img-cont {
-  width: 400px;
+  width: 75%;
   margin: 0 auto;
 }
 .feed-item img {
@@ -188,19 +204,48 @@ body {
 }
 .feed-item p {
   text-align: center;
-  margin: 15px 0 30px;
+  margin: 15px 20px 30px;
 }
 .bio-container {
-  padding: 5px 15px;
   margin: 30px 50px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
   height: 85px;
-  background-color: #fff;
 }
 p.bio {
   line-height: 25px;
   font-weight: 300;
   letter-spacing: 1px;
-  font-size: 13px;
+}
+input:focus, textarea:focus {
+  outline: none;
+  border: 2px solid $purple;
+}
+
+// FEED
+.feed {
+  width: 1200px;
+  margin: 0 auto;
+}
+.feed::after {
+  clear: both;
+  content: "";
+  visibility: hidden;
+  display: block;
+}
+.news-feed-item:first-child {
+  margin-top: 25px;
+}
+.news-feed-item {
+  width: 600px;
+  margin: 100px auto;
+  padding: 50px 0;
+}
+.news-feed-item img {
+  display: block;
+  margin: 0 auto;
+  width: 450px;
+}
+.news-feed-item p {
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
 }

@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: finstagram
+  api_key: '726138223968661'
+  api_secret: jArFB8FIP-uC6VIBQ2vwOgHrtSM
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: finstagram
+  api_key: '726138223968661'
+  api_secret: jArFB8FIP-uC6VIBQ2vwOgHrtSM
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: finstagram
+  api_key: '726138223968661'
+  api_secret: jArFB8FIP-uC6VIBQ2vwOgHrtSM
+  enhance_image_tag: true
+  static_image_support: false

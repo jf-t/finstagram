@@ -34,7 +34,7 @@ class EditProfile extends React.Component {
             <input type="text" onChange={this.update("email")} defaultValue={this.state.email} />
             <input type="text" onChange={this.update("username")} defaultValue={this.state.username} />
             <input type="text" onChange={this.update("image_url")} defaultValue={this.state.image_url} placeholder="Image Url" />
-            <textarea onChange={this.update("bio")} placeholder="Bio">{this.state.bio}</textarea>
+            <textarea onChange={this.update("bio")} placeholder="Bio"defaultValue={this.state.bio}></textarea>
             <input type="submit" value="Submit Changes"></input>
           </form>
         </div>

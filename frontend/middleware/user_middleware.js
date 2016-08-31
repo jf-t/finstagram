@@ -1,4 +1,4 @@
-import { userConstants, receiveUser, receivePageUser, receiveErrors } from '../actions/user_actions';
+import { userConstants, receiveUser, receivePageUser, receiveErrors, loggedOutRender } from '../actions/user_actions';
 import { login, signup, logout, editUser } from '../util/user_api_util';
 
 const UserMiddleware = ({getState, dispatch}) => next => action => {
@@ -18,8 +18,7 @@ const UserMiddleware = ({getState, dispatch}) => next => action => {
       return next(action)
     case userConstants.LOGOUT:
       logout(() => {
-        console.log("yo");
-        next(action)
+        dispatch(loggedOutRender())
       });
       break;
     case userConstants.SIGNUP:

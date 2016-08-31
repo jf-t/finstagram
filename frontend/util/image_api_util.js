@@ -1,5 +1,4 @@
 export const requestImages = (success, params) => {
-  console.log("receiving images");
   $.ajax({
     method: "GET",
     url: "api/images",

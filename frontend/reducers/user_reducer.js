@@ -9,7 +9,7 @@ const noUser = {
 
 const UserReducer = (state = noUser, action) => {
   switch(action.type) {
-    case userConstants.LOGOUT:
+    case userConstants.LOGGED_OUT:
       return merge({}, noUser);
     case userConstants.RECEIVE_USER:
       return merge({}, noUser, {user: action.user});
