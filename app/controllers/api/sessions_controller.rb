@@ -12,6 +12,7 @@ class Api::SessionsController < ApplicationController
     end
 
     if @user
+      session[:session_token] = @user.session_token
       render 'api/users/show'
     else
       render( json: ["Invalid username/password combination"],status: 401)
@@ -20,6 +21,7 @@ class Api::SessionsController < ApplicationController
 
   def destroy
     logout
+    render 'api/users/no'
   end
 
   private

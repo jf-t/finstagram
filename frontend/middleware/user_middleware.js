@@ -17,7 +17,10 @@ const UserMiddleware = ({getState, dispatch}) => next => action => {
       login(action.user, success, errors);
       return next(action)
     case userConstants.LOGOUT:
-      logout(() => next(action));
+      logout(() => {
+        console.log("yo");
+        next(action)
+      });
       break;
     case userConstants.SIGNUP:
       signup(action.user, success, errors);

@@ -4,7 +4,7 @@ import UserSignupContainer from './user/user_signup_container';
 import UserLoginContainer from './user/user_login_container';
 import UserProfileContainer from './user/user_profile_container';
 import App from './app';
-import HomeIndexContainer from './feed/home_index_container';
+import HomeIndexContainer from './containing/home_index_container';
 
 
 class AppRouter extends React.Component {

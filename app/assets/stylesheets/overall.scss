@@ -1,0 +1,123 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i';
+
+
+//variables
+$purple: #E3CDFF;
+
+
+h1, h2, h3, h4, h5, h6, p, ul, li, div, nav, main, section, body {
+  margin: 0;
+  color: inherit;
+  font-family: sans-serif;
+  box-sizing: inherit;
+  font-family: "Raleway";
+  text-decoration: inherit;
+}
+body {
+  background-color: #eee;
+}
+
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  width: 900px;
+  margin: 0 auto;
+  border-left: 1px solid #ccc;
+}
+.header h1 {
+  font-size: 30px;
+  padding: 5px 10px;
+}
+.header-nav ul {
+  display: flex;
+  padding: 0;
+  list-style: none;
+  border-right: 1px solid $purple;
+}
+.header-nav li {
+  padding: 13px 20px;
+  border-left: 1px solid $purple;
+}
+.header-nav li:hover {
+  background-color: $purple;
+  cursor: pointer;
+  color: #333;
+}
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header-nav {
+  float: right;
+}
+
+// LOGIN
+
+.login {
+  position: absolute;
+  right: 100px;
+  background-color: #fff;
+  top: 55px;
+  border: 1px solid #ccc;
+}
+.login a {
+  text-decoration: none;
+  padding: 20px;
+  position: relative;
+  top: 10px;
+}
+.login form {
+  color: inherit;
+  width: 250px;
+}
+.login input {
+  margin: 15px;
+  width: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.login input[type=submit] {
+  width: 80px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #ddd;
+  font-size: 15px;
+}
+.login input[type=submit]:hover {
+  background-color: $purple;
+  cursor: pointer;
+}
+
+//PROFILE PAGE
+.profile-info {
+  width: 900px;
+  height: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.profile-pic {
+  width: 250px;
+  height: 250px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.profile-pic img {
+  width: 100%;
+}
+.profile-info h1 {
+  margin: 50px 0 0 50px;
+  float: left;
+}
+.profile-info h3 {
+  font-style: italic;
+  font-weight: 300px;
+  margin: 20px 0 0 50px;
+  display: block;
+  float: left;
+}

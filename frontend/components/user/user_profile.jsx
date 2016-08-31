@@ -21,10 +21,15 @@ class UserProfile extends React.Component {
       user = this.state.user
     }
     return(
-      <ul>
-        <li>{user.username}</li>
-        <li>{user.email}</li>
-      </ul>
+      <div className="main">
+        <div className="profile-info">
+          <div className="profile-pic">
+            <img src={user.image_url} />
+          </div>
+          <h1>{user.full_name}</h1>
+          <h3>{user.username}</h3>
+        </div>
+      </div>
     )
   }
 }
