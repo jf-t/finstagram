@@ -35,14 +35,15 @@ class UserLogin extends React.Component {
 
   render() {
     return(
-      <div className="login">
-        <Link to={`/signup`} className="sign-up">Sign In</Link>
+      <div className="modal-form">
+        <h4>Login</h4>
         <form onSubmit={event => this.submitForm(event)}>
           <input type="text" onChange={this.update("user_item")} name="fullName" placeholder="Email or Username"></input>
           <input type="password" onChange={this.update("password")} name="email" placeholder="Password"></input>
 
           <input type="submit" value="submit"></input>
         </form>
+        <Link to={`/signup`} className="sign-up">Sign Up</Link>
       </div>
     )
   }

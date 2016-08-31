@@ -37,3 +37,14 @@ export const userfromId = (userId, success) => {
     success
   })
 };
+
+export const editUser = (user, success, error) => {
+  $.ajax({
+    method: "PATCH",
+    url: `api/users/${user.id}`,
+    data: {
+      user: user
+    },
+    success
+  });
+};

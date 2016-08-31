@@ -1,4 +1,3 @@
-@import 'https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i';
 
 
 //variables
@@ -11,6 +10,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li, div, nav, main, section, body {
   font-family: sans-serif;
   box-sizing: inherit;
   font-family: "Raleway";
+  color: #333;
   text-decoration: inherit;
 }
 body {
@@ -56,68 +56,151 @@ body {
   float: right;
 }
 
-// LOGIN
-
-.login {
+//Login / Sign Up
+.modal-form {
   position: absolute;
-  right: 100px;
   background-color: #fff;
-  top: 55px;
+  width: 40%;
+  left: 30%;
+  top: 25%;
+  border-radius: 10px;
+  padding: 10px 40px 40px;
   border: 1px solid #ccc;
 }
-.login a {
-  text-decoration: none;
-  padding: 20px;
-  position: relative;
-  top: 10px;
-}
-.login form {
-  color: inherit;
-  width: 250px;
-}
-.login input {
-  margin: 15px;
-  width: 200px;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-.login input[type=submit] {
-  width: 80px;
+.modal-form h4 {
+  margin: 10px 0;
   text-align: center;
-  border-radius: 5px;
-  background-color: #ddd;
-  font-size: 15px;
 }
-.login input[type=submit]:hover {
+.modal-form input {
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.modal-form input[type=submit] {
+  width: 100px;
+  float: right;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.modal-form input[type=submit]:hover {
   background-color: $purple;
-  cursor: pointer;
+}
+.modal-form textarea {
+  width: 100%;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 100px;
+  padding: 10px 20px;
+}
+
+.edit-form {
+  width: 60%;
+  left: 20%;
+  top: 4%;
+}
+.edit-form input[type=submit] {
+  width: 150px;
+}
+
+.edit-form h4 {
+  margin: 0 !important;
 }
 
 //PROFILE PAGE
-.profile-info {
+.main {
   width: 900px;
-  height: 500px;
   margin: 0 auto;
-  background-color: #fff;
+}
+.profile-info {
+  margin: 0;
+  position: relative;
 }
 
 .profile-pic {
   width: 250px;
-  height: 250px;
+  height: 249px;
   border: 1px solid #ccc;
+  padding: 0;
   border-top: none;
 }
 .profile-pic img {
   width: 100%;
+  height: 100%;
 }
 .profile-info h1 {
   margin: 50px 0 0 50px;
-  float: left;
+  display: block;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 40px;
 }
-.profile-info h3 {
-  font-style: italic;
-  font-weight: 300px;
+.profile-info h4 {
   margin: 20px 0 0 50px;
   display: block;
-  float: left;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+.edit-profile-link {
+  background-color: #fff;
+  padding: 10px 20px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.edit-profile-link a {
+  color: #333;
+  text-decoration: none;
+}
+.edit-profile-link:hover {
+  background-color: $purple;
+  cursor: pointer;
+}
+#edit-pro-form {
+  display: none;
+}
+
+.image-feed {
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+.feed-item {
+  width: 300px;
+  margin: 0 auto;
+  padding: 30px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.feed-img-cont {
+  width: 400px;
+  margin: 0 auto;
+}
+.feed-item img {
+  width: 100%;
+  height: 100%;
+}
+.feed-item p {
+  text-align: center;
+  margin: 15px 0 30px;
+}
+.bio-container {
+  padding: 5px 15px;
+  margin: 30px 50px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  height: 85px;
+  background-color: #fff;
+}
+p.bio {
+  line-height: 25px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 13px;
 }

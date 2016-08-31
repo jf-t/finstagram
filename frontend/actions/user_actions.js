@@ -4,7 +4,8 @@ export const userConstants = {
   SIGNUP: "SIGNUP",
   RECEIVE_USER: "RECEIVE_USER",
   RECEIVE_ERRORS: "RECEIVE_ERRORS",
-  RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER"
+  RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER",
+  EDIT_USER: "EDIT_USER"
 }
 
 export const login = user => {
@@ -40,4 +41,9 @@ export const receivePageUser = user => ({
 export const receiveErrors = errors => ({
   type: userConstants.RECEIVE_ERRORS,
   errors
+});
+
+export const editUser = user => ({
+  type: userConstants.EDIT_USER,
+  user
 });

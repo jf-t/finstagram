@@ -14,10 +14,14 @@ class AppRouter extends React.Component {
     }
   }
 
+  addHome (nextState, replace) {
+    replace("/home");
+  }
+
   render() {
     return (
       <Router history={hashHistory} >
-        <Route path="/" component={ App }></Route>
+        <Route path="/" component={ App } onEnter={this.addHome}></Route>
         <Route path="/home" component={ HomeIndexContainer }>
           <Route path="/profile/:id" component={ UserProfileContainer } onEnter={this.redirectIfNotLoggedIn}/>
           <Route path="/signup" component={ UserSignupContainer } />

@@ -18,6 +18,12 @@ class SiteHeader extends React.Component {
     } else {
       innout = <li><Link to={"/login"}>Sign In</Link></li>
     }
+    let currentId;
+    if (this.props.currentUser) {
+      currentId = this.props.currentUser.id
+    } else {
+      currentId = 0;
+    }
     return(
       <div className="header">
         <div className="header-inner">
@@ -25,7 +31,7 @@ class SiteHeader extends React.Component {
           <nav className="header-nav">
             <ul>
               <li><Link to={'/home'}>Home</Link></li>
-              <li><Link to={`/profile/4`}>Profile</Link></li>
+              <li><Link to={`/profile/${currentId}`}>Profile</Link></li>
               {innout}
             </ul>
           </nav>
