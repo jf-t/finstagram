@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import UserProfile from './user_profile';
-import { logout, editUser } from '../../actions/user_actions';
+import { logout, editUser, requestUser } from '../../actions/user_actions';
 import { requestImages } from '../../actions/image_actions';
 
 
@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  requestUser: (id) => dispatch(requestUser(id))
+  requestUser: (id) => dispatch(requestUser(id)),
+  editUser: (user) => dispatch(editUser(user))
 });
 
 export default connect(

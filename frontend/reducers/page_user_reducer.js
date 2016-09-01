@@ -6,6 +6,8 @@ const PageUserReducer = (state = {}, action) => {
   switch(action.type) {
     case userConstants.EDIT_USER:
       return merge({}, action.user);
+    case userConstants.RECEIVE_PAGE_USER:
+      return merge({}, action.user);
     default:
       return state;
   }

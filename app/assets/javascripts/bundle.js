@@ -28856,6 +28856,7 @@
 	  RECEIVE_USER: "RECEIVE_USER",
 	  RECEIVE_ERRORS: "RECEIVE_ERRORS",
 	  RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER",
+	  REQUEST_USER: "REQUEST_USER",
 	  EDIT_USER: "EDIT_USER",
 	  LOGGED_OUT: "LOGGED_OUT"
 	};
@@ -29102,19 +29103,12 @@
 	    logout: function logout() {
 	      return dispatch((0, _user_actions.logout)());
 	    },
-	    requestUser: function (_requestUser) {
-	      function requestUser(_x) {
-	        return _requestUser.apply(this, arguments);
-	      }
-	
-	      requestUser.toString = function () {
-	        return _requestUser.toString();
-	      };
-	
-	      return requestUser;
-	    }(function (id) {
-	      return dispatch(requestUser(id));
-	    })
+	    requestUser: function requestUser(id) {
+	      return dispatch((0, _user_actions.requestUser)(id));
+	    },
+	    editUser: function editUser(user) {
+	      return dispatch((0, _user_actions.editUser)(user));
+	    }
 	  };
 	};
 	
@@ -29164,12 +29158,11 @@
 	  _createClass(UserProfile, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.receiveUser(this.pageUserId);
+	      this.props.requestUser(this.props.pageUserId);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      console.log('please update');
 	      if (!this.props.currentUser.user) {
 	        _reactRouter.hashHistory.push("/login");
 	      }
@@ -29199,31 +29192,38 @@
 	      if (!this.props.currentUser.user) {
 	        _reactRouter.hashHistory.push('/login');
 	      }
-	      if (this.props.currentUser.user) {
-	        user = this.props.currentUser.user;
-	      }
-	      if (this.props.currentUser.user.images.length > 0) {
-	        var images = this.props.currentUser.user.images;
-	        this.feedItems = images.map(function (img) {
-	          return _react2.default.createElement(
-	            'div',
-	            { key: img.id, className: 'feed-item' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'feed-img-cont' },
-	              _react2.default.createElement('img', { src: img.image_url })
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'caption' },
-	              img.caption
-	            )
-	          );
-	        });
-	      } else {
-	        this.feedItems = _react2.default.createElement('div', null);
+	      if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
+	        this.pageUser = this.props.currentUser.user;
 	      }
 	
+	      if (Object.keys(this.props.pageUser).length > 0 || this.pageUser) {
+	        if (!this.pageUser) {
+	          this.pageUser = this.props.pageUser;
+	        }
+	        if (this.pageUser.images.length > 0) {
+	          var images = this.pageUser.images;
+	          this.feedItems = images.map(function (img) {
+	            return _react2.default.createElement(
+	              'div',
+	              { key: img.id, className: 'feed-item' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'feed-img-cont' },
+	                _react2.default.createElement('img', { src: img.image_url })
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'caption' },
+	                img.caption
+	              )
+	            );
+	          });
+	        } else {
+	          this.feedItems = _react2.default.createElement('div', null);
+	        }
+	      } else {
+	        this.pageUser = "";
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'main' },
@@ -29233,7 +29233,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'profile-pic col-sm-4' },
-	            _react2.default.createElement('img', { src: user.image_url })
+	            _react2.default.createElement('img', { src: this.pageUser.image_url })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -29241,13 +29241,13 @@
 	            _react2.default.createElement(
 	              'h1',
 	              null,
-	              user.full_name
+	              this.pageUser.full_name
 	            ),
 	            _react2.default.createElement(
 	              'h4',
 	              null,
 	              '@',
-	              user.username
+	              this.pageUser.username
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -29255,7 +29255,7 @@
 	              _react2.default.createElement(
 	                'p',
 	                { className: 'bio' },
-	                user.bio
+	                this.pageUser.bio
 	              )
 	            )
 	          ),
@@ -33330,6 +33330,8 @@
 	  switch (action.type) {
 	    case _user_actions.userConstants.EDIT_USER:
 	      return (0, _merge2.default)({}, action.user);
+	    case _user_actions.userConstants.RECEIVE_PAGE_USER:
+	      return (0, _merge2.default)({}, action.user);
 	    default:
 	      return state;
 	  }
@@ -33456,6 +33458,11 @@
 	        case _user_actions.userConstants.EDIT_USER:
 	          (0, _user_api_util.editUser)(action.user, success, errors);
 	          return next(action);
+	        case _user_actions.userConstants.REQUEST_USER:
+	          var success2 = function success2(user) {
+	            return dispatch((0, _user_actions.receivePageUser)(user));
+	          };
+	          (0, _user_api_util.userfromId)(action.userId, success2);
 	        default:
 	          return next(action);
 	      }
