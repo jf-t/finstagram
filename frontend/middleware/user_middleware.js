@@ -1,5 +1,5 @@
-import { userConstants, receiveUser, receivePageUser, receiveErrors, loggedOutRender } from '../actions/user_actions';
-import { login, signup, logout, editUser, userfromId } from '../util/user_api_util';
+import { userConstants, receiveUser, receivePageUser, receiveErrors, loggedOutRender, receiveUsers } from '../actions/user_actions';
+import { login, signup, logout, editUser, userfromId, requestUsers} from '../util/user_api_util';
 
 const UserMiddleware = ({getState, dispatch}) => next => action => {
 
@@ -30,6 +30,9 @@ const UserMiddleware = ({getState, dispatch}) => next => action => {
     case userConstants.REQUEST_USER:
       const success2 = (user) => dispatch(receivePageUser(user));
       userfromId(action.userId, success2);
+    case userConstants.REQUEST_USERS:
+      const success3 = (users) => dispatch(receiveUsers(users));
+      requestUsers(action.data, success3);
     default:
       return next(action);
   }

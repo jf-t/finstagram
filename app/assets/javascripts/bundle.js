@@ -28858,7 +28858,9 @@
 	  RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER",
 	  REQUEST_USER: "REQUEST_USER",
 	  EDIT_USER: "EDIT_USER",
-	  LOGGED_OUT: "LOGGED_OUT"
+	  LOGGED_OUT: "LOGGED_OUT",
+	  REQUEST_USERS: "REQUEST_USERS",
+	  RECEIVE_USERS: "RECEIVE_USERS"
 	};
 	
 	var login = exports.login = function login(user) {
@@ -28885,6 +28887,20 @@
 	  return {
 	    type: userConstants.REQUEST_USER,
 	    userId: id
+	  };
+	};
+	
+	var requestUsers = exports.requestUsers = function requestUsers(str) {
+	  return {
+	    type: userConstants.REQUEST_USERS,
+	    data: str
+	  };
+	};
+	
+	var receiveUsers = exports.receiveUsers = function receiveUsers(users) {
+	  return {
+	    type: userConstants.RECEIVE_USERS,
+	    users: users
 	  };
 	};
 	
@@ -29478,6 +29494,20 @@
 	    success: success
 	  });
 	};
+	
+	var requestUsers = exports.requestUsers = function requestUsers(str, success, error) {
+	  $.ajax({
+	    method: "GET",
+	    url: 'api/users',
+	    data: {
+	      str: str
+	    },
+	    success: success,
+	    error: function error() {
+	      return console.log("ugh");
+	    }
+	  });
+	};
 
 /***/ },
 /* 267 */
@@ -29761,6 +29791,10 @@
 	
 	var _reactRouter = __webpack_require__(198);
 	
+	var _search_container = __webpack_require__(499);
+	
+	var _search_container2 = _interopRequireDefault(_search_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29832,6 +29866,7 @@
 	              'Finstagram'
 	            )
 	          ),
+	          _react2.default.createElement(_search_container2.default, null),
 	          _react2.default.createElement(
 	            'nav',
 	            { className: 'header-nav' },
@@ -30077,12 +30112,17 @@
 	
 	var _page_user_reducer2 = _interopRequireDefault(_page_user_reducer);
 	
+	var _search_reducer = __webpack_require__(498);
+	
+	var _search_reducer2 = _interopRequireDefault(_search_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var RootReducer = (0, _redux.combineReducers)({
 	  user: _user_reducer2.default,
 	  images: _image_reducer2.default,
-	  pageUser: _page_user_reducer2.default
+	  pageUser: _page_user_reducer2.default,
+	  search: _search_reducer2.default
 	});
 	
 	exports.default = RootReducer;
@@ -33634,6 +33674,11 @@
 	            return dispatch((0, _user_actions.receivePageUser)(user));
 	          };
 	          (0, _user_api_util.userfromId)(action.userId, success2);
+	        case _user_actions.userConstants.REQUEST_USERS:
+	          var success3 = function success3(users) {
+	            return dispatch((0, _user_actions.receiveUsers)(users));
+	          };
+	          (0, _user_api_util.requestUsers)(action.data, success3);
 	        default:
 	          return next(action);
 	      }
@@ -48037,6 +48082,161 @@
 	}();
 	
 	exports.default = MarkerManager;
+
+/***/ },
+/* 498 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _user_actions = __webpack_require__(261);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var SearchReducer = function SearchReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _user_actions.userConstants.RECEIVE_USERS:
+	      return [].concat(_toConsumableArray(action.users));
+	    default:
+	      return state;
+	  }
+	};
+	exports.default = SearchReducer;
+
+/***/ },
+/* 499 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _search = __webpack_require__(500);
+	
+	var _search2 = _interopRequireDefault(_search);
+	
+	var _user_actions = __webpack_require__(261);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    search: state.search
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    requestUsers: function requestUsers(str) {
+	      return dispatch((0, _user_actions.requestUsers)(str));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_search2.default);
+
+/***/ },
+/* 500 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(198);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Search = function (_React$Component) {
+	  _inherits(Search, _React$Component);
+	
+	  function Search(props) {
+	    _classCallCheck(this, Search);
+	
+	    var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+	
+	    _this.state = { input: "" };
+	    _this.searchQuery = _this.searchQuery.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(Search, [{
+	    key: 'searchQuery',
+	    value: function searchQuery(e) {
+	      this.props.requestUsers(e.target.value);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var searchItems = "";
+	      if (this.props.search.length > 0) {
+	        searchItems = this.props.search.map(function (user) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: user.id },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/profile/' + user.id },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'search-fullname' },
+	                user.full_name
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'search-username' },
+	                user.username
+	              )
+	            )
+	          );
+	        });
+	      }
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'search-bar' },
+	        _react2.default.createElement('input', { type: 'text', onChange: this.searchQuery }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'search-results' },
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            searchItems
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Search;
+	}(_react2.default.Component);
+	
+	exports.default = Search;
 
 /***/ }
 /******/ ]);

@@ -48,3 +48,15 @@ export const editUser = (user, success, error) => {
     success
   });
 };
+
+export const requestUsers = (str, success, error) => {
+  $.ajax({
+    method: "GET",
+    url: 'api/users',
+    data: {
+      str
+    },
+    success,
+    error: () => console.log("ugh")
+  });
+}

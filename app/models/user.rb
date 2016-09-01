@@ -51,6 +51,20 @@ class User < ApplicationRecord
   attr_reader :password
   after_initialize :generate_session_token
 
+
+  def self.search(string)
+    if string === ""
+      return []
+    end
+    string.downcase!
+    users = User.all.where("full_name LIKE ?", "#{string}%")
+    users += (User.all.where("username LIKE ?", string))
+    string.capitalize!
+    users += User.all.where("full_name LIKE ?", "#{string}%")
+    users += (User.all.where("username LIKE ?", string))
+    users
+  end
+
   def self.find_by_email_cred(email, password)
     user = User.find_by(email: email)
     return nil unless user

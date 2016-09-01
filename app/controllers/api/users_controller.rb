@@ -1,4 +1,11 @@
 class Api::UsersController < ApplicationController
+
+  def index
+    @users = User.search(params[:str])
+    render json: @users
+  end
+
+
   def new
     @user = User.new
   end

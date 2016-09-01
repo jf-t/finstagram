@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import SearchContainer from '../search/search_container';
+
 
 class SiteHeader extends React.Component {
   constructor(props) {
@@ -28,6 +30,7 @@ class SiteHeader extends React.Component {
       <div className="header">
         <div className="header-inner">
           <h1><Link to={'/home'}>Finstagram</Link></h1>
+          <SearchContainer />
           <nav className="header-nav">
             <ul>
               <li><Link to={'/home'}>Home</Link></li>

@@ -7,7 +7,9 @@ export const userConstants = {
   RECEIVE_PAGE_USER: "RECEIVE_PAGE_USER",
   REQUEST_USER: "REQUEST_USER",
   EDIT_USER: "EDIT_USER",
-  LOGGED_OUT: "LOGGED_OUT"
+  LOGGED_OUT: "LOGGED_OUT",
+  REQUEST_USERS: "REQUEST_USERS",
+  RECEIVE_USERS: "RECEIVE_USERS"
 }
 
 export const login = user => {
@@ -29,6 +31,16 @@ export const signup = user => ({
 export const requestUser = (id) => ({
   type: userConstants.REQUEST_USER,
   userId: id
+});
+
+export const requestUsers = (str) => ({
+  type: userConstants.REQUEST_USERS,
+  data: str
+});
+
+export const receiveUsers = (users) => ({
+  type: userConstants.RECEIVE_USERS,
+  users
 });
 
 export const receiveUser = user => ({
