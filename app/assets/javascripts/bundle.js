@@ -29956,6 +29956,17 @@
 	    key: 'render',
 	    value: function render() {
 	      if (this.props.images) {
+	        var compare = function compare(a, b) {
+	          if (a.image.created_at > b.image.created_at) {
+	            return -1;
+	          } else if (a.image.created_at < b.image.created_at) {
+	            return 1;
+	          } else {
+	            return 0;
+	          }
+	        };
+	        this.props.images.sort(compare);
+	
 	        this.feedItems = this.props.images.map(function (img) {
 	          return _react2.default.createElement(
 	            'div',

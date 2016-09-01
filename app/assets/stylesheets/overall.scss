@@ -323,6 +323,7 @@ span.moment-ago {
 }
 .modal-form li {
   border-bottom: 1px solid #ccc;
+  overflow: hidden;
 }
 .modal-form li:last-child {
   border-bottom: none;
@@ -333,11 +334,11 @@ span.moment-ago {
   width: 100%;
   display: block;
 }
-.modal-form li:first-child a {
+.modal-form li:first-child {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
-.modal-form li:last-child a {
+.modal-form li:last-child {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }

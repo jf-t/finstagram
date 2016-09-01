@@ -16,6 +16,17 @@ class FeedIndex extends React.Component {
 
   render() {
     if (this.props.images) {
+      let compare = (a, b) => {
+        if (a.image.created_at > b.image.created_at) {
+          return -1;
+        } else if (a.image.created_at < b.image.created_at) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+      this.props.images.sort(compare)
+
       this.feedItems = this.props.images.map((img) => {
         return (
           <div key={img.image.id} className="news-feed-item">
