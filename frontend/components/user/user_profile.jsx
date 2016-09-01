@@ -16,6 +16,7 @@ class UserProfile extends React.Component {
     });
   }
   componentDidUpdate() {
+    console.log('please update');
     if (!this.props.currentUser.user) {
       hashHistory.push("/login");
     }
@@ -39,7 +40,9 @@ class UserProfile extends React.Component {
 
   render() {
     let user = "";
-
+    if (!this.props.currentUser.user) {
+      hashHistory.push('/login');
+    }
     if (this.props.currentUser.user) {
       user = this.props.currentUser.user
     }

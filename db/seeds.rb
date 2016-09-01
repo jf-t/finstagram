@@ -31,8 +31,8 @@ end
 
 100.times do
   user_id = rand(51)
-  following_id = 0
-  while (following_id != user_id)
+  following_id = rand(51)
+  while (following_id == user_id)
     following_id = rand(51)
   end
   f = Follow.create(user_id: user_id, following_id: following_id)

@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let userOut;
     userfromId(current_user, (user) => {
       store = configureStore({user: { user}});
+      window.store = store;
       ReactDOM.render(<Root store={store} />, root)
     })
   } else {
     store = configureStore();
+    window.store = store;
     ReactDOM.render(<Root store={store} />, root)
   }
 

@@ -74,10 +74,12 @@
 	    var userOut = void 0;
 	    (0, _user_api_util.userfromId)(current_user, function (user) {
 	      store = (0, _store2.default)({ user: { user: user } });
+	      window.store = store;
 	      _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	    });
 	  } else {
 	    store = (0, _store2.default)();
+	    window.store = store;
 	    _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 	  }
 	});
@@ -29180,6 +29182,7 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
+	      console.log('please update');
 	      if (!this.props.currentUser.user) {
 	        _reactRouter.hashHistory.push("/login");
 	      }
@@ -29206,7 +29209,9 @@
 	    key: 'render',
 	    value: function render() {
 	      var user = "";
-	
+	      if (!this.props.currentUser.user) {
+	        _reactRouter.hashHistory.push('/login');
+	      }
 	      if (this.props.currentUser.user) {
 	        user = this.props.currentUser.user;
 	      }
@@ -29832,17 +29837,42 @@
 	  }
 	
 	  _createClass(FeedIndex, [{
+	    key: "componentWillMount",
+	    value: function componentWillMount() {
+	      debugger;
+	      if (this.props.currentUser.user) {
+	        this.images = this.props.currentUser.user.images;
+	      } else {
+	        this.images = [];
+	      }
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
-	
+	      if (this.images.length > 0) {
+	        this.feedItems = this.images.map(function (img) {
+	          return _react2.default.createElement(
+	            "div",
+	            { key: img.id, className: "news-feed-item" },
+	            _react2.default.createElement(
+	              "div",
+	              { className: "feed-img-cont" },
+	              _react2.default.createElement("img", { src: img.image_url })
+	            ),
+	            _react2.default.createElement(
+	              "p",
+	              { className: "caption" },
+	              img.caption
+	            )
+	          );
+	        });
+	      } else {
+	        this.feedItems = _react2.default.createElement("div", null);
+	      }
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "feed" },
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          "Stuff"
-	        )
+	        this.feedItems
 	      );
 	    }
 	  }]);

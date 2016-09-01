@@ -17,22 +17,22 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :username, presence: true
 
-  has_many :ext_follows,
+  has_many :your_follows,
     primary_key: :id,
     foreign_key: :following_id,
     class_name: :Follow
 
   has_many :followers,
-    through: :ext_follows,
+    through: :your_follows,
     source: :follower
 
-  has_many :follows,
+  has_many :your_followed,
     primary_key: :id,
     foreign_key: :user_id,
     class_name: :Follow
 
   has_many :following,
-    through: :follows,
+    through: :your_followed,
     source: :followee
 
   has_many :images
