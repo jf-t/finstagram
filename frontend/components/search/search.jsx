@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {input: ""}
     this.searchQuery = this.searchQuery.bind(this);
   }
 
@@ -12,24 +11,34 @@ class Search extends React.Component {
     this.props.requestUsers(e.target.value);
   }
 
+  resetInput() {
+    let input = document.getElementById("search-input");
+    input.value = "";
+  };
+
   render() {
     let searchItems = ""
     if (this.props.search.length > 0) {
       searchItems = this.props.search.map(user => {
         return <li key={user.id}><Link to={`/profile/${user.id}`}>
-          <span className="search-fullname">{user.full_name}</span>
-          <span className="search-username">{user.username}</span>
+          <div className="search-profile-pic">
+            <img src={user.image_url} />
+          </div>
+          <span>{user.full_name}</span>
+          <span className="follow-username">@{user.username}</span>
         </Link></li>
       })
     }
     return(
       <div className="search-bar">
-        <input type="text" onChange={this.searchQuery} />
+        <i className="fa fa-search"></i>
+        <input id="search-input" type="text" onChange={this.searchQuery} placeholder="Search..."/>
         <div className="search-results">
           <ul>
             {searchItems}
           </ul>
         </div>
+        <span onClick={this.resetInput} className="close-search">X</span>
       </div>
     )
   }

@@ -29200,7 +29200,6 @@
 	  }, {
 	    key: 'createHiddenModals',
 	    value: function createHiddenModals() {
-	      debugger;
 	      this.editStuff = _react2.default.createElement(
 	        'div',
 	        { id: 'edit-pro-form' },
@@ -48180,7 +48179,6 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 	
-	    _this.state = { input: "" };
 	    _this.searchQuery = _this.searchQuery.bind(_this);
 	    return _this;
 	  }
@@ -48189,6 +48187,12 @@
 	    key: 'searchQuery',
 	    value: function searchQuery(e) {
 	      this.props.requestUsers(e.target.value);
+	    }
+	  }, {
+	    key: 'resetInput',
+	    value: function resetInput() {
+	      var input = document.getElementById("search-input");
+	      input.value = "";
 	    }
 	  }, {
 	    key: 'render',
@@ -48203,13 +48207,19 @@
 	              _reactRouter.Link,
 	              { to: '/profile/' + user.id },
 	              _react2.default.createElement(
+	                'div',
+	                { className: 'search-profile-pic' },
+	                _react2.default.createElement('img', { src: user.image_url })
+	              ),
+	              _react2.default.createElement(
 	                'span',
-	                { className: 'search-fullname' },
+	                null,
 	                user.full_name
 	              ),
 	              _react2.default.createElement(
 	                'span',
-	                { className: 'search-username' },
+	                { className: 'follow-username' },
+	                '@',
 	                user.username
 	              )
 	            )
@@ -48219,7 +48229,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'search-bar' },
-	        _react2.default.createElement('input', { type: 'text', onChange: this.searchQuery }),
+	        _react2.default.createElement('i', { className: 'fa fa-search' }),
+	        _react2.default.createElement('input', { id: 'search-input', type: 'text', onChange: this.searchQuery, placeholder: 'Search...' }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'search-results' },
@@ -48228,6 +48239,11 @@
 	            null,
 	            searchItems
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: this.resetInput, className: 'close-search' },
+	          'X'
 	        )
 	      );
 	    }

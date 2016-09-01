@@ -31,7 +31,6 @@ class UserProfile extends React.Component {
   }
 
   createHiddenModals() {
-    debugger;
     this.editStuff = (
       <div id="edit-pro-form">
         <EditProfile editUser={this.props.editUser} user={this.props.currentUser}/>
