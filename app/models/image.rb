@@ -30,7 +30,12 @@ class Image < ApplicationRecord
     source: :author
 
     def self.all_following(user_id, offsetNum = 0)
-      @images = Image.all.where(user_id: user_id).order(:created_at).limit(30).offset(offsetNum)
+      @user = User.find(user_id)
+      @images = []
+      @user.following.each do |user|
+        @images.concat(Image.all.where(user_id: user.id).order(:created_at).limit(30))
+      end
+      return @images
     end
 
 end

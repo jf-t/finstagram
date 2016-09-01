@@ -1,16 +1,7 @@
-export const requestImages = ([imageIds], success, params) => {
-
+export const requestImages = (success) => {
   $.ajax({
     method: "GET",
-    url: `api/image`,
-    data: {
-      user_id: userId
-    },
+    url: `api/images`,
     success: success
   }) //This should return a list of 30 images from the database through the controller
-}
-
-
-export const requestFollowedImages = (userId, success) => {
-
 }

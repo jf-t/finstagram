@@ -1,7 +1,6 @@
 class Api::ImagesController < ApplicationController
-
   def index
-    @images = Image.all
+    @images = Image.all_following(current_user.id, 0)
     render json: @images
   end
 

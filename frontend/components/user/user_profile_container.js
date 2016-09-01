@@ -15,9 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  requestImages: (userId) => dispatch(requestImages(userId)),
-  requestUser: (id) => dispatch(requestUser(id)),
-  editUser: (user) => dispatch(editUser(user))
+  requestUser: (id) => dispatch(requestUser(id))
 });
 
 export default connect(

@@ -6,17 +6,14 @@ class FeedIndex extends React.Component {
   }
 
   componentWillMount() {
-    debugger;
     if (this.props.currentUser.user) {
-      this.images = this.props.currentUser.user.images;
-    } else {
-      this.images = []
+      this.props.requestImages();
     }
   }
 
   render() {
-    if (this.images.length > 0) {
-      this.feedItems = this.images.map((img) => {
+    if (this.props.images) {
+      this.feedItems = this.props.images.map((img) => {
         return (
           <div key={img.id} className="news-feed-item">
             <div className="feed-img-cont">

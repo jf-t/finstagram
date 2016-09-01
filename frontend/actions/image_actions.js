@@ -2,9 +2,7 @@ export const imageConstants = {
   REQUEST_IMAGES: "REQUEST_IMAGES",
   RECEIVE_IMAGES: "RECEIVE_IMAGES",
   REQUEST_IMAGE: "REQUEST_IMAGE",
-  RECEIVE_IMAGE: "RECEIVE_IMAGE",
-  REQUEST_FOLLOWED_IMAGES: "REQUEST_FOLLOWED_IMAGES",
-  RECEIVE_FOLLOWED_IMAGES: "RECEIVE_FOLLOWED_IMAGES"
+  RECEIVE_IMAGE: "RECEIVE_IMAGE"
 };
 
 export const requestImages = (userId) => ({
@@ -26,12 +24,3 @@ export const receiveImage = (image) => ({
   type: imageConstants.RECEIVE_IMAGE,
   image
 });
-
-export const requestFollowedImages = (userId) => ({
-  type: imageConstants.REQUEST_FOLLOWED_IMAGES,
-  userId
-})
-export const receiveFollowedImages = (images) => ({
-  type: imageConstants.RECEIVE_FOLLOWED_IMAGES,
-  images
-})

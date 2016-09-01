@@ -7,13 +7,10 @@ import { hashHistory } from 'react-router';
 class UserProfile extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {};
   }
 
   componentWillMount() {
-    userfromId(this.props.pageUserId, (user) => {
-      this.setState({user: user})
-    });
+    this.props.receiveUser(this.pageUserId);
   }
   componentDidUpdate() {
     console.log('please update');

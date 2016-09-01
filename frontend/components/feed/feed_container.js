@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import FeedIndex from './feed';
-import { requestFollowedImages } from '../../actions/image_actions';
+import { requestImages } from '../../actions/image_actions';
 
 const mapStateToProps = (state) => ({
   images: state.images,
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestFollowedImages: (userId) => dispatch(requestFollowedImages(userId))
+  requestImages: () => dispatch(requestImages())
 });
 
 export default connect(

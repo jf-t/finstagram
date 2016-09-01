@@ -29102,9 +29102,6 @@
 	    logout: function logout() {
 	      return dispatch((0, _user_actions.logout)());
 	    },
-	    requestImages: function requestImages(userId) {
-	      return dispatch((0, _image_actions.requestImages)(userId));
-	    },
 	    requestUser: function (_requestUser) {
 	      function requestUser(_x) {
 	        return _requestUser.apply(this, arguments);
@@ -29117,10 +29114,7 @@
 	      return requestUser;
 	    }(function (id) {
 	      return dispatch(requestUser(id));
-	    }),
-	    editUser: function editUser(user) {
-	      return dispatch((0, _user_actions.editUser)(user));
-	    }
+	    })
 	  };
 	};
 	
@@ -29164,20 +29158,13 @@
 	  function UserProfile(props) {
 	    _classCallCheck(this, UserProfile);
 	
-	    var _this = _possibleConstructorReturn(this, (UserProfile.__proto__ || Object.getPrototypeOf(UserProfile)).call(this, props));
-	
-	    _this.state = {};
-	    return _this;
+	    return _possibleConstructorReturn(this, (UserProfile.__proto__ || Object.getPrototypeOf(UserProfile)).call(this, props));
 	  }
 	
 	  _createClass(UserProfile, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      var _this2 = this;
-	
-	      (0, _user_api_util.userfromId)(this.props.pageUserId, function (user) {
-	        _this2.setState({ user: user });
-	      });
+	      this.props.receiveUser(this.pageUserId);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -29469,9 +29456,7 @@
 	  REQUEST_IMAGES: "REQUEST_IMAGES",
 	  RECEIVE_IMAGES: "RECEIVE_IMAGES",
 	  REQUEST_IMAGE: "REQUEST_IMAGE",
-	  RECEIVE_IMAGE: "RECEIVE_IMAGE",
-	  REQUEST_FOLLOWED_IMAGES: "REQUEST_FOLLOWED_IMAGES",
-	  RECEIVE_FOLLOWED_IMAGES: "RECEIVE_FOLLOWED_IMAGES"
+	  RECEIVE_IMAGE: "RECEIVE_IMAGE"
 	};
 	
 	var requestImages = exports.requestImages = function requestImages(userId) {
@@ -29499,19 +29484,6 @@
 	  return {
 	    type: imageConstants.RECEIVE_IMAGE,
 	    image: image
-	  };
-	};
-	
-	var requestFollowedImages = exports.requestFollowedImages = function requestFollowedImages(userId) {
-	  return {
-	    type: imageConstants.REQUEST_FOLLOWED_IMAGES,
-	    userId: userId
-	  };
-	};
-	var receiveFollowedImages = exports.receiveFollowedImages = function receiveFollowedImages(images) {
-	  return {
-	    type: imageConstants.RECEIVE_FOLLOWED_IMAGES,
-	    images: images
 	  };
 	};
 
@@ -29795,8 +29767,8 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    requestFollowedImages: function requestFollowedImages(userId) {
-	      return dispatch((0, _image_actions.requestFollowedImages)(userId));
+	    requestImages: function requestImages() {
+	      return dispatch((0, _image_actions.requestImages)());
 	    }
 	  };
 	};
@@ -29839,18 +29811,15 @@
 	  _createClass(FeedIndex, [{
 	    key: "componentWillMount",
 	    value: function componentWillMount() {
-	      debugger;
 	      if (this.props.currentUser.user) {
-	        this.images = this.props.currentUser.user.images;
-	      } else {
-	        this.images = [];
+	        this.props.requestImages();
 	      }
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      if (this.images.length > 0) {
-	        this.feedItems = this.images.map(function (img) {
+	      if (this.props.images) {
+	        this.feedItems = this.props.images.map(function (img) {
 	          return _react2.default.createElement(
 	            "div",
 	            { key: img.id, className: "news-feed-item" },
@@ -29959,19 +29928,15 @@
 	
 	var _image_actions = __webpack_require__(268);
 	
-	var _merge = __webpack_require__(279);
-	
-	var _merge2 = _interopRequireDefault(_merge);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	var ImageReducer = function ImageReducer() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
 	    case _image_actions.imageConstants.RECEIVE_IMAGES:
-	      return (0, _merge2.default)({}, action.images);
+	      return [].concat(_toConsumableArray(action.images));
 	    default:
 	      return state;
 	  }
@@ -33421,11 +33386,6 @@
 	            return store.dispatch((0, _image_actions.receiveImages)(data));
 	          };
 	          (0, _image_api_util.requestImages)(success);
-	        case _image_actions.imageConstants.REQUEST_FOLLOWED_IMAGES:
-	          var success2 = function success2(data) {
-	            return store.dispatch((0, _image_actions.receiveFollowedImages)(data));
-	          };
-	          (0, _image_api_util.requestFollowedImages)(action.userId, success2);
 	        default:
 	          return next(action);
 	      }
@@ -33444,26 +33404,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var requestImages = exports.requestImages = function requestImages(_ref, success, params) {
-	  var _ref2 = _slicedToArray(_ref, 1);
-	
-	  var imageIds = _ref2[0];
-	
-	
+	var requestImages = exports.requestImages = function requestImages(success) {
 	  $.ajax({
 	    method: "GET",
-	    url: "api/image",
-	    data: {
-	      user_id: userId
-	    },
+	    url: "api/images",
 	    success: success
 	  }); //This should return a list of 30 images from the database through the controller
 	};
-	
-	var requestFollowedImages = exports.requestFollowedImages = function requestFollowedImages(userId, success) {};
 
 /***/ },
 /* 392 */
