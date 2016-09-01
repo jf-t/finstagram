@@ -47919,7 +47919,6 @@
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
-	            debugger;
 	            this.markermanager.updateMarkers(this.props.images);
 	        }
 	    }, {
@@ -47966,8 +47965,7 @@
 	    key: 'updateMarkers',
 	    value: function updateMarkers(images) {
 	      this.images = images;
-	      this._toAdd().forEach(this._createMarker);
-	      debugger;
+	      this._toAdd().forEach(this._createMarker);y;
 	    }
 	  }, {
 	    key: '_toAdd',

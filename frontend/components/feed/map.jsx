@@ -301,7 +301,6 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger;
     this.markermanager.updateMarkers(this.props.images);
   }
 

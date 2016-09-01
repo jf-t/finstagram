@@ -9,8 +9,7 @@ class MarkerManager {
 
   updateMarkers(images) {
     this.images = images;
-    this._toAdd().forEach(this._createMarker);
-    debugger;
+    this._toAdd().forEach(this._createMarker);y
   }
 
   _toAdd(){
