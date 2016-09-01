@@ -24,6 +24,9 @@ end
   lat = Faker::Address.latitude
   lng = Faker::Address.longitude
   user_id = rand(51)
+  while (user_id == 0)
+    user_id = rand(51)
+  end
   a = Image.create!(image_url: image_url, caption: caption, lat: lat, lng: lng, user_id: user_id)
   a.save!
 end
@@ -31,7 +34,13 @@ end
 
 100.times do
   user_id = rand(51)
+  while (user_id == 0)
+    user_id = rand(51)
+  end
   following_id = rand(51)
+  while (following_id == 0)
+    following_id = rand(51)
+  end
   while (following_id == user_id)
     following_id = rand(51)
   end
@@ -41,14 +50,27 @@ end
 
 400.times do
   user_id = rand(51)
+  while (user_id == 0)
+    user_id = rand(51)
+  end
+
   image_id = rand(100)
+  while (image_id == 0)
+    user_id = rand(100)
+  end
   l = Like.create(user_id: user_id, image_id: image_id)
   l.save!
 end
 
 100.times do
   user_id = rand(51)
+  while (user_id == 0)
+    user_id = rand(51)
+  end
   image_id = rand(100)
+  while (image_id == 0)
+    user_id = rand(100)
+  end
   caption = Faker::Hipster.sentence
   c = Comment.create(body: caption, user_id: user_id, image_id: image_id);
   c.save!
