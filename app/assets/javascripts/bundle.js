@@ -29152,7 +29152,10 @@
 	  function UserProfile(props) {
 	    _classCallCheck(this, UserProfile);
 	
-	    return _possibleConstructorReturn(this, (UserProfile.__proto__ || Object.getPrototypeOf(UserProfile)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (UserProfile.__proto__ || Object.getPrototypeOf(UserProfile)).call(this, props));
+	
+	    _this.createHiddenModals = _this.createHiddenModals.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(UserProfile, [{
@@ -29161,30 +29164,130 @@
 	      this.props.requestUser(this.props.pageUserId);
 	    }
 	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      this.props.requestUser(this.props.pageUserId);
-	      if (!this.props.currentUser.user) {
-	        _reactRouter.hashHistory.push("/login");
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      if (this.pageUser.followers.length > 0) {
+	        this.createHiddenModals();
 	      }
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (!this.props.currentUser.user) {
+	        _reactRouter.hashHistory.push("/login");
+	      }
+	      var editProForm = document.getElementById("edit-pro-form");
+	      if (!editProForm) {
+	        this.createHiddenModals();
+	      }
+	    }
+	  }, {
+	    key: 'createHiddenModals',
+	    value: function createHiddenModals() {
+	      debugger;
 	      this.editStuff = _react2.default.createElement(
 	        'div',
 	        { id: 'edit-pro-form' },
 	        _react2.default.createElement(_edit_profile2.default, { editUser: this.props.editUser, user: this.props.currentUser })
 	      );
+	      var followersList = this.pageUser.followers.map(function (follower) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: follower.id },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/profile/' + follower.id },
+	            _react2.default.createElement(
+	              'span',
+	              { className: '' },
+	              follower.full_name
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'follow-username' },
+	              '@',
+	              follower.username
+	            )
+	          )
+	        );
+	      });
+	      var followingList = this.pageUser.following.map(function (following) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: following.id },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/profile/' + following.id },
+	            _react2.default.createElement(
+	              'span',
+	              { className: '' },
+	              following.full_name
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'follow-username' },
+	              '@',
+	              following.username
+	            )
+	          )
+	        );
+	      });
+	
+	      this.followersModal = _react2.default.createElement(
+	        'div',
+	        { id: 'followers-modal', className: 'modal-form' },
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: this.hideFollowers, className: 'close-modal' },
+	          'X'
+	        ),
+	        followersList
+	      );
+	      this.followingModal = _react2.default.createElement(
+	        'div',
+	        { id: 'following-modal', className: 'modal-form' },
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: this.hideFollowing, className: 'close-modal' },
+	          'X'
+	        ),
+	        followingList
+	      );
+	
 	      if (!this.props.currentUser.user) {
 	        _reactRouter.hashHistory.push('/login');
 	      }
+	      this.setState({ hey: "whatsup" });
 	    }
 	  }, {
 	    key: 'showEditForm',
 	    value: function showEditForm() {
 	      var editProForm = document.getElementById("edit-pro-form");
 	      editProForm.style.display = "block";
+	    }
+	  }, {
+	    key: 'showFollowers',
+	    value: function showFollowers() {
+	      var editProForm = document.getElementById("followers-modal");
+	      editProForm.style.display = "block";
+	    }
+	  }, {
+	    key: 'showFollowing',
+	    value: function showFollowing() {
+	      var editProForm = document.getElementById("following-modal");
+	      editProForm.style.display = "block";
+	    }
+	  }, {
+	    key: 'hideFollowers',
+	    value: function hideFollowers() {
+	      var editProForm = document.getElementById("followers-modal");
+	      editProForm.style.display = "none";
+	    }
+	  }, {
+	    key: 'hideFollowing',
+	    value: function hideFollowing() {
+	      var editProForm = document.getElementById("following-modal");
+	      editProForm.style.display = "none";
 	    }
 	  }, {
 	    key: 'render',
@@ -29226,7 +29329,7 @@
 	          this.feedItems = _react2.default.createElement('div', null);
 	        }
 	      } else {
-	        this.pageUser = "";
+	        this.pageUser = { following: {}, followers: {}, images: [] };
 	      }
 	      return _react2.default.createElement(
 	        'div',
@@ -29255,6 +29358,28 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
+	              { className: 'follow-info' },
+	              _react2.default.createElement(
+	                'span',
+	                { onClick: this.showFollowers, className: 'followers' },
+	                this.pageUser.followers.length,
+	                ' followers'
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                { onClick: this.showFollowing, className: 'following' },
+	                this.pageUser.following.length,
+	                ' following'
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'posts' },
+	                this.pageUser.images.length,
+	                ' posts'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
 	              { className: 'bio-container' },
 	              _react2.default.createElement(
 	                'p',
@@ -29272,7 +29397,9 @@
 	              'Edit Profile'
 	            )
 	          ),
-	          this.editStuff
+	          this.editStuff,
+	          this.followersModal,
+	          this.followingModal
 	        ),
 	        _react2.default.createElement(
 	          'div',

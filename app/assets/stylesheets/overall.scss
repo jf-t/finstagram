@@ -147,7 +147,7 @@ body {
   height: 100%;
 }
 .profile-info h1 {
-  margin: 50px 0 0 50px;
+  margin: 70px 0 0 50px;
   display: block;
   font-weight: 300;
   letter-spacing: 2px;
@@ -183,7 +183,6 @@ body {
 .image-feed {
   width: 900px;
   margin: 0 auto;
-  margin-top: 100px;
   border-top: 1px solid #ccc;
   padding-top: 50px;
 }
@@ -296,4 +295,74 @@ span.moment-ago {
   float: left;
   display: inline;
   margin: 20px;
+}
+.follow-info {
+  left: 50px;
+  position: absolute;
+  top: 20px;
+  display: flex;
+}
+.follow-info span {
+  background-color: #fff;
+  padding: 10px;
+  display: block;
+  margin: 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 7%;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+.follow-info span:hover {
+  background-color: $purple
+}
+#followers-modal, #following-modal {
+  display: none;
+  padding: 0;
+  list-style: none;
+}
+.modal-form li {
+  border-bottom: 1px solid #ccc;
+}
+.modal-form li:last-child {
+  border-bottom: none;
+}
+.modal-form li a {
+  color: #333;
+  padding: 10px 20px;
+  width: 100%;
+  display: block;
+}
+.modal-form li:first-child a {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.modal-form li:last-child a {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.modal-form li a:hover {
+  background-color: $purple;
+  text-decoration: none;
+}
+
+.follow-username {
+  font-size: 12px;
+  color: #444;
+  padding-left: 5px;
+}
+
+.close-modal {
+position: absolute;
+cursor: pointer;
+padding: 1px 5px;
+right: 0;
+top: 0;
+text-align: center;
+border-top-right-radius: 4px;
+}
+.close-modal:hover {
+  background-color: #ccc;
+  color: #fff;
 }
