@@ -14,6 +14,7 @@ class UserProfile extends React.Component {
   }
 
   componentDidUpdate() {
+    this.props.requestUser(this.props.pageUserId);
     if (!this.props.currentUser.user) {
       hashHistory.push("/login");
     }
@@ -43,8 +44,11 @@ class UserProfile extends React.Component {
     if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
       this.pageUser = this.props.currentUser.user;
     }
+    if ((Object.keys(this.props.pageUser).length > 0) && this.props.pageUser.id.toString() === this.props.pageUserId) {
+      this.pageUser = this.props.pageUser
+    }
 
-    if ((Object.keys(this.props.pageUser).length > 0) || this.pageUser) {
+    if (this.pageUser) {
       if (!this.pageUser) {
         this.pageUser = this.props.pageUser
       }

@@ -1,2 +1,4 @@
-
-json.extract! img, :id, :caption, :lat, :lng, :image_url
+json.array! @images do |img|
+  json.image img
+  json.user img.author
+end

@@ -14,12 +14,16 @@ h1, h2, h3, h4, h5, h6, p, ul, li, div, nav, main, section, body {
   text-decoration: inherit;
 }
 body {
-  background-color: #eee;
+  background-color: #fafafa;
 }
 
 .header {
   background-color: #fff;
   border-bottom: 1px solid #ccc;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
 }
 .header-inner {
   display: flex;
@@ -121,7 +125,7 @@ body {
 //PROFILE PAGE
 .main {
   width: 900px;
-  margin: 0 auto;
+  margin: 100px auto;
 }
 .profile-info {
   margin: 0;
@@ -131,6 +135,7 @@ body {
 
 .profile-pic {
   width: 250px;
+  border: 1px solid #ccc;
   height: 249px;
   padding: 0;
   border-top: none;
@@ -223,7 +228,7 @@ input:focus, textarea:focus {
 // FEED
 .feed {
   width: 1200px;
-  margin: 0 auto;
+  margin: 100px auto;
 }
 .feed::after {
   clear: both;
@@ -238,6 +243,11 @@ input:focus, textarea:focus {
   width: 600px;
   margin: 100px auto;
   padding: 50px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 15px #ccc;
+  position: relative;
 }
 .news-feed-item img {
   display: block;
@@ -248,4 +258,42 @@ input:focus, textarea:focus {
   text-align: center;
   width: 300px;
   margin: 0 auto;
+}
+.feed-item-prof {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+.feed-item-prof a:hover {
+  background-color: $purple;
+  cursor: pointer;
+  text-decoration: none;
+}
+.feed-item-prof img {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background-color: #eee;
+  margin: 0;
+}
+span.moment-ago {
+  position: absolute;
+  right: 18px;
+  top: 30px;
+  color: #333;
+}
+.feed-item-prof a {
+  display: flex;
+  float: left;
+  width: 100%;
+  padding: 10px 0 10px 15px;
+}
+
+.feed-item-prof h4 {
+  float: left;
+  display: inline;
+  margin: 20px;
 }
