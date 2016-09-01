@@ -29887,6 +29887,10 @@
 	
 	var _image_actions = __webpack_require__(268);
 	
+	var _map = __webpack_require__(496);
+	
+	var _map2 = _interopRequireDefault(_map);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
@@ -29904,7 +29908,7 @@
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_feed2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_map2.default);
 
 /***/ },
 /* 275 */
@@ -47669,6 +47673,355 @@
 	    return zh_tw;
 	
 	}));
+
+/***/ },
+/* 496 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _marker_manager = __webpack_require__(497);
+	
+	var _marker_manager2 = _interopRequireDefault(_marker_manager);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _mapOptions = {
+	    center: { lat: 37.773972, lng: -122.431297 }, //San Francisco
+	    zoom: 13,
+	    styles: [{
+	        "featureType": "administrative",
+	        "elementType": "all",
+	        "stylers": [{
+	            "hue": "#000000"
+	        }, {
+	            "lightness": -100
+	        }, {
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "landscape",
+	        "elementType": "geometry",
+	        "stylers": [{
+	            "hue": "#dddddd"
+	        }, {
+	            "saturation": -100
+	        }, {
+	            "lightness": -3
+	        }, {
+	            "visibility": "on"
+	        }]
+	    }, {
+	        "featureType": "landscape",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "hue": "#000000"
+	        }, {
+	            "saturation": -100
+	        }, {
+	            "lightness": -100
+	        }, {
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "poi",
+	        "elementType": "all",
+	        "stylers": [{
+	            "hue": "#000000"
+	        }, {
+	            "saturation": -100
+	        }, {
+	            "lightness": -100
+	        }, {
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road",
+	        "elementType": "geometry",
+	        "stylers": [{
+	            "hue": "#ff0000"
+	        }, {
+	            "saturation": -100
+	        }, {
+	            "lightness": 26
+	        }, {
+	            "visibility": "on"
+	        }]
+	    }, {
+	        "featureType": "road",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "saturation": -100
+	        }, {
+	            "lightness": 100
+	        }, {
+	            "visibility": "off"
+	        }, {
+	            "color": "#000000"
+	        }]
+	    }, {
+	        "featureType": "road",
+	        "elementType": "labels.text",
+	        "stylers": [{
+	            "visibility": "off"
+	        }, {
+	            "color": "#ff0000"
+	        }]
+	    }, {
+	        "featureType": "road",
+	        "elementType": "labels.icon",
+	        "stylers": [{
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road.highway",
+	        "elementType": "geometry",
+	        "stylers": [{
+	            "visibility": "on"
+	        }, {
+	            "hue": "#ff0000"
+	        }]
+	    }, {
+	        "featureType": "road.highway",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road.highway",
+	        "elementType": "labels.text",
+	        "stylers": [{
+	            "saturation": "3"
+	        }, {
+	            "color": "#fd0000"
+	        }, {
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road.highway.controlled_access",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road.highway.controlled_access",
+	        "elementType": "labels.text",
+	        "stylers": [{
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road.arterial",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "road.local",
+	        "elementType": "all",
+	        "stylers": [{
+	            "hue": "#ffffff"
+	        }, {
+	            "saturation": -100
+	        }, {
+	            "lightness": 100
+	        }, {
+	            "visibility": "on"
+	        }]
+	    }, {
+	        "featureType": "road.local",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "transit",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "hue": "#000000"
+	        }, {
+	            "lightness": -100
+	        }, {
+	            "visibility": "off"
+	        }]
+	    }, {
+	        "featureType": "water",
+	        "elementType": "geometry",
+	        "stylers": [{
+	            "saturation": "-100"
+	        }, {
+	            "lightness": 100
+	        }, {
+	            "visibility": "on"
+	        }, {
+	            "color": "#240f56"
+	        }]
+	    }, {
+	        "featureType": "water",
+	        "elementType": "geometry.fill",
+	        "stylers": [{
+	            "visibility": "on"
+	        }, {
+	            "color": "#E3CDFF"
+	        }]
+	    }, {
+	        "featureType": "water",
+	        "elementType": "labels",
+	        "stylers": [{
+	            "hue": "#000000"
+	        }, {
+	            "saturation": -100
+	        }, {
+	            "lightness": -100
+	        }, {
+	            "visibility": "off"
+	        }]
+	    }]
+	
+	};
+	
+	var Map = function (_React$Component) {
+	    _inherits(Map, _React$Component);
+	
+	    function Map() {
+	        _classCallCheck(this, Map);
+	
+	        return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).apply(this, arguments));
+	    }
+	
+	    _createClass(Map, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this.props.requestImages(this.props.currentUser.user.id);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var mapDOMNode = this.refs.map;
+	            this.map = new google.maps.Map(mapDOMNode, _mapOptions);
+	            this.markermanager = new _marker_manager2.default(this.map);
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            debugger;
+	            this.markermanager.updateMarkers(this.props.images);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'map', ref: 'map' },
+	                'Map'
+	            );
+	        }
+	    }]);
+	
+	    return Map;
+	}(_react2.default.Component);
+	
+	exports.default = Map;
+
+/***/ },
+/* 497 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var MarkerManager = function () {
+	  function MarkerManager(map) {
+	    _classCallCheck(this, MarkerManager);
+	
+	    this.markers = [];
+	    this.map = map;
+	    this._createMarker = this._createMarker.bind(this);
+	    this._removeMarker = this._removeMarker.bind(this);
+	  }
+	
+	  _createClass(MarkerManager, [{
+	    key: 'updateMarkers',
+	    value: function updateMarkers(images) {
+	      this.images = images;
+	      this._toAdd().forEach(this._createMarker);
+	      debugger;
+	    }
+	  }, {
+	    key: '_toAdd',
+	    value: function _toAdd() {
+	      var imgIds = this.markers.map(function (marker) {
+	        return marker.image_id;
+	      });
+	      var newImgs = this.images;
+	      var newImgIds = Object.keys(newImgs);
+	
+	      return newImgIds.reduce(function (collection, image_id) {
+	        if (!imgIds.includes(image_id)) {
+	          return collection.concat([newImgs[image_id]]);
+	        }
+	      }, []);
+	    }
+	  }, {
+	    key: '_markersToRemove',
+	    value: function _markersToRemove() {
+	      var _this = this;
+	
+	      return this.markers.filter(function (marker) {
+	        return !_this.images.hasOwnProperty(marker.image_id);
+	      });
+	    }
+	  }, {
+	    key: '_createMarker',
+	    value: function _createMarker(img) {
+	      var _this2 = this;
+	
+	      var pos = new google.maps.LatLng(img.image.lat, img.image.lng);
+	      var marker = new google.maps.Marker({
+	        position: pos,
+	        map: this.map,
+	        image_id: img.id
+	      });
+	      marker.addListener('click', function () {
+	        return _this2.handleClick(img);
+	      });
+	      this.markers.push(marker);
+	    }
+	  }, {
+	    key: '_removeMarker',
+	    value: function _removeMarker(marker) {
+	      var idx = this.markers.indexOf(marker);
+	      this.markers[idx].setMap(null);
+	      this.markers.splice(idx, 1);
+	    }
+	  }]);
+	
+	  return MarkerManager;
+	}();
+	
+	exports.default = MarkerManager;
 
 /***/ }
 /******/ ]);
