@@ -11,7 +11,6 @@ class UserProfile extends React.Component {
   }
 
   componentWillMount() {
-    this.props.requestImages();
     userfromId(this.props.pageUserId, (user) => {
       this.setState({user: user})
     });
@@ -40,17 +39,19 @@ class UserProfile extends React.Component {
 
   render() {
     let user = "";
+
     if (this.props.currentUser.user) {
       user = this.props.currentUser.user
     }
-    if (Object.keys(this.props.images).length > 0) {
-      this.feedItems = Object.keys(this.props.images).map((img) => {
+    if (this.props.currentUser.user.images.length > 0) {
+      let images = this.props.currentUser.user.images
+      this.feedItems = images.map((img) => {
         return (
-          <div key={this.props.images[img].id} className="feed-item">
+          <div key={img.id} className="feed-item">
             <div className="feed-img-cont">
-              <img src={this.props.images[img].image_url} />
+              <img src={img.image_url} />
             </div>
-            <p className="caption">{this.props.images[img].caption}</p>
+            <p className="caption">{img.caption}</p>
           </div>
         )
       })

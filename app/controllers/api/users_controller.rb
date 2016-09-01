@@ -13,9 +13,11 @@ class Api::UsersController < ApplicationController
     end
   end
 
+
+
   def show
     @user = User.find(params[:id]);
-    render json: @user
+    @images = Image.find_by(user_id: @user.id)
   end
 
   def update

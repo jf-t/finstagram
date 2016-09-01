@@ -16,7 +16,27 @@ class User < ApplicationRecord
   validates :email, :username, :full_name, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :username, presence: true
+
+  has_many :ext_follows,
+    primary_key: :id,
+    foreign_key: :following_id,
+    class_name: :Follow
+
+  has_many :followers,
+    through: :ext_follows,
+    source: :follower
+
+  has_many :follows,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :Follow
+
+  has_many :following,
+    through: :follows,
+    source: :followee
+
   has_many :images
+
   has_many :authored_comments,
     primary_key: :id,
     foreign_key: :comment_id,

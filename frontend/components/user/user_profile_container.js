@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
-  requestImages: () => dispatch(requestImages()),
+  requestImages: (userId) => dispatch(requestImages(userId)),
   requestUser: (id) => dispatch(requestUser(id)),
   editUser: (user) => dispatch(editUser(user))
 });

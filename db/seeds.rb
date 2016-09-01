@@ -23,7 +23,33 @@ end
   caption = Faker::Hipster.sentence
   lat = Faker::Address.latitude
   lng = Faker::Address.longitude
-  user_id = rand(50)
+  user_id = rand(51)
   a = Image.create!(image_url: image_url, caption: caption, lat: lat, lng: lng, user_id: user_id)
   a.save!
+end
+
+
+100.times do
+  user_id = rand(51)
+  following_id = 0
+  while (following_id != user_id)
+    following_id = rand(51)
+  end
+  f = Follow.create(user_id: user_id, following_id: following_id)
+  f.save!
+end
+
+400.times do
+  user_id = rand(51)
+  image_id = rand(100)
+  l = Like.create(user_id: user_id, image_id: image_id)
+  l.save!
+end
+
+100.times do
+  user_id = rand(51)
+  image_id = rand(100)
+  caption = Faker::Hipster.sentence
+  c = Comment.create(body: caption, user_id: user_id, image_id: image_id);
+  c.save!
 end
