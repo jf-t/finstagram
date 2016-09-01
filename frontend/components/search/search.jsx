@@ -5,6 +5,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.searchQuery = this.searchQuery.bind(this);
+    this.resetInput = this.resetInput.bind(this);
   }
 
   searchQuery(e) {
@@ -12,8 +13,8 @@ class Search extends React.Component {
   }
 
   resetInput() {
-    let input = document.getElementById("search-input");
-    input.value = "";
+    let e = {target:{value:""}}
+    this.searchQuery(e)
   };
 
   render() {

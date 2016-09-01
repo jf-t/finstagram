@@ -52,8 +52,8 @@ class User < ApplicationRecord
   after_initialize :generate_session_token
 
 
-  def self.search(string)
-    if string === ""
+  def self.search(string = "")
+    if ((string == "") || string == nil)
       return []
     end
     string.downcase!

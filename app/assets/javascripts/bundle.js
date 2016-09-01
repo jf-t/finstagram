@@ -48180,6 +48180,7 @@
 	    var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 	
 	    _this.searchQuery = _this.searchQuery.bind(_this);
+	    _this.resetInput = _this.resetInput.bind(_this);
 	    return _this;
 	  }
 	
@@ -48191,8 +48192,8 @@
 	  }, {
 	    key: 'resetInput',
 	    value: function resetInput() {
-	      var input = document.getElementById("search-input");
-	      input.value = "";
+	      var e = { target: { value: "" } };
+	      this.searchQuery(e);
 	    }
 	  }, {
 	    key: 'render',
