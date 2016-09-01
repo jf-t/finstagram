@@ -2,14 +2,16 @@ class MarkerManager {
   constructor(map) {
     this.markers = [];
     this.map = map;
-    this._createMarker = this._createMarker.bind(this)
-    this._removeMarker = this._removeMarker.bind(this)
+    this._createMarker = this._createMarker.bind(this);
+    this._removeMarker = this._removeMarker.bind(this);
+
+    this.pin = "http://res.cloudinary.com/finstagram/image/upload/v1472763956/pin_hg4gtb.png"
   }
 
 
   updateMarkers(images) {
     this.images = images;
-    this._toAdd().forEach(this._createMarker);y
+    this._toAdd().forEach(this._createMarker);
   }
 
   _toAdd(){
@@ -35,7 +37,8 @@ class MarkerManager {
     const marker = new google.maps.Marker({
       position: pos,
       map: this.map,
-      image_id: img.id
+      image_id: img.id,
+      icon: this.pin
     });
     marker.addListener('click', () => this.handleClick(img));
     this.markers.push(marker);

@@ -47702,9 +47702,14 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var MY_MAPTYPE_ID = void 0;
 	var _mapOptions = {
 	    center: { lat: 37.773972, lng: -122.431297 }, //San Francisco
 	    zoom: 13,
+	    mapTypeControlOptions: {
+	        mapTypeIds: ['roadmap', MY_MAPTYPE_ID]
+	    },
+	    mapTypeId: MY_MAPTYPE_ID,
 	    styles: [{
 	        "featureType": "administrative",
 	        "elementType": "all",
@@ -47926,8 +47931,17 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'map', ref: 'map' },
-	                'Map'
+	                { className: 'map-container' },
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'change-feeds' },
+	                    'feed'
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'map', ref: 'map' },
+	                    'Map'
+	                )
 	            );
 	        }
 	    }]);
@@ -47941,7 +47955,7 @@
 /* 497 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -47959,16 +47973,18 @@
 	    this.map = map;
 	    this._createMarker = this._createMarker.bind(this);
 	    this._removeMarker = this._removeMarker.bind(this);
+	
+	    this.pin = "http://res.cloudinary.com/finstagram/image/upload/v1472763956/pin_hg4gtb.png";
 	  }
 	
 	  _createClass(MarkerManager, [{
-	    key: 'updateMarkers',
+	    key: "updateMarkers",
 	    value: function updateMarkers(images) {
 	      this.images = images;
-	      this._toAdd().forEach(this._createMarker);y;
+	      this._toAdd().forEach(this._createMarker);
 	    }
 	  }, {
-	    key: '_toAdd',
+	    key: "_toAdd",
 	    value: function _toAdd() {
 	      var imgIds = this.markers.map(function (marker) {
 	        return marker.image_id;
@@ -47983,7 +47999,7 @@
 	      }, []);
 	    }
 	  }, {
-	    key: '_markersToRemove',
+	    key: "_markersToRemove",
 	    value: function _markersToRemove() {
 	      var _this = this;
 	
@@ -47992,7 +48008,7 @@
 	      });
 	    }
 	  }, {
-	    key: '_createMarker',
+	    key: "_createMarker",
 	    value: function _createMarker(img) {
 	      var _this2 = this;
 	
@@ -48000,7 +48016,8 @@
 	      var marker = new google.maps.Marker({
 	        position: pos,
 	        map: this.map,
-	        image_id: img.id
+	        image_id: img.id,
+	        icon: this.pin
 	      });
 	      marker.addListener('click', function () {
 	        return _this2.handleClick(img);
@@ -48008,7 +48025,7 @@
 	      this.markers.push(marker);
 	    }
 	  }, {
-	    key: '_removeMarker',
+	    key: "_removeMarker",
 	    value: function _removeMarker(marker) {
 	      var idx = this.markers.indexOf(marker);
 	      this.markers[idx].setMap(null);

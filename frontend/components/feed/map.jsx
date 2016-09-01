@@ -1,9 +1,13 @@
 import React from 'react';
 import MarkerManager from '../../util/marker_manager';
-
+let MY_MAPTYPE_ID: 'myymaps'
 let _mapOptions = {
   center: {lat: 37.773972, lng: -122.431297}, //San Francisco
   zoom: 13,
+  mapTypeControlOptions: {
+     mapTypeIds: ['roadmap', MY_MAPTYPE_ID]
+  },
+  mapTypeId: MY_MAPTYPE_ID,
   styles: [
     {
         "featureType": "administrative",
@@ -306,7 +310,12 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="map" ref="map">Map</div>
+      <div className="map-container">
+        <span className="change-feeds">feed</span>
+        <div className="map" ref="map">
+          Map
+        </div>
+      </div>
     );
   }
 }
