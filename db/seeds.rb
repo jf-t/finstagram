@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create!(image_url: "https://pbs.twimg.com/profile_images/770511161884237824/qdzxmnyB_400x400.jpg", username: "jackfintan", full_name: "jack fintan tilly", email: "jackftilly@gmail.com", password: "password")
+User.create!(image_url: "https://pbs.twimg.com/profile_images/709251447557378048/VABcAjy3_400x400.jpg", username: "melissatalgo", email: "melissa.talgo@gmail.com", full_name: "Melissa Talgo", password: "iLoveJack")
 50.times do
   name = Faker::Name.name
   email = Faker::Internet.free_email
@@ -23,9 +24,9 @@ end
   caption = Faker::Hipster.sentence
   lat = Faker::Address.latitude
   lng = Faker::Address.longitude
-  user_id = rand(51)
+  user_id = rand(52)
   while (user_id == 0)
-    user_id = rand(51)
+    user_id = rand(52)
   end
   a = Image.create!(image_url: image_url, caption: caption, lat: lat, lng: lng, user_id: user_id)
   a.save!
@@ -33,25 +34,25 @@ end
 
 
 100.times do
-  user_id = rand(51)
+  user_id = rand(52)
   while (user_id == 0)
-    user_id = rand(51)
+    user_id = rand(52)
   end
-  following_id = rand(51)
+  following_id = rand(52)
   while (following_id == 0)
-    following_id = rand(51)
+    following_id = rand(52)
   end
   while (following_id == user_id)
-    following_id = rand(51)
+    following_id = rand(52)
   end
   f = Follow.create(user_id: user_id, following_id: following_id)
   f.save!
 end
 
 400.times do
-  user_id = rand(51)
+  user_id = rand(52)
   while (user_id == 0)
-    user_id = rand(51)
+    user_id = rand(52)
   end
 
   image_id = rand(100)
@@ -63,9 +64,9 @@ end
 end
 
 100.times do
-  user_id = rand(51)
+  user_id = rand(52)
   while (user_id == 0)
-    user_id = rand(51)
+    user_id = rand(52)
   end
   image_id = rand(100)
   while (image_id == 0)
