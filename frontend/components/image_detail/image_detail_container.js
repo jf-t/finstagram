@@ -3,7 +3,7 @@ import { requestImage } from '../../actions/image_actions';
 import ImageDetail from './image_detail';
 
 const mapStateToProps = (state, ownProps) => ({
-  image: state.images,
+  image: state.image,
   imageOwner: state.user,
   imageId: ownProps.params.id
 });

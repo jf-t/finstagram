@@ -43,7 +43,7 @@ class MarkerManager {
       icon: this.pin
     });
     marker.addListener('click',() => {
-      hashHistory.push(`/profile/${img.user.id}`);
+      hashHistory.push(`/images/${img.image.id}`);
     });
     this.markers.push(marker);
   }

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import UploadForm from './upload';
 import { addImage } from '../../actions/image_actions';
 const mapStateToProps = (state) => ({
-  image: state.images,
+  image: state.image,
   currentUser: state.user
 });
 
