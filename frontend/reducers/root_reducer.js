@@ -9,7 +9,7 @@ const RootReducer = combineReducers({
   user: UserReducer,
   images: ImageReducer,
   pageUser: PageUserReducer,
-  search: SearchReducer
+  search: SearchReducer,
 });
 
 export default RootReducer;
