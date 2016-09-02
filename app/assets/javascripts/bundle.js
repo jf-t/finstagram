@@ -30112,7 +30112,7 @@
 	        _react2.default.createElement(
 	          'span',
 	          (_React$createElement = { onClick: this.switchFeeds }, _defineProperty(_React$createElement, 'onClick', this.switchFeeds), _defineProperty(_React$createElement, 'className', 'change-feeds'), _React$createElement),
-	          'feed'
+	          'switch feed'
 	        ),
 	        _react2.default.createElement(_map2.default, { currentUser: this.props.currentUser, images: this.props.images, requestImages: this.props.requestImages }),
 	        _react2.default.createElement(

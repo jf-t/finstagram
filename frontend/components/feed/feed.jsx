@@ -65,7 +65,7 @@ class FeedIndex extends React.Component {
     }
     return(
       <div className="feed">
-        <span onClick={this.switchFeeds} onClick={this.switchFeeds} className="change-feeds">feed</span>
+        <span onClick={this.switchFeeds} onClick={this.switchFeeds} className="change-feeds">switch feed</span>
         <Map currentUser={this.props.currentUser} images={this.props.images} requestImages={this.props.requestImages}/>
         <div id="feed" className="news-feed">
           {this.feedItems}
