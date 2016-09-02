@@ -1,6 +1,7 @@
 import React from 'react';
 import MarkerManager from '../../util/marker_manager';
-let MY_MAPTYPE_ID: 'myymaps'
+let MY_MAPTYPE_ID: 'myymaps';
+
 let _mapOptions = {
   center: {lat: 37.773972, lng: -122.431297}, //San Francisco
   zoom: 13,
@@ -295,7 +296,9 @@ let _mapOptions = {
 class Map extends React.Component {
 
   componentWillMount() {
-    this.props.requestImages(this.props.currentUser.user.id);
+    if (this.props.currentUser.user) {
+      this.props.requestImages(this.props.currentUser.user.id);
+    }
   }
 
   componentDidMount() {
@@ -310,9 +313,8 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="map-container">
-        <span className="change-feeds">feed</span>
-        <div className="map" ref="map">
+      <div className="home-container">
+        <div id="map" className="map" ref="map">
           Map
         </div>
       </div>

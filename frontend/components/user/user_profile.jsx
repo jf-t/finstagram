@@ -132,6 +132,36 @@ class UserProfile extends React.Component {
     } else {
       this.pageUser = {following: {}, followers: {}, images: []}
     }
+    let editorno;
+    if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
+      editorno = (
+      <div className="edit-profile-link">
+        <a onClick={this.showEditForm}>Edit Profile</a>
+      </div>
+      )
+    } else {
+      let flag = false;
+      let pageUserId = this.props.pageUserId;
+      this.props.currentUser.user.following.forEach(followee => {
+        if (followee.id.toString() === pageUserId) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        editorno = (
+          <div className="follow-user">
+            <a onClick={this.unfollowUser}>Unfollow</a>
+          </div>
+        )
+      } else {
+        editorno = (
+          <div className="follow-user">
+            <a onClick={this.followUser}>Follow</a>
+          </div>
+        )
+      }
+    }
+
     return(
       <div className="main">
         <div className="profile-info row">
@@ -150,9 +180,7 @@ class UserProfile extends React.Component {
               <p className="bio">{this.pageUser.bio}</p>
             </div>
           </div>
-          <div className="edit-profile-link">
-            <a onClick={this.showEditForm}>Edit Profile</a>
-          </div>
+          {editorno}
           {this.editStuff}
           {this.followersModal}
           {this.followingModal}

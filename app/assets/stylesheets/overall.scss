@@ -225,11 +225,12 @@ input:focus, textarea:focus {
 }
 
 // FEED
-.feed {
+.news-feed {
   width: 1200px;
   margin: 100px auto;
+  display:none;
 }
-.feed::after {
+.news-feed::after {
   clear: both;
   content: "";
   visibility: hidden;
@@ -369,9 +370,18 @@ border-top-right-radius: 4px;
 }
 .change-feeds {
   position: absolute;
-  top: 0;
+  top: 100px;
   right: 0;
+  z-index: 2;
+  background-color: #fff;
+  padding: 4px 12px;
+  border: 1px solid #ccc;
 }
+.change-feeds:hover {
+  cursor: pointer;
+  background-color: $purple;
+}
+
 .search-bar {
 }
 .search-bar input {
@@ -443,4 +453,12 @@ border-top-right-radius: 4px;
   top: 20px;
   color: #888;
   cursor: pointer;
+}
+.follow-user {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+#map {
+  display: block;
 }

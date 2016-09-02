@@ -29307,6 +29307,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var user = "";
 	      if (!this.props.currentUser.user) {
 	        _reactRouter.hashHistory.push('/login');
@@ -29346,6 +29348,50 @@
 	      } else {
 	        this.pageUser = { following: {}, followers: {}, images: [] };
 	      }
+	      var editorno = void 0;
+	      if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
+	        editorno = _react2.default.createElement(
+	          'div',
+	          { className: 'edit-profile-link' },
+	          _react2.default.createElement(
+	            'a',
+	            { onClick: this.showEditForm },
+	            'Edit Profile'
+	          )
+	        );
+	      } else {
+	        (function () {
+	          var flag = false;
+	          var pageUserId = _this2.props.pageUserId;
+	          _this2.props.currentUser.user.following.forEach(function (followee) {
+	            if (followee.id.toString() === pageUserId) {
+	              flag = true;
+	            }
+	          });
+	          if (flag) {
+	            editorno = _react2.default.createElement(
+	              'div',
+	              { className: 'follow-user' },
+	              _react2.default.createElement(
+	                'a',
+	                { onClick: _this2.unfollowUser },
+	                'Unfollow'
+	              )
+	            );
+	          } else {
+	            editorno = _react2.default.createElement(
+	              'div',
+	              { className: 'follow-user' },
+	              _react2.default.createElement(
+	                'a',
+	                { onClick: _this2.followUser },
+	                'Follow'
+	              )
+	            );
+	          }
+	        })();
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'main' },
@@ -29403,15 +29449,7 @@
 	              )
 	            )
 	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'edit-profile-link' },
-	            _react2.default.createElement(
-	              'a',
-	              { onClick: this.showEditForm },
-	              'Edit Profile'
-	            )
-	          ),
+	          editorno,
 	          this.editStuff,
 	          this.followersModal,
 	          this.followingModal
@@ -29921,10 +29959,6 @@
 	
 	var _image_actions = __webpack_require__(268);
 	
-	var _map = __webpack_require__(496);
-	
-	var _map2 = _interopRequireDefault(_map);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
@@ -29942,7 +29976,7 @@
 	  };
 	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_map2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_feed2.default);
 
 /***/ },
 /* 275 */
@@ -29966,7 +30000,13 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
+	var _map = __webpack_require__(496);
+	
+	var _map2 = _interopRequireDefault(_map);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29980,7 +30020,10 @@
 	  function FeedIndex(props) {
 	    _classCallCheck(this, FeedIndex);
 	
-	    return _possibleConstructorReturn(this, (FeedIndex.__proto__ || Object.getPrototypeOf(FeedIndex)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (FeedIndex.__proto__ || Object.getPrototypeOf(FeedIndex)).call(this, props));
+	
+	    _this.switchFeeds = _this.switchFeeds.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(FeedIndex, [{
@@ -29991,8 +30034,28 @@
 	      }
 	    }
 	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.map = document.getElementById("map");
+	      this.feed = document.getElementById("feed");
+	      this.map.style.display = "block";
+	    }
+	  }, {
+	    key: 'switchFeeds',
+	    value: function switchFeeds() {
+	      if (this.map.style.display === "block") {
+	        this.map.style.display = "none";
+	        this.feed.style.display = "block";
+	      } else {
+	        this.map.style.display = "block";
+	        this.feed.style.display = "none";
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _React$createElement;
+	
 	      if (this.props.images) {
 	        var compare = function compare(a, b) {
 	          if (a.image.created_at > b.image.created_at) {
@@ -30046,7 +30109,17 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'feed' },
-	        this.feedItems
+	        _react2.default.createElement(
+	          'span',
+	          (_React$createElement = { onClick: this.switchFeeds }, _defineProperty(_React$createElement, 'onClick', this.switchFeeds), _defineProperty(_React$createElement, 'className', 'change-feeds'), _React$createElement),
+	          'feed'
+	        ),
+	        _react2.default.createElement(_map2.default, { currentUser: this.props.currentUser, images: this.props.images, requestImages: this.props.requestImages }),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'feed', className: 'news-feed' },
+	          this.feedItems
+	        )
 	      );
 	    }
 	  }]);
@@ -47747,6 +47820,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var MY_MAPTYPE_ID = void 0;
+	
 	var _mapOptions = {
 	    center: { lat: 37.773972, lng: -122.431297 }, //San Francisco
 	    zoom: 13,
@@ -47956,7 +48030,9 @@
 	    _createClass(Map, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
-	            this.props.requestImages(this.props.currentUser.user.id);
+	            if (this.props.currentUser.user) {
+	                this.props.requestImages(this.props.currentUser.user.id);
+	            }
 	        }
 	    }, {
 	        key: 'componentDidMount',
@@ -47975,15 +48051,10 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'map-container' },
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'change-feeds' },
-	                    'feed'
-	                ),
+	                { className: 'home-container' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'map', ref: 'map' },
+	                    { id: 'map', className: 'map', ref: 'map' },
 	                    'Map'
 	                )
 	            );

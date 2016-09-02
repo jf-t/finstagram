@@ -1,16 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
-
+import Map from './map'
 
 class FeedIndex extends React.Component {
   constructor(props) {
     super(props)
+    this.switchFeeds = this.switchFeeds.bind(this)
   }
 
   componentWillMount() {
     if (this.props.currentUser.user) {
       this.props.requestImages();
+    }
+  }
+  componentDidMount() {
+    this.map = document.getElementById("map");
+    this.feed = document.getElementById("feed")
+    this.map.style.display = "block";
+  }
+
+  switchFeeds() {
+    if (this.map.style.display === "block") {
+      this.map.style.display = "none";
+      this.feed.style.display = "block"
+    } else {
+      this.map.style.display = "block";
+      this.feed.style.display = "none";
     }
   }
 
@@ -49,7 +65,11 @@ class FeedIndex extends React.Component {
     }
     return(
       <div className="feed">
-        {this.feedItems}
+        <span onClick={this.switchFeeds} onClick={this.switchFeeds} className="change-feeds">feed</span>
+        <Map currentUser={this.props.currentUser} images={this.props.images} requestImages={this.props.requestImages}/>
+        <div id="feed" className="news-feed">
+          {this.feedItems}
+        </div>
       </div>
     )
   }
