@@ -2,7 +2,7 @@ import { userConstants } from '../actions/user_actions';
 import merge from 'lodash/merge';
 
 
-const PageUserReducer = (state = {loading: false}, action) => {
+const PageUserReducer = (state = {loading: true}, action) => {
   switch(action.type) {
     case userConstants.EDIT_USER:
       return merge({}, state, {loading: true}, action.user);

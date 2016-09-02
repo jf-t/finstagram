@@ -5,7 +5,6 @@ import { requestImages } from '../../actions/image_actions';
 
 
 const mapStateToProps = (state, ownProps) => {
-  debugger;
   return ({
     images: state.images,
     currentUser: state.user,

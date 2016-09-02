@@ -14,20 +14,12 @@ class UserProfile extends React.Component {
     this.props.requestUser(this.props.pageUserId);
   }
 
-  componentDidMount() {
-    if (this.pageUser.followers.length > 0) {
-      this.createHiddenModals();
-    }
-  }
 
   componentDidUpdate() {
     if (!this.props.currentUser.user) {
       hashHistory.push("/login");
     }
-    let editProForm = document.getElementById("edit-pro-form");
-    if (!editProForm) {
-      this.createHiddenModals();
-    }
+    // this.createHiddenModals();
   }
 
   createHiddenModals() {
@@ -67,10 +59,6 @@ class UserProfile extends React.Component {
       </div>
     );
 
-    if (!this.props.currentUser.user) {
-      hashHistory.push('/login');
-    }
-    this.setState({hey: "whatsup"})
   }
 
   showEditForm() {
@@ -79,23 +67,23 @@ class UserProfile extends React.Component {
   }
 
   showFollowers() {
-    let editProForm = document.getElementById("followers-modal");
-    editProForm.style.display = "block";
+    let followers = document.getElementById("followers-modal");
+    followers.style.display = "block";
   }
 
   showFollowing() {
-    let editProForm = document.getElementById("following-modal");
-    editProForm.style.display = "block";
+    let following = document.getElementById("following-modal");
+    following.style.display = "block";
   }
 
   hideFollowers() {
-    let editProForm = document.getElementById("followers-modal");
-    editProForm.style.display = "none";
+    let followers = document.getElementById("followers-modal");
+    followers.style.display = "none";
   }
 
   hideFollowing() {
-    let editProForm = document.getElementById("following-modal");
-    editProForm.style.display = "none";
+    let following = document.getElementById("following-modal");
+    following.style.display = "none";
   }
 
   render() {
@@ -103,10 +91,7 @@ class UserProfile extends React.Component {
     if (!this.props.currentUser.user) {
       hashHistory.push('/login');
     }
-    if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
-      this.pageUser = this.props.currentUser.user;
-    }
-    if ((Object.keys(this.props.pageUser).length > 0) && this.props.pageUser.id.toString() === this.props.pageUserId) {
+    if ((Object.keys(this.props.pageUser).length > 1) && this.props.pageUser.id.toString() === this.props.pageUserId) {
       this.pageUser = this.props.pageUser
     }
 
@@ -161,37 +146,49 @@ class UserProfile extends React.Component {
         )
       }
     }
-
-    debugger;
-
-    return(
-      <div className="main">
-        <div className="profile-info row">
-          <div className="profile-pic col-sm-4">
-            <img src={this.pageUser.image_url} />
-          </div>
-          <div className="col-sm-8">
-            <h1>{this.pageUser.full_name}</h1>
-            <h4>@{this.pageUser.username}</h4>
-            <div className="follow-info">
-              <span onClick={this.showFollowers} className="followers">{this.pageUser.followers.length} followers</span>
-              <span onClick={this.showFollowing} className="following">{this.pageUser.following.length} following</span>
-              <span className="posts">{this.pageUser.images.length} posts</span>
-            </div>
-            <div className="bio-container">
-              <p className="bio">{this.pageUser.bio}</p>
-            </div>
-          </div>
-          {editorno}
-          {this.editStuff}
-          {this.followersModal}
-          {this.followingModal}
+    let content;
+    if ((this.props.pageUser.loading === true) || (this.props.pageUser.id.toString() !== this.props.pageUserId)) {
+      setTimeout(() => this.props.requestUser(this.props.pageUserId), 100);
+      content = (
+        <div className="loading-icon">
+          <h1>loading...</h1>
         </div>
-        <div className="image-feed">
-          {this.feedItems}
+      )
+    } else {
+      this.createHiddenModals();
+      content = (
+        <div className="main">
+          <div className="profile-info row">
+            <div className="profile-pic col-sm-4">
+              <img src={this.pageUser.image_url} />
+            </div>
+            <div className="col-sm-8">
+              <h1>{this.pageUser.full_name}</h1>
+              <h4>@{this.pageUser.username}</h4>
+              <div className="follow-info">
+                <span onClick={this.showFollowers} className="followers">{this.pageUser.followers.length} followers</span>
+                <span onClick={this.showFollowing} className="following">{this.pageUser.following.length} following</span>
+                <span className="posts">{this.pageUser.images.length} posts</span>
+              </div>
+              <div className="bio-container">
+                <p className="bio">{this.pageUser.bio}</p>
+              </div>
+            </div>
+            {editorno}
+            {this.editStuff}
+            {this.followersModal}
+            {this.followingModal}
+          </div>
+          <div className="image-feed">
+            {this.feedItems}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+
+
+
+    return content
   }
 }
 
