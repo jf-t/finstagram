@@ -162,6 +162,8 @@ class UserProfile extends React.Component {
       }
     }
 
+    debugger;
+
     return(
       <div className="main">
         <div className="profile-info row">
