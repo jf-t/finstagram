@@ -21,6 +21,16 @@ class ImageDetail extends React.Component {
         </div>
       )
     } else {
+      let editButton = "";
+      if (image.user.id === this.props.currentUser.user.id) {
+        editButton = (
+          <div className="edit-img-button">
+            <a onClick={this.showEditForm}>
+              Edit Image
+            </a>
+          </div>
+        )
+      }
       content = (
         <div className="image-detail">
           <div className="feed-item-prof">
@@ -35,6 +45,7 @@ class ImageDetail extends React.Component {
           </div>
           <div className="image-content">
             <span className="num-likes">{image.num_likes}</span>
+            {editButton}
             <p className="image-caption">{image.caption}</p>
             <div className="comments">
               <ul>

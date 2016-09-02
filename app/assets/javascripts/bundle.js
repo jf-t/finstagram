@@ -44876,7 +44876,7 @@
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return {
 	    image: state.image,
-	    imageOwner: state.user,
+	    currentUser: state.user,
 	    imageId: ownProps.params.id
 	  };
 	};
@@ -44951,6 +44951,18 @@
 	          )
 	        );
 	      } else {
+	        var editButton = "";
+	        if (image.user.id === this.props.currentUser.user.id) {
+	          editButton = _react2.default.createElement(
+	            'div',
+	            { className: 'edit-img-button' },
+	            _react2.default.createElement(
+	              'a',
+	              { onClick: this.showEditForm },
+	              'Edit Image'
+	            )
+	          );
+	        }
 	        content = _react2.default.createElement(
 	          'div',
 	          { className: 'image-detail' },
@@ -44986,6 +44998,7 @@
 	              { className: 'num-likes' },
 	              image.num_likes
 	            ),
+	            editButton,
 	            _react2.default.createElement(
 	              'p',
 	              { className: 'image-caption' },

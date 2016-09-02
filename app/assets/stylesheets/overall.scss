@@ -500,3 +500,18 @@ img {
   text-align: center;
   margin-bottom: 10px;
 }
+.edit-img-button {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float: right;
+  font-size: 12px;
+}
+.edit-img-button:hover {
+  cursor: pointer;
+  color: #eee;
+}
+.edit-img-button a {
+  padding: 0px 10px;
+  line-height: 26px;
+  color: #333;
+}

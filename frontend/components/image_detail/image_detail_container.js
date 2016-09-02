@@ -4,7 +4,7 @@ import ImageDetail from './image_detail';
 
 const mapStateToProps = (state, ownProps) => ({
   image: state.image,
-  imageOwner: state.user,
+  currentUser: state.user,
   imageId: ownProps.params.id
 });
 
