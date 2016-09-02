@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160831100643) do
     t.string   "image_url",              null: false
     t.text     "caption"
     t.integer  "user_id",                null: false
-    t.integer  "lat",                    null: false
-    t.integer  "lng",                    null: false
+    t.float    "lat",                    null: false
+    t.float    "lng",                    null: false
     t.integer  "num_likes",  default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
