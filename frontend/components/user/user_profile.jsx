@@ -2,12 +2,14 @@ import React from 'react';
 import { userfromId } from '../../util/user_api_util';
 import EditProfile from './edit_profile';
 import { hashHistory, Link } from 'react-router';
-
+import { addFollow, removeFollow } from '../../util/user_api_util';
 
 class UserProfile extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.createHiddenModals = this.createHiddenModals.bind(this);
+    this.followUser = this.followUser.bind(this);
+    this.unfollowUser = this.unfollowUser.bind(this);
   }
 
   componentWillMount() {
@@ -19,7 +21,6 @@ class UserProfile extends React.Component {
     if (!this.props.currentUser.user) {
       hashHistory.push("/login");
     }
-    // this.createHiddenModals();
   }
 
   createHiddenModals() {
@@ -59,6 +60,14 @@ class UserProfile extends React.Component {
       </div>
     );
 
+  }
+
+  followUser() {
+    addFollow(this.props.pageUserId);
+  }
+
+  unfollowUser() {
+    removeFollow(this.props.pageUserId);
   }
 
   showEditForm() {
@@ -127,8 +136,8 @@ class UserProfile extends React.Component {
       </div>
       )
     } else {
-      let flag = false;
       let pageUserId = this.props.pageUserId;
+      let flag = false;
       this.props.currentUser.user.following.forEach(followee => {
         if (followee.id.toString() === pageUserId) {
           flag = true;

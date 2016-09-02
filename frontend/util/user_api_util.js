@@ -60,3 +60,25 @@ export const requestUsers = (str, success, error) => {
     error: () => console.log("ugh")
   });
 }
+
+export const addFollow = (id, success) => {
+  $.ajax({
+    method: "POST",
+    url: "api/follow",
+    data: {
+      following_id: id
+    },
+    success
+  });
+}
+
+export const removeFollow = (id, success) => {
+  $.ajax({
+    method: "DELETE",
+    url: `api/follow`,
+    data: {
+      following_id: id
+    },
+    success
+  });
+}

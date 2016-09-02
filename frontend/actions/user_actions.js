@@ -9,8 +9,10 @@ export const userConstants = {
   EDIT_USER: "EDIT_USER",
   LOGGED_OUT: "LOGGED_OUT",
   REQUEST_USERS: "REQUEST_USERS",
-  RECEIVE_USERS: "RECEIVE_USERS"
-}
+  RECEIVE_USERS: "RECEIVE_USERS",
+  ADD_FOLLOW: "ADD_FOLLOW",
+  REMOVE_FOLLOW: "REMOVE_FOLLOW"
+};
 
 export const login = user => {
   return ({
@@ -64,4 +66,15 @@ export const editUser = user => ({
 
 export const loggedOutRender = () => ({
   type: userConstants.LOGGED_OUT
+});
+
+
+export const addFollow = (id) => ({
+  type: userConstnats.ADD_FOLLOW,
+  following_id: id
+});
+
+export const removeFollow = (id) => ({
+  type: userConstnats.REMOVE_FOLLOW,
+  following_id: id
 });

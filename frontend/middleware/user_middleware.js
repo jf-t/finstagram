@@ -33,6 +33,7 @@ const UserMiddleware = ({getState, dispatch}) => next => action => {
     case userConstants.REQUEST_USERS:
       const success3 = (users) => dispatch(receiveUsers(users));
       requestUsers(action.data, success3);
+    break;
     default:
       return next(action);
   }

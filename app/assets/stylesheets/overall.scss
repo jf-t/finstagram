@@ -161,7 +161,6 @@ body {
 }
 .edit-profile-link {
   background-color: #fff;
-  padding: 10px 20px;
   position: absolute;
   top: 10px;
   right: 0;
@@ -169,6 +168,8 @@ body {
   border: 1px solid #ccc;
 }
 .edit-profile-link a {
+  padding: 10px 20px;
+  display: block;
   color: #333;
   text-decoration: none;
 }
