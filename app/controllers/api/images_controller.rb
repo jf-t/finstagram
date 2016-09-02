@@ -6,13 +6,16 @@ class Api::ImagesController < ApplicationController
   def create
     @image = Image.new(image_params);
     @image.user_id = current_user.id
-    byebug
     if (@image.save!)
       @user = User.find(current_user.id);
       render 'api/users/show'
     else
       render json: @image.errors.full_messages, status: 422
     end
+  end
+
+  def show
+    @image = Image.find(params[:id]);
   end
 
   private

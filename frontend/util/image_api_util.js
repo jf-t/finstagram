@@ -17,3 +17,11 @@ export const addImage = (img, success, error) => {
     error
   });
 }
+
+export const requestImage = (id, success) => {
+  $.ajax({
+    method: "GET",
+    url: `api/images/${id}`,
+    success
+  });
+};

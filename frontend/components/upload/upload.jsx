@@ -22,10 +22,15 @@ class UploadForm extends React.Component {
     e.preventDefault();
     this.props.addImage(this.state);
   }
+  openCloudinary() {
+    debugger;
+    let widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, function(error, result) {console.log(result)});
+  }
 
   render() {
     return(
       <div className="upload-form modal-form">
+        <a onClick={this.openCloudinary}>yo</a>
         <form onSubmit={e => this.submitForm(e)}>
           <input onChange={(e) => this.update(e, "image_url")} placeholder="image url"/>
           <input onChange={(e) => this.update(e, "caption")} placeholder="caption"/>

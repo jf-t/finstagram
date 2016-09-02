@@ -1,3 +1,5 @@
+import { hashHistory } from 'react-router';
+
 class MarkerManager {
   constructor(map) {
     this.markers = [];
@@ -40,7 +42,9 @@ class MarkerManager {
       image_id: img.id,
       icon: this.pin
     });
-    marker.addListener('click', () => this.handleClick(img));
+    marker.addListener('click',() => {
+      hashHistory.push(`/profile/${img.user.id}`);
+    });
     this.markers.push(marker);
   }
 

@@ -103,12 +103,14 @@ class UserProfile extends React.Component {
         let images = this.pageUser.images
         this.feedItems = images.map((img) => {
           return (
-            <div key={img.id} className="feed-item">
-              <div className="feed-img-cont">
-                <img src={img.image_url} />
+            <Link key={img.id} to={`/images/${img.id}`}>
+              <div className="feed-item">
+                <div className="feed-img-cont">
+                  <img src={img.image_url} />
+                </div>
+                <p className="caption">{img.caption}</p>
               </div>
-              <p className="caption">{img.caption}</p>
-            </div>
+            </Link>
           )
         })
       } else {
