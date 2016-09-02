@@ -2,7 +2,8 @@ export const imageConstants = {
   REQUEST_IMAGES: "REQUEST_IMAGES",
   RECEIVE_IMAGES: "RECEIVE_IMAGES",
   REQUEST_IMAGE: "REQUEST_IMAGE",
-  RECEIVE_IMAGE: "RECEIVE_IMAGE"
+  RECEIVE_IMAGE: "RECEIVE_IMAGE",
+  ADD_IMAGE: "ADD_IMAGE"
 };
 
 export const requestImages = (userId) => ({
@@ -22,5 +23,10 @@ export const requestImage = (image_id) => ({
 
 export const receiveImage = (image) => ({
   type: imageConstants.RECEIVE_IMAGE,
+  image
+});
+
+export const addImage = (image) => ({
+  type: imageConstants.ADD_IMAGE,
   image
 });

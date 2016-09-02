@@ -5,9 +5,10 @@ class Api::ImagesController < ApplicationController
 
   def create
     @image = Image.new(image_params);
-    if (@image.save)
-      img_hash = Cloudinary::Uploader.upload(@image.image_url);
-      @image.image_url = img_hash[:url]
+    @image.user_id = current_user.id
+    byebug
+    if (@image.save!)
+      @user = User.find(current_user.id);
       render 'api/users/show'
     else
       render json: @image.errors.full_messages, status: 422

@@ -3,5 +3,17 @@ export const requestImages = (success) => {
     method: "GET",
     url: `api/images`,
     success: success
-  }) //This should return a list of 30 images from the database through the controller
+  })
+}
+
+export const addImage = (img, success, error) => {
+  $.ajax({
+    method: "POST",
+    url: "api/images",
+    data: {
+      image: img
+    },
+    success,
+    error
+  });
 }

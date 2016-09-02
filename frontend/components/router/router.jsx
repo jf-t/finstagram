@@ -6,6 +6,9 @@ import UserProfileContainer from '../user/user_profile_container';
 import App from '../app';
 import HomeIndexContainer from '../containing/home_index_container';
 import FeedContainer from '../feed/feed_container';
+import UploadFormContainer from '../upload/upload_container';
+import { addImage } from '../../actions/image_actions';
+
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -27,6 +30,7 @@ class AppRouter extends React.Component {
         <Route path="/" component={ App } onEnter={this.addHome}></Route>
         <Route path="/home" component={ HomeIndexContainer }>
           <IndexRoute component={ FeedContainer } />
+          <Route path="/upload" component={UploadFormContainer} onEnter={this.redirectIfNotLoggedIn}/>
           <Route path="/profile/:id" component={ UserProfileContainer } onEnter={this.redirectIfNotLoggedIn}/>
           <Route path="/signup" component={ UserSignupContainer } />
           <Route path="/login" component={ UserLoginContainer } />
