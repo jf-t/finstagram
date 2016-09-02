@@ -10,6 +10,17 @@
 #
 
 class Follow < ApplicationRecord
+  validates :user_id, :following_id, presence: true
+
+  validate :cant_follow_yourself
+
+
+  def cant_follow_yourself
+    if (user_id == following_id)
+      errors.add(:errors, "Can't follow yourself")
+    end
+  end
+
 
   belongs_to :follower,
     primary_key: :id,
