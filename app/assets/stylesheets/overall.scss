@@ -242,7 +242,7 @@ input:focus, textarea:focus {
 .news-feed-item {
   width: 600px;
   margin: 100px auto;
-  padding: 50px 0;
+  padding: 81px 0;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -463,4 +463,11 @@ border-top-right-radius: 4px;
 }
 #map {
   display: block;
+}
+
+.loading-icon {
+  position: relative;
+  top: 200px;
+  width: 100%;
+  text-align: center;
 }
