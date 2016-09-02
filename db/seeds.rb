@@ -24,7 +24,9 @@ User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s32
   user_id = idx + 1
   12.times do |idx2|
     following_id = idx2 + 1
-    Follow.create!(user_id: user_id, following_id: following_id)
+    if (following_id != user_id)
+      Follow.create!(user_id: user_id, following_id: following_id)
+    end
   end
 end
 
