@@ -516,3 +516,21 @@ img {
   line-height: 26px;
   color: #333;
 }
+.follow-user {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.follow-user:hover {
+  background-color: $purple;
+}
+.follow-user a {
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: #333;
+}
+#edit-image {
+  display: none;
+}

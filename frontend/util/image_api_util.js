@@ -25,3 +25,14 @@ export const requestImage = (id, success) => {
     success
   });
 };
+
+export const editImage = (img, success, error) => {
+  $.ajax({
+    method: "PATCH",
+    url: `api/images/${img.id}`,
+    data: {
+      image: img
+    },
+    success
+  });
+}

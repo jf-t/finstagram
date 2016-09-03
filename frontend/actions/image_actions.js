@@ -3,7 +3,8 @@ export const imageConstants = {
   RECEIVE_IMAGES: "RECEIVE_IMAGES",
   REQUEST_IMAGE: "REQUEST_IMAGE",
   RECEIVE_IMAGE: "RECEIVE_IMAGE",
-  ADD_IMAGE: "ADD_IMAGE"
+  ADD_IMAGE: "ADD_IMAGE",
+  EDIT_IMAGE: "EDIT_IMAGE"
 };
 
 export const requestImages = (userId) => ({
@@ -30,3 +31,8 @@ export const addImage = (image) => ({
   type: imageConstants.ADD_IMAGE,
   image
 });
+
+export const editImage = (image) => ({
+  type: imageConstants.EDIT_IMAGE,
+  image
+})

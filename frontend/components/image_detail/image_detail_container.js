@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { requestImage } from '../../actions/image_actions';
+import { requestImage, editImage } from '../../actions/image_actions';
 import ImageDetail from './image_detail';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -9,7 +9,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestImage: (id) => dispatch(requestImage(id))
+  requestImage: (id) => dispatch(requestImage(id)),
+  editImage: (img) => dispatch(editImage(img))
 });
 
 export default connect(

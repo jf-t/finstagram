@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
+import EditImage from './edit_image';
 
 class ImageDetail extends React.Component {
   constructor(props) {
@@ -10,8 +11,15 @@ class ImageDetail extends React.Component {
   componentWillMount() {
     this.props.requestImage(this.props.imageId)
   }
+  showEditForm() {
+    let editForm = document.getElementById("edit-image");
+    editForm.style.display = "block";
+  }
 
   render() {
+    this.editForm = (
+      <EditImage editImage={this.props.editImage} image={this.props.image}/>
+    )
     let image = this.props.image[0];
     let content;
     if (!image) {
@@ -46,6 +54,7 @@ class ImageDetail extends React.Component {
           <div className="image-content">
             <span className="num-likes">{image.num_likes}</span>
             {editButton}
+            {this.editForm}
             <p className="image-caption">{image.caption}</p>
             <div className="comments">
               <ul>

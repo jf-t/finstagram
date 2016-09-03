@@ -6,6 +6,7 @@ const ImageReducer = (state = [], action) => {
     case imageConstants.RECEIVE_IMAGE:
       return[action.image]
     default:
+    
       return state;
   }
 };
