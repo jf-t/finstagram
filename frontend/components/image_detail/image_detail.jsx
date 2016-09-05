@@ -5,15 +5,40 @@ import EditImage from './edit_image';
 
 class ImageDetail extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      body: "",
+      image_id: this.props.imageId
+    };
+    this.sendComment = this.sendComment.bind(this);
+    this.updateTextarea = this.updateTextarea.bind(this);
+    this.likeImage = this.likeImage.bind(this);
+    this.unlikeImage = this.unlikeImage.bind(this);
   }
 
   componentWillMount() {
     this.props.requestImage(this.props.imageId)
   }
+  componentWillUpdate() {
+    this.props.requestImage(this.props.imageId)
+  }
   showEditForm() {
     let editForm = document.getElementById("edit-image");
     editForm.style.display = "block";
+  }
+  updateTextarea(e) {
+    this.setState({body: e.target.value})
+  }
+
+  sendComment() {
+    this.props.addComment(this.state);
+  }
+
+  likeImage() {
+    this.props.addLike(this.props.image[0].id);
+  }
+  unlikeImage() {
+    this.props.removeLike(this.props.image[0].id);
   }
 
   render() {
@@ -22,7 +47,7 @@ class ImageDetail extends React.Component {
     )
     let image = this.props.image[0];
     let content;
-    if (!image) {
+    if ((!image) || (!Object.keys(image).length > 2)) {
       content = (
         <div className="loading-icon">
           <h1>loading...</h1>
@@ -39,6 +64,24 @@ class ImageDetail extends React.Component {
           </div>
         )
       }
+      let comments = image.comments.map(comment => {
+        return <li key={comment.id}>
+          <Link to={`/profile/${comment.author.id}`} className="author-name">{comment.author.username}</Link>
+          {comment.body}</li>
+      });
+      let flag = false;
+      let likeOrNo;
+      image.likes.forEach(like => {
+        if (like.author.id === this.props.currentUser.user.id) {
+          flag = true;
+        }
+      });
+      if (flag) {
+        likeOrNo = (<a className="unlike-heart" onClick={this.unlikeImage}><i className="fa fa-heart"></i></a>)
+      } else {
+        likeOrNo = (<a className="like-heart" onClick={this.likeImage}><i className="fa fa-heart-o"></i></a>)
+      };
+
       content = (
         <div className="image-detail">
           <div className="feed-item-prof">
@@ -52,16 +95,21 @@ class ImageDetail extends React.Component {
             <img src={image.image_url} />
           </div>
           <div className="image-content">
-            <span className="num-likes">{image.num_likes}</span>
+            {likeOrNo}
+            <span className="num-likes">{image.likes.length} Likes</span>
             {editButton}
             {this.editForm}
             <p className="image-caption">{image.caption}</p>
             <div className="comments">
               <ul>
-                <li>comment1</li>
-                <li>comment2</li>
-                <li>comment3</li>
+                {comments}
               </ul>
+            </div>
+            <div className="add-comment">
+              <form onSubmit={this.sendComment} >
+                <textarea className="add-comment" onChange={this.updateTextarea} placeholder="Add Comment..."></textarea>
+                <input type="submit"></input>
+              </form>
             </div>
           </div>
         </div>

@@ -36,3 +36,39 @@ export const editImage = (img, success, error) => {
     success
   });
 }
+
+export const addLike = (id, success) => {
+  $.ajax({
+    method: "POST",
+    url: "api/likes",
+    data: {
+      image_id: id
+    },
+    success,
+    error: () => console.log("add like error")
+  });
+}
+
+export const removeLike = (id, success) => {
+  $.ajax({
+    method: "DELETE",
+    url: "api/likes",
+    data: {
+      image_id: id
+    },
+    success,
+    error: () => console.log("remove like error")
+  });
+}
+
+export const addComment = (comment, success) => {
+  $.ajax({
+    method: "POST",
+    url: "api/comments/",
+    data: {
+      comment
+    },
+    success,
+    error: () => (console.log("add comment error"))
+  })
+}

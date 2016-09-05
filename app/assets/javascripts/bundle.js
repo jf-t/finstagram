@@ -29727,7 +29727,10 @@
 	  REQUEST_IMAGE: "REQUEST_IMAGE",
 	  RECEIVE_IMAGE: "RECEIVE_IMAGE",
 	  ADD_IMAGE: "ADD_IMAGE",
-	  EDIT_IMAGE: "EDIT_IMAGE"
+	  EDIT_IMAGE: "EDIT_IMAGE",
+	  ADD_COMMENT: "ADD_COMMENT",
+	  ADD_LIKE: "ADD_LIKE",
+	  REMOVE_LIKE: "REMOVE_LIKE"
 	};
 	
 	var requestImages = exports.requestImages = function requestImages(userId) {
@@ -29769,6 +29772,27 @@
 	  return {
 	    type: imageConstants.EDIT_IMAGE,
 	    image: image
+	  };
+	};
+	
+	var addLike = exports.addLike = function addLike(id) {
+	  return {
+	    type: imageConstants.ADD_LIKE,
+	    id: id
+	  };
+	};
+	
+	var removeLike = exports.removeLike = function removeLike(id) {
+	  return {
+	    type: imageConstants.REMOVE_LIKE,
+	    id: id
+	  };
+	};
+	
+	var addComment = exports.addComment = function addComment(comment) {
+	  return {
+	    type: imageConstants.ADD_COMMENT,
+	    comment: comment
 	  };
 	};
 
@@ -44951,6 +44975,15 @@
 	    },
 	    editImage: function editImage(img) {
 	      return dispatch((0, _image_actions.editImage)(img));
+	    },
+	    addComment: function addComment(comment) {
+	      return dispatch((0, _image_actions.addComment)(comment));
+	    },
+	    addLike: function addLike(id) {
+	      return dispatch((0, _image_actions.addLike)(id));
+	    },
+	    removeLike: function removeLike(id) {
+	      return dispatch((0, _image_actions.removeLike)(id));
 	    }
 	  };
 	};
@@ -44997,12 +45030,27 @@
 	  function ImageDetail(props) {
 	    _classCallCheck(this, ImageDetail);
 	
-	    return _possibleConstructorReturn(this, (ImageDetail.__proto__ || Object.getPrototypeOf(ImageDetail)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (ImageDetail.__proto__ || Object.getPrototypeOf(ImageDetail)).call(this, props));
+	
+	    _this.state = {
+	      body: "",
+	      image_id: _this.props.imageId
+	    };
+	    _this.sendComment = _this.sendComment.bind(_this);
+	    _this.updateTextarea = _this.updateTextarea.bind(_this);
+	    _this.likeImage = _this.likeImage.bind(_this);
+	    _this.unlikeImage = _this.unlikeImage.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(ImageDetail, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      this.props.requestImage(this.props.imageId);
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
 	      this.props.requestImage(this.props.imageId);
 	    }
 	  }, {
@@ -45012,12 +45060,34 @@
 	      editForm.style.display = "block";
 	    }
 	  }, {
+	    key: 'updateTextarea',
+	    value: function updateTextarea(e) {
+	      this.setState({ body: e.target.value });
+	    }
+	  }, {
+	    key: 'sendComment',
+	    value: function sendComment() {
+	      this.props.addComment(this.state);
+	    }
+	  }, {
+	    key: 'likeImage',
+	    value: function likeImage() {
+	      this.props.addLike(this.props.image[0].id);
+	    }
+	  }, {
+	    key: 'unlikeImage',
+	    value: function unlikeImage() {
+	      this.props.removeLike(this.props.image[0].id);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      this.editForm = _react2.default.createElement(_edit_image2.default, { editImage: this.props.editImage, image: this.props.image });
 	      var image = this.props.image[0];
 	      var content = void 0;
-	      if (!image) {
+	      if (!image || !Object.keys(image).length > 2) {
 	        content = _react2.default.createElement(
 	          'div',
 	          { className: 'loading-icon' },
@@ -45040,6 +45110,39 @@
 	            )
 	          );
 	        }
+	        var comments = image.comments.map(function (comment) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: comment.id },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/profile/' + comment.author.id, className: 'author-name' },
+	              comment.author.username
+	            ),
+	            comment.body
+	          );
+	        });
+	        var flag = false;
+	        var likeOrNo = void 0;
+	        image.likes.forEach(function (like) {
+	          if (like.author.id === _this2.props.currentUser.user.id) {
+	            flag = true;
+	          }
+	        });
+	        if (flag) {
+	          likeOrNo = _react2.default.createElement(
+	            'a',
+	            { className: 'unlike-heart', onClick: this.unlikeImage },
+	            _react2.default.createElement('i', { className: 'fa fa-heart' })
+	          );
+	        } else {
+	          likeOrNo = _react2.default.createElement(
+	            'a',
+	            { className: 'like-heart', onClick: this.likeImage },
+	            _react2.default.createElement('i', { className: 'fa fa-heart-o' })
+	          );
+	        };
+	
 	        content = _react2.default.createElement(
 	          'div',
 	          { className: 'image-detail' },
@@ -45070,10 +45173,12 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'image-content' },
+	            likeOrNo,
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'num-likes' },
-	              image.num_likes
+	              image.likes.length,
+	              ' Likes'
 	            ),
 	            editButton,
 	            this.editForm,
@@ -45088,21 +45193,17 @@
 	              _react2.default.createElement(
 	                'ul',
 	                null,
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  'comment1'
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  'comment2'
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  'comment3'
-	                )
+	                comments
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'add-comment' },
+	              _react2.default.createElement(
+	                'form',
+	                { onSubmit: this.sendComment },
+	                _react2.default.createElement('textarea', { className: 'add-comment', onChange: this.updateTextarea, placeholder: 'Add Comment...' }),
+	                _react2.default.createElement('input', { type: 'submit' })
 	              )
 	            )
 	          )
@@ -48813,6 +48914,14 @@
 	        case _image_actions.imageConstants.REQUEST_IMAGE:
 	          (0, _image_api_util.requestImage)(action.image_id, success2);
 	          return next(action);
+	        case _image_actions.imageConstants.ADD_LIKE:
+	          (0, _image_api_util.addLike)(action.id, success2);
+	          return next(action);
+	        case _image_actions.imageConstants.ADD_COMMENT:
+	          (0, _image_api_util.addComment)(action.comment, success2);
+	          return next(action);
+	        case _image_actions.imageConstants.REMOVE_LIKE:
+	          (0, _image_api_util.removeLike)(action.id, success2);
 	        default:
 	          return next(action);
 	      }
@@ -48867,6 +48976,48 @@
 	      image: img
 	    },
 	    success: success
+	  });
+	};
+	
+	var addLike = exports.addLike = function addLike(id, success) {
+	  $.ajax({
+	    method: "POST",
+	    url: "api/likes",
+	    data: {
+	      image_id: id
+	    },
+	    success: success,
+	    error: function error() {
+	      return console.log("add like error");
+	    }
+	  });
+	};
+	
+	var removeLike = exports.removeLike = function removeLike(id, success) {
+	  $.ajax({
+	    method: "DELETE",
+	    url: "api/likes",
+	    data: {
+	      image_id: id
+	    },
+	    success: success,
+	    error: function error() {
+	      return console.log("remove like error");
+	    }
+	  });
+	};
+	
+	var addComment = exports.addComment = function addComment(comment, success) {
+	  $.ajax({
+	    method: "POST",
+	    url: "api/comments/",
+	    data: {
+	      comment: comment
+	    },
+	    success: success,
+	    error: function error() {
+	      return console.log("add comment error");
+	    }
 	  });
 	};
 
