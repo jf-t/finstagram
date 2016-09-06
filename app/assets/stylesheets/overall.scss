@@ -19,7 +19,7 @@ body {
 
 .header {
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $purple;
   position: fixed;
   width: 100%;
   top: 0;
@@ -30,7 +30,7 @@ body {
   justify-content: space-between;
   width: 900px;
   margin: 0 auto;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid $purple;
 }
 .header h1 {
   padding: 5px 10px;

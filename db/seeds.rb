@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(image_url: "https://pbs.twimg.com/profile_images/770511161884237824/qdzxmnyB_400x400.jpg", username: "jackfintan", full_name: "jack fintan tilly", email: "jackftilly@gmail.com", password: "password")
+User.create!(image_url: "https://pbs.twimg.com/profile_images/770511161884237824/qdzxmnyB_400x400.jpg", username: "jackfintan", full_name: "jack fintan tilly", email: "jackftilly@gmail.com", password: "warrior99!")
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/13736091_1141889845854971_965104315_a.jpg", username: "melissatalgo", email: "melissa.talgo@gmail.com", full_name: "Melissa Talgo", password: "iLoveJack")
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/11137590_1589144874665540_1847240937_a.jpg", username: "austinjones2", full_name: "austin jones", email: "austinjones@gmail.com", password: "rilSquadAustin", bio: "Right now let's get this paper and smile for all them haters");
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/11881841_981304115260795_1162752656_a.jpg", username: "conradical8", full_name: "Conrad May", email: "conradmay@gmail.com", password: "rilSquadConrad");
@@ -18,6 +18,7 @@ User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/111
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/13671238_1089196924494993_2109793326_a.jpg", username: "reggiechatman", full_name: "Reggie Chatman Jr.", email: "reggiechatman@gmail.com", password: "rilSquadReggie", bio: "ournalist || LSU Student || Alpha Man ReggieChatman.com");
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/13687417_296158190748292_793844372_a.jpg", username: "finigan_tilly", full_name: "fin tilly", email: "fintilly@gmail.com", password: "fintilly");
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/12934972_1736519349926987_1486472382_a.jpg", username: "tayysexton", full_name: "Taylor Sexton", email: "taylorsexton@gmail.com", password: "taylorSexton", bio: "Bay Area ⇄ UC Davis ΑΧΩ");
+User.create!(username: "guest_user", full_name: "Guest", email: "example@gmail.com", password: "password", bio: "living in the clouds");
 
 
 12.times do |idx|

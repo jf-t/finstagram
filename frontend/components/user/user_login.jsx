@@ -43,7 +43,9 @@ class UserLogin extends React.Component {
 
           <input type="submit" value="submit"></input>
         </form>
+        <a onClick={this.guestUser}>Guest User</a>
         <Link to={`/signup`} className="sign-up">Sign Up</Link>
+        <p>my guest user tab probably doesn't work... sign in manually with username: "guest_user" and password: "password"</p>
       </div>
     )
   }
