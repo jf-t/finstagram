@@ -635,6 +635,20 @@ textarea.add-comment {
     }
     input[type=submit] {
       width: 100px;
+      float: left;
+      margin-left: 25px;
     }
+    #map-sm {
+      border-radius: 20px;
+      cursor: pointer;
+      .gm-style {
+        border-radius: 20px;
+      }
+    }
+  }
+}
+.latNLng {
+  h3 {
+    font-size: 18px;
   }
 }

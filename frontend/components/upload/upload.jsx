@@ -1,5 +1,5 @@
 import React from 'react';
-
+import _mapOptions from '../../util/map_options';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -17,6 +17,12 @@ class UploadForm extends React.Component {
     const addUrl =(error, result) => {
       this.setState({image_url: result[0].url});
     }
+    const setPos = (e) => {
+      this.setState({lat: e.latLng.lat(), lng: e.latLng.lng()})
+    }
+    const mapDOMNode = this.refs.map;
+    this.map = new google.maps.Map(mapDOMNode, _mapOptions);
+    this.map.addListener('click', setPos.bind(this));
     let widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
   }
   update(e, prop) {
@@ -29,6 +35,14 @@ class UploadForm extends React.Component {
   }
 
   render() {
+    if (this.state.lat !== "") {
+      let lat = document.getElementById("lat-detail");
+      let roundedLat = (Math.floor(this.state.lat * 10000) / 10000);
+      lat.innerHTML = roundedLat;
+      let lng = document.getElementById("lng-detail");
+      let roundedLng = (Math.floor(this.state.lng * 10000) / 10000);
+      lng.innerHTML = roundedLng
+    }
     return(
       <div className="upload-form modal-form">
         <div id="upload-holder">
@@ -36,8 +50,13 @@ class UploadForm extends React.Component {
         </div>
         <form onSubmit={e => this.submitForm(e)}>
           <textarea onChange={(e) => this.update(e, "caption")} placeholder="caption"></textarea>
-          <input onChange={(e) => this.update(e, "lat")} placeholder="lat"/>
-          <input onChange={(e) => this.update(e, "lng")} placeholder="lng"/>
+            <div id="map-sm" className="map" ref="map">
+              Map
+            </div>
+            <div className="latNLng">
+              <h3>Latitude: <span id="lat-detail"></span></h3>
+              <h3>Longitude: <span id="lng-detail"></span></h3>
+            </div>
           <input type="submit" name="Add Image"/>
         </form>
       </div>
