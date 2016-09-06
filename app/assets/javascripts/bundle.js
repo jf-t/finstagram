@@ -23100,13 +23100,13 @@
 	
 	var _feed_container2 = _interopRequireDefault(_feed_container);
 	
-	var _upload_container = __webpack_require__(384);
+	var _upload_container = __webpack_require__(387);
 	
 	var _upload_container2 = _interopRequireDefault(_upload_container);
 	
 	var _image_actions = __webpack_require__(268);
 	
-	var _image_detail_container = __webpack_require__(386);
+	var _image_detail_container = __webpack_require__(384);
 	
 	var _image_detail_container2 = _interopRequireDefault(_image_detail_container);
 	
@@ -29364,11 +29364,6 @@
 	                  'div',
 	                  { className: 'feed-img-cont' },
 	                  _react2.default.createElement('img', { src: img.image_url })
-	                ),
-	                _react2.default.createElement(
-	                  'p',
-	                  { className: 'caption' },
-	                  img.caption
 	                )
 	              )
 	            );
@@ -30035,6 +30030,15 @@
 	                null,
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
+	                  { to: '/upload' },
+	                  'Add Memory'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
 	                  { to: '/profile/' + currentId },
 	                  'Profile'
 	                )
@@ -30229,6 +30233,15 @@
 	  return {
 	    requestImages: function requestImages() {
 	      return dispatch((0, _image_actions.requestImages)());
+	    },
+	    addComment: function addComment(comment) {
+	      return dispatch((0, _image_actions.addComment)(comment));
+	    },
+	    addLike: function addLike(id) {
+	      return dispatch((0, _image_actions.addLike)(id));
+	    },
+	    removeLike: function removeLike(id) {
+	      return dispatch((0, _image_actions.removeLike)(id));
 	    }
 	  };
 	};
@@ -30260,6 +30273,10 @@
 	var _map = __webpack_require__(382);
 	
 	var _map2 = _interopRequireDefault(_map);
+	
+	var _image_detail_container = __webpack_require__(384);
+	
+	var _image_detail_container2 = _interopRequireDefault(_image_detail_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30302,9 +30319,9 @@
 	    value: function switchFeeds() {
 	      if (this.map.style.display === "block") {
 	        this.map.style.display = "none";
-	        this.feed.style.display = "block";
+	        this.feed.style.display = "flex";
 	      } else {
-	        this.map.style.display = "block";
+	        this.map.style.display = "flex";
 	        this.feed.style.display = "none";
 	      }
 	    }
@@ -30315,50 +30332,20 @@
 	
 	      if (this.props.images) {
 	        var compare = function compare(a, b) {
-	          if (a.image.created_at > b.image.created_at) {
+	          if (a.created_at > b.created_at) {
 	            return -1;
-	          } else if (a.image.created_at < b.image.created_at) {
+	          } else if (a.created_at < b.created_at) {
 	            return 1;
 	          } else {
 	            return 0;
 	          }
 	        };
 	        this.props.images.sort(compare);
-	
-	        this.feedItems = this.props.images.map(function (img) {
-	          return _react2.default.createElement(
-	            'div',
-	            { key: img.image.id, className: 'news-feed-item' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'feed-item-prof' },
-	              _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: '/profile/' + img.user.id },
-	                _react2.default.createElement('img', { src: img.user.image_url }),
-	                _react2.default.createElement(
-	                  'h4',
-	                  null,
-	                  img.user.username
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'moment-ago' },
-	                  (0, _moment2.default)(img.image.created_at).fromNow()
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'feed-img-cont' },
-	              _react2.default.createElement('img', { src: img.image.image_url })
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'caption' },
-	              img.image.caption
-	            )
-	          );
+	        this.feedItems = this.props.images.map(function (image) {
+	          var params = {
+	            id: image.id
+	          };
+	          return _react2.default.createElement(_image_detail_container2.default, { key: image.id, image: image, params: params });
 	        });
 	      } else {
 	        this.feedItems = _react2.default.createElement('div', null);
@@ -30371,7 +30358,7 @@
 	          (_React$createElement = { onClick: this.switchFeeds }, _defineProperty(_React$createElement, 'onClick', this.switchFeeds), _defineProperty(_React$createElement, 'className', 'change-feeds'), _React$createElement),
 	          'switch feed'
 	        ),
-	        _react2.default.createElement(_map2.default, { currentUser: this.props.currentUser, images: this.props.images, requestImages: this.props.requestImages }),
+	        _react2.default.createElement(_map2.default, { currentUser: this.props.currentUser, images: this.props.images }),
 	        _react2.default.createElement(
 	          'div',
 	          { id: 'feed', className: 'news-feed' },
@@ -44465,8 +44452,8 @@
 	var MY_MAPTYPE_ID = void 0;
 	
 	var _mapOptions = {
-	    center: { lat: 37.773972, lng: -122.431297 }, //San Francisco
-	    zoom: 13,
+	    center: { lat: 37.8282, lng: -98.5795 }, //center of US
+	    zoom: 5,
 	    mapTypeControlOptions: {
 	        mapTypeIds: ['roadmap', MY_MAPTYPE_ID]
 	    },
@@ -44671,13 +44658,6 @@
 	    }
 	
 	    _createClass(Map, [{
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {
-	            if (this.props.currentUser.user) {
-	                this.props.requestImages(this.props.currentUser.user.id);
-	            }
-	        }
-	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            var mapDOMNode = this.refs.map;
@@ -44734,7 +44714,7 @@
 	    this._createMarker = this._createMarker.bind(this);
 	    this._removeMarker = this._removeMarker.bind(this);
 	
-	    this.pin = "http://res.cloudinary.com/finstagram/image/upload/v1472763956/pin_hg4gtb.png";
+	    this.pin = "http://res.cloudinary.com/finstagram/image/upload/c_scale,e_grayscale,w_30/v1473184794/pin_kwj5vh.png";
 	  }
 	
 	  _createClass(MarkerManager, [{
@@ -44770,7 +44750,7 @@
 	  }, {
 	    key: '_createMarker',
 	    value: function _createMarker(img) {
-	      var pos = new google.maps.LatLng(img.image.lat, img.image.lng);
+	      var pos = new google.maps.LatLng(img.lat, img.lng);
 	      var marker = new google.maps.Marker({
 	        position: pos,
 	        map: this.map,
@@ -44778,7 +44758,7 @@
 	        icon: this.pin
 	      });
 	      marker.addListener('click', function () {
-	        _reactRouter.hashHistory.push('/images/' + img.image.id);
+	        _reactRouter.hashHistory.push('/images/' + img.id);
 	      });
 	      this.markers.push(marker);
 	    }
@@ -44808,161 +44788,27 @@
 	
 	var _reactRedux = __webpack_require__(173);
 	
-	var _upload = __webpack_require__(385);
-	
-	var _upload2 = _interopRequireDefault(_upload);
-	
 	var _image_actions = __webpack_require__(268);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    image: state.image,
-	    currentUser: state.user
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    addImage: function addImage(img) {
-	      return dispatch((0, _image_actions.addImage)(img));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_upload2.default);
-
-/***/ },
-/* 385 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var UploadForm = function (_React$Component) {
-	  _inherits(UploadForm, _React$Component);
-	
-	  function UploadForm(props) {
-	    _classCallCheck(this, UploadForm);
-	
-	    var _this = _possibleConstructorReturn(this, (UploadForm.__proto__ || Object.getPrototypeOf(UploadForm)).call(this, props));
-	
-	    _this.state = {
-	      image_url: "",
-	      caption: "",
-	      lat: "",
-	      lng: ""
-	    };
-	    _this.update = _this.update.bind(_this);
-	    _this.submitForm = _this.submitForm.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(UploadForm, [{
-	    key: "update",
-	    value: function update(e, prop) {
-	      this.setState(_defineProperty({}, prop, e.target.value));
-	    }
-	  }, {
-	    key: "submitForm",
-	    value: function submitForm(e) {
-	      e.preventDefault();
-	      this.props.addImage(this.state);
-	    }
-	  }, {
-	    key: "openCloudinary",
-	    value: function openCloudinary() {
-	      debugger;
-	      var widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, function (error, result) {
-	        console.log(result);
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var _this2 = this;
-	
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "upload-form modal-form" },
-	        _react2.default.createElement(
-	          "a",
-	          { onClick: this.openCloudinary },
-	          "yo"
-	        ),
-	        _react2.default.createElement(
-	          "form",
-	          { onSubmit: function onSubmit(e) {
-	              return _this2.submitForm(e);
-	            } },
-	          _react2.default.createElement("input", { onChange: function onChange(e) {
-	              return _this2.update(e, "image_url");
-	            }, placeholder: "image url" }),
-	          _react2.default.createElement("input", { onChange: function onChange(e) {
-	              return _this2.update(e, "caption");
-	            }, placeholder: "caption" }),
-	          _react2.default.createElement("input", { onChange: function onChange(e) {
-	              return _this2.update(e, "lat");
-	            }, placeholder: "lat" }),
-	          _react2.default.createElement("input", { onChange: function onChange(e) {
-	              return _this2.update(e, "lng");
-	            }, placeholder: "lng" }),
-	          _react2.default.createElement("input", { type: "submit", name: "Add Image" })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return UploadForm;
-	}(_react2.default.Component);
-	
-	;
-	
-	exports.default = UploadForm;
-
-/***/ },
-/* 386 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(173);
-	
-	var _image_actions = __webpack_require__(268);
-	
-	var _image_detail = __webpack_require__(387);
+	var _image_detail = __webpack_require__(385);
 	
 	var _image_detail2 = _interopRequireDefault(_image_detail);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  var updProps = void 0;
+	  if (Object.keys(state.image).length > 0) {
+	    updProps = {
+	      image: state.image
+	    };
+	  } else {
+	    updProps = {
+	      image: ownProps.image
+	    };
+	  }
 	  return {
-	    image: state.image,
+	    image: updProps.image,
 	    currentUser: state.user,
 	    imageId: ownProps.params.id
 	  };
@@ -44991,7 +44837,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_image_detail2.default);
 
 /***/ },
-/* 387 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45012,7 +44858,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _edit_image = __webpack_require__(388);
+	var _edit_image = __webpack_require__(386);
 	
 	var _edit_image2 = _interopRequireDefault(_edit_image);
 	
@@ -45046,12 +44892,9 @@
 	  _createClass(ImageDetail, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.requestImage(this.props.imageId);
-	    }
-	  }, {
-	    key: 'componentWillUpdate',
-	    value: function componentWillUpdate() {
-	      this.props.requestImage(this.props.imageId);
+	      if (!this.props.image || Object.keys(this.props.image).length === 0 || this.props.image.id !== this.props.imageId) {
+	        this.props.requestImage(this.props.imageId);
+	      }
 	    }
 	  }, {
 	    key: 'showEditForm',
@@ -45072,12 +44915,12 @@
 	  }, {
 	    key: 'likeImage',
 	    value: function likeImage() {
-	      this.props.addLike(this.props.image[0].id);
+	      this.props.addLike(this.props.image.id);
 	    }
 	  }, {
 	    key: 'unlikeImage',
 	    value: function unlikeImage() {
-	      this.props.removeLike(this.props.image[0].id);
+	      this.props.removeLike(this.props.image.id);
 	    }
 	  }, {
 	    key: 'render',
@@ -45085,7 +44928,7 @@
 	      var _this2 = this;
 	
 	      this.editForm = _react2.default.createElement(_edit_image2.default, { editImage: this.props.editImage, image: this.props.image });
-	      var image = this.props.image[0];
+	      var image = this.props.image;
 	      var content = void 0;
 	      if (!image || !Object.keys(image).length > 2) {
 	        content = _react2.default.createElement(
@@ -45145,7 +44988,7 @@
 	
 	        content = _react2.default.createElement(
 	          'div',
-	          { className: 'image-detail' },
+	          { className: 'image-detail image-central' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'feed-item-prof' },
@@ -45220,7 +45063,7 @@
 	exports.default = ImageDetail;
 
 /***/ },
-/* 388 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45253,8 +45096,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (EditImage.__proto__ || Object.getPrototypeOf(EditImage)).call(this, props));
 	
-	    console.log(props);
-	    var image = _this.props.image[0];
+	    var image = _this.props.image;
 	    _this.state = {
 	      caption: image.caption,
 	      lat: image.lat,
@@ -45312,6 +45154,145 @@
 	}(_react2.default.Component);
 	
 	exports.default = EditImage;
+
+/***/ },
+/* 387 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(173);
+	
+	var _upload = __webpack_require__(388);
+	
+	var _upload2 = _interopRequireDefault(_upload);
+	
+	var _image_actions = __webpack_require__(268);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    image: state.image,
+	    currentUser: state.user
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    addImage: function addImage(img) {
+	      return dispatch((0, _image_actions.addImage)(img));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_upload2.default);
+
+/***/ },
+/* 388 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var UploadForm = function (_React$Component) {
+	  _inherits(UploadForm, _React$Component);
+	
+	  function UploadForm(props) {
+	    _classCallCheck(this, UploadForm);
+	
+	    var _this = _possibleConstructorReturn(this, (UploadForm.__proto__ || Object.getPrototypeOf(UploadForm)).call(this, props));
+	
+	    _this.state = {
+	      image_url: "",
+	      caption: "",
+	      lat: "",
+	      lng: ""
+	    };
+	    _this.update = _this.update.bind(_this);
+	    _this.submitForm = _this.submitForm.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(UploadForm, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
+	      var addUrl = function addUrl(error, result) {
+	        _this2.setState({ image_url: result[0].url });
+	      };
+	      var widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
+	    }
+	  }, {
+	    key: "update",
+	    value: function update(e, prop) {
+	      this.setState(_defineProperty({}, prop, e.target.value));
+	    }
+	  }, {
+	    key: "submitForm",
+	    value: function submitForm(e) {
+	      e.preventDefault();
+	      this.props.addImage(this.state);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _this3 = this;
+	
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "upload-form modal-form" },
+	        _react2.default.createElement("div", { id: "upload-holder" }),
+	        _react2.default.createElement(
+	          "form",
+	          { onSubmit: function onSubmit(e) {
+	              return _this3.submitForm(e);
+	            } },
+	          _react2.default.createElement("textarea", { onChange: function onChange(e) {
+	              return _this3.update(e, "caption");
+	            }, placeholder: "caption" }),
+	          _react2.default.createElement("input", { onChange: function onChange(e) {
+	              return _this3.update(e, "lat");
+	            }, placeholder: "lat" }),
+	          _react2.default.createElement("input", { onChange: function onChange(e) {
+	              return _this3.update(e, "lng");
+	            }, placeholder: "lng" }),
+	          _react2.default.createElement("input", { type: "submit", name: "Add Image" })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return UploadForm;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = UploadForm;
 
 /***/ },
 /* 389 */
@@ -48837,12 +48818,12 @@
 	var _image_actions = __webpack_require__(268);
 	
 	var ImageReducer = function ImageReducer() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	  var action = arguments[1];
 	
 	  switch (action.type) {
 	    case _image_actions.imageConstants.RECEIVE_IMAGE:
-	      return [action.image];
+	      return action.image;
 	    default:
 	
 	      return state;

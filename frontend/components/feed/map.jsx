@@ -3,8 +3,8 @@ import MarkerManager from '../../util/marker_manager';
 let MY_MAPTYPE_ID: 'myymaps';
 
 let _mapOptions = {
-  center: {lat: 37.773972, lng: -122.431297}, //San Francisco
-  zoom: 13,
+  center: {lat: 37.8282, lng: -98.5795}, //center of US
+  zoom: 5,
   mapTypeControlOptions: {
      mapTypeIds: ['roadmap', MY_MAPTYPE_ID]
   },
@@ -294,12 +294,6 @@ let _mapOptions = {
 };
 
 class Map extends React.Component {
-
-  componentWillMount() {
-    if (this.props.currentUser.user) {
-      this.props.requestImages(this.props.currentUser.user.id);
-    }
-  }
 
   componentDidMount() {
     const mapDOMNode = this.refs.map;

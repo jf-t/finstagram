@@ -33,12 +33,12 @@ body {
   border-left: 1px solid #ccc;
 }
 .header h1 {
-  font-size: 30px;
   padding: 5px 10px;
 }
 .header h1 a {
-  padding: 8px 0;
-  display: block;
+  font-style: italic;
+  font-weight: 200;
+  font-size: 46px;
 }
 .header-nav ul {
   display: flex;
@@ -186,22 +186,24 @@ body {
   margin: 0 auto;
   border-top: 1px solid #ccc;
   padding-top: 50px;
+  margin-bottom: 50px;
 }
 .image-feed::after {
   content: " ";
   clear: both;
-  visibility: hidden;
+  display: block;
 }
 .feed-item {
   width: 300px;
   margin: 0 auto;
-  padding: 30px 0;
+  padding: 5px 0;
   float: left;
 }
 
 .feed-img-cont {
-  width: 75%;
-  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 5px;
 }
 .feed-item img {
   width: 100%;
@@ -228,8 +230,8 @@ input:focus, textarea:focus {
 // FEED
 .news-feed {
   width: 1200px;
-  margin: 100px auto;
-  display:none;
+  margin: 0 auto;
+  display: none;
 }
 .news-feed::after {
   clear: both;
@@ -266,6 +268,9 @@ input:focus, textarea:focus {
   left: 0;
   width: 100%;
   border-bottom: 1px solid #ccc;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
 }
 .feed-item-prof a:hover {
   background-color: $purple;
@@ -476,18 +481,19 @@ border-top-right-radius: 4px;
   position: relative;
   top: 100px;
   width: 500px;
-  margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 15px;
   background-color: #fff;
+  margin: 0 auto;
 }
 .image-detail-cont {
-  width: 400px;
+  width: auto;
   display: block;
-  margin: 5px auto;
+  margin: 10px;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 100px;
+  border: 1px solid #ccc;
 }
 img {
   width: 100%;
@@ -573,6 +579,7 @@ textarea.add-comment {
   border-radius: 15px;
   padding: 10px;
   resize:none;
+  font-size: 14px;
 }
 
 .like-heart {
@@ -594,14 +601,40 @@ textarea.add-comment {
   top: -1px;
 }
 .add-comment input[type=submit] {
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 10px 20px;
   background: #fff;
   color: #333;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 10px;
 }
 .add-comment input[type=submit]:hover {
   background-color: $purple;
+}
+.news-feed .image-detail {
+  margin: 0 20px;
+  .image-detail-cont {
+    width: 400px;
+  }
+}
+
+//cloudinary
+.upload-form {
+  width: 80%;
+  left: 10%;
+  top: 11%;
+}
+.upload-form {
+  form {
+    margin-top: 40px;
+    textarea, input {
+      width: 60%;
+      display: block;
+      margin: 20px auto;
+    }
+    input[type=submit] {
+      width: 100px;
+    }
+  }
 }

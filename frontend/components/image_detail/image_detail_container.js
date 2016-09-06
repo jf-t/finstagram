@@ -1,11 +1,23 @@
 import { connect } from 'react-redux';
 import { requestImage, editImage, addLike, addComment, removeLike } from '../../actions/image_actions';
 import ImageDetail from './image_detail';
-const mapStateToProps = (state, ownProps) => ({
-  image: state.image,
-  currentUser: state.user,
-  imageId: ownProps.params.id
-});
+const mapStateToProps = (state, ownProps) => {
+  let updProps;
+  if (Object.keys(state.image).length > 0) {
+    updProps = {
+      image: state.image
+    }
+  } else {
+    updProps = {
+      image: ownProps.image
+    }
+  }
+  return ({
+    image: updProps.image,
+    currentUser: state.user,
+    imageId: ownProps.params.id
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
   requestImage: (id) => dispatch(requestImage(id)),

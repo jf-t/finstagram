@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
 import Map from './map'
+import ImageDetailContainer from '../image_detail/image_detail_container';
 
 class FeedIndex extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.switchFeeds = this.switchFeeds.bind(this)
   }
 
@@ -23,9 +24,9 @@ class FeedIndex extends React.Component {
   switchFeeds() {
     if (this.map.style.display === "block") {
       this.map.style.display = "none";
-      this.feed.style.display = "block"
+      this.feed.style.display = "flex"
     } else {
-      this.map.style.display = "block";
+      this.map.style.display = "flex";
       this.feed.style.display = "none";
     }
   }
@@ -33,40 +34,28 @@ class FeedIndex extends React.Component {
   render() {
     if (this.props.images) {
       let compare = (a, b) => {
-        if (a.image.created_at > b.image.created_at) {
+        if (a.created_at > b.created_at) {
           return -1;
-        } else if (a.image.created_at < b.image.created_at) {
+        } else if (a.created_at < b.created_at) {
           return 1;
         } else {
           return 0;
         }
       }
-      this.props.images.sort(compare)
-
-      this.feedItems = this.props.images.map((img) => {
-        return (
-          <div key={img.image.id} className="news-feed-item">
-            <div className="feed-item-prof">
-              <Link to={`/profile/${img.user.id}`}>
-                <img src={img.user.image_url} />
-                <h4>{img.user.username}</h4>
-                <span className="moment-ago">{moment(img.image.created_at).fromNow()}</span>
-              </Link>
-            </div>
-            <div className="feed-img-cont">
-              <img src={img.image.image_url} />
-            </div>
-            <p className="caption">{img.image.caption}</p>
-          </div>
-        )
-      })
+      this.props.images.sort(compare);
+      this.feedItems = this.props.images.map((image) => {
+        let params = {
+          id: image.id
+        }
+        return <ImageDetailContainer key={image.id} image={image} params={params} />
+      });
     } else {
       this.feedItems = <div></div>
     }
     return(
       <div className="feed">
         <span onClick={this.switchFeeds} onClick={this.switchFeeds} className="change-feeds">switch feed</span>
-        <Map currentUser={this.props.currentUser} images={this.props.images} requestImages={this.props.requestImages}/>
+        <Map currentUser={this.props.currentUser} images={this.props.images}/>
         <div id="feed" className="news-feed">
           {this.feedItems}
         </div>

@@ -117,7 +117,6 @@ class UserProfile extends React.Component {
                 <div className="feed-img-cont">
                   <img src={img.image_url} />
                 </div>
-                <p className="caption">{img.caption}</p>
               </div>
             </Link>
           )

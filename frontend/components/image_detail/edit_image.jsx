@@ -3,8 +3,7 @@ import React from 'react';
 class EditImage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    let image = this.props.image[0]
+    let image = this.props.image
     this.state = {
       caption: image.caption,
       lat: image.lat,

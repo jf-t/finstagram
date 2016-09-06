@@ -34,6 +34,7 @@ class SiteHeader extends React.Component {
           <nav className="header-nav">
             <ul>
               <li><Link to={'/home'}>Home</Link></li>
+              <li><Link to={'/upload'}>Add Memory</Link></li>
               <li><Link to={`/profile/${currentId}`}>Profile</Link></li>
               {innout}
             </ul>

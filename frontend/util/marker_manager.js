@@ -7,7 +7,7 @@ class MarkerManager {
     this._createMarker = this._createMarker.bind(this);
     this._removeMarker = this._removeMarker.bind(this);
 
-    this.pin = "http://res.cloudinary.com/finstagram/image/upload/v1472763956/pin_hg4gtb.png"
+    this.pin = "http://res.cloudinary.com/finstagram/image/upload/c_scale,e_grayscale,w_30/v1473184794/pin_kwj5vh.png"
   }
 
 
@@ -35,7 +35,7 @@ class MarkerManager {
   }
 
   _createMarker(img) {
-    const pos = new google.maps.LatLng(img.image.lat, img.image.lng);
+    const pos = new google.maps.LatLng(img.lat, img.lng);
     const marker = new google.maps.Marker({
       position: pos,
       map: this.map,
@@ -43,7 +43,7 @@ class MarkerManager {
       icon: this.pin
     });
     marker.addListener('click',() => {
-      hashHistory.push(`/images/${img.image.id}`);
+      hashHistory.push(`/images/${img.id}`);
     });
     this.markers.push(marker);
   }

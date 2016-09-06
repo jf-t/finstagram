@@ -17,10 +17,9 @@ class ImageDetail extends React.Component {
   }
 
   componentWillMount() {
-    this.props.requestImage(this.props.imageId)
-  }
-  componentWillUpdate() {
-    this.props.requestImage(this.props.imageId)
+    if ((!this.props.image) || (Object.keys(this.props.image).length === 0) || (this.props.image.id !== this.props.imageId)) {
+      this.props.requestImage(this.props.imageId)
+    }
   }
   showEditForm() {
     let editForm = document.getElementById("edit-image");
@@ -35,17 +34,17 @@ class ImageDetail extends React.Component {
   }
 
   likeImage() {
-    this.props.addLike(this.props.image[0].id);
+    this.props.addLike(this.props.image.id);
   }
   unlikeImage() {
-    this.props.removeLike(this.props.image[0].id);
+    this.props.removeLike(this.props.image.id);
   }
 
   render() {
     this.editForm = (
       <EditImage editImage={this.props.editImage} image={this.props.image}/>
     )
-    let image = this.props.image[0];
+    let image = this.props.image;
     let content;
     if ((!image) || (!Object.keys(image).length > 2)) {
       content = (
@@ -65,7 +64,7 @@ class ImageDetail extends React.Component {
         )
       }
       let comments = image.comments.map(comment => {
-        return <li key={comment.id}>
+        return <li key={comment.id} >
           <Link to={`/profile/${comment.author.id}`} className="author-name">{comment.author.username}</Link>
           {comment.body}</li>
       });
@@ -83,7 +82,7 @@ class ImageDetail extends React.Component {
       };
 
       content = (
-        <div className="image-detail">
+        <div className="image-detail image-central">
           <div className="feed-item-prof">
             <Link to={`/profile/${image.user.id}`}>
               <img src={image.user.image_url} />
