@@ -48882,11 +48882,13 @@
 	
 	var _image_api_util = __webpack_require__(505);
 	
+	var _user_actions = __webpack_require__(261);
+	
 	var ImageMiddleware = function ImageMiddleware(store) {
 	  return function (next) {
 	    return function (action) {
 	      var success2 = function success2(image) {
-	        return store.dispatch((0, _image_actions.receiveImage)(image));
+	        store.dispatch((0, _image_actions.receiveImage)(image));
 	      };
 	      switch (action.type) {
 	        case _image_actions.imageConstants.REQUEST_IMAGES:
@@ -48896,10 +48898,12 @@
 	          (0, _image_api_util.requestImages)(success);
 	          return next(action);
 	        case _image_actions.imageConstants.ADD_IMAGE:
-	          (0, _image_api_util.addImage)(action.image, success2);
+	          var success3 = function success3(user) {
+	            return store.dispatch((0, _user_actions.receiveUser)(user));
+	          };
+	          (0, _image_api_util.addImage)(action.image, success3);
 	          return next(action);
 	        case _image_actions.imageConstants.EDIT_IMAGE:
-	          console.log(action.type);
 	          (0, _image_api_util.editImage)(action.image, success2);
 	          return next(action);
 	        case _image_actions.imageConstants.REQUEST_IMAGE:
