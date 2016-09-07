@@ -2,7 +2,7 @@
 
 //variables
 $purple: #E3CDFF;
-
+$gray: #cccccc;
 
 h1, h2, h3, h4, h5, h6, p, ul, li, div, nav, main, section, body {
   margin: 0;
@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li, div, nav, main, section, body {
   text-decoration: inherit;
 }
 body {
-  background-color: #fafafa;
+  background-color: #F6F0FF;
 }
 
 .header {
@@ -76,7 +76,7 @@ body {
   top: 25%;
   border-radius: 10px;
   padding: 10px 40px 40px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   z-index: 1;
 }
 .modal-form h4 {
@@ -89,13 +89,13 @@ body {
   box-sizing: border-box;
   margin: 10px 0;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
 }
 .modal-form input[type=submit] {
   width: 100px;
   float: right;
   background-color: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 5px;
 }
 .modal-form input[type=submit]:hover {
@@ -104,7 +104,7 @@ body {
 .modal-form textarea {
   width: 100%;
   resize: none;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 5px;
   height: 100px;
   padding: 10px 20px;
@@ -136,7 +136,7 @@ body {
 
 .profile-pic {
   width: 250px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   height: 249px;
   padding: 0;
   border-top: none;
@@ -166,7 +166,7 @@ body {
   top: 10px;
   right: 0;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
 }
 .edit-profile-link a {
   padding: 10px 20px;
@@ -185,7 +185,7 @@ body {
 .image-feed {
   width: 900px;
   margin: 0 auto;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid $gray;
   padding-top: 50px;
   margin-bottom: 50px;
 }
@@ -249,8 +249,8 @@ input:focus, textarea:focus {
   padding: 81px 0;
   background-color: #fff;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 15px #ccc;
+  border: 1px solid $gray;
+  box-shadow: 0 0 15px $gray;
   position: relative;
 }
 .news-feed-item img {
@@ -268,7 +268,7 @@ input:focus, textarea:focus {
   top: 0;
   left: 0;
   width: 100%;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $gray;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   overflow: hidden;
@@ -281,7 +281,7 @@ input:focus, textarea:focus {
 .feed-item-prof img {
   width: 60px;
   height: 60px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 50%;
   background-color: #eee;
   margin: 0;
@@ -315,7 +315,7 @@ span.moment-ago {
   padding: 10px;
   display: block;
   margin: 0 8px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 7%;
   text-align: center;
   font-size: 12px;
@@ -330,7 +330,7 @@ span.moment-ago {
   list-style: none;
 }
 .modal-form li {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $gray;
   overflow: hidden;
 }
 .modal-form li:last-child {
@@ -372,7 +372,7 @@ text-align: center;
 border-top-right-radius: 4px;
 }
 .close-modal:hover {
-  background-color: #ccc;
+  background-color: $gray;
   color: #fff;
 }
 .change-feeds {
@@ -382,7 +382,7 @@ border-top-right-radius: 4px;
   z-index: 12;
   background-color: #fff;
   padding: 4px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 5px;
 }
 
@@ -410,8 +410,8 @@ border-top-right-radius: 4px;
   background-color: #fff;
   margin-top: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 20px #ccc;
+  border: 1px solid $gray;
+  box-shadow: 0 0 20px $gray;
 }
 .search-profile-pic {
   width: 25px;
@@ -447,7 +447,7 @@ border-top-right-radius: 4px;
   background-color: $purple;
 }
 .search-bar i {
-  color: #ccc;
+  color: $gray;
   position: relative;
   left: 23px;
   font-size: 17px;
@@ -482,7 +482,7 @@ border-top-right-radius: 4px;
   position: relative;
   top: 100px;
   width: 500px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 15px;
   background-color: #fff;
   margin: 0 auto;
@@ -494,7 +494,7 @@ border-top-right-radius: 4px;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 100px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
 }
 img {
   width: 100%;
@@ -509,7 +509,7 @@ img {
   margin-bottom: 5px;
 }
 .edit-img-button {
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 10px;
   font-size: 12px;
   width: 90px;
@@ -527,7 +527,7 @@ img {
 }
 .follow-user {
   background-color: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 10px;
 }
 .follow-user:hover {
@@ -574,7 +574,7 @@ a.author-name {
 textarea.add-comment {
   width: 100%;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   border-radius: 15px;
   padding: 10px;
   resize:none;
@@ -604,7 +604,7 @@ textarea.add-comment {
   padding: 10px 20px;
   background: #fff;
   color: #333;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   font-size: 14px;
   border-radius: 10px;
 }
@@ -652,7 +652,7 @@ textarea.add-comment {
 }
 .show-or-hide-cont {
   float: right;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
   position: relative;
   top: -1px;
   border-radius: 10px;
