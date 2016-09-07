@@ -45018,6 +45018,7 @@
 	    key: 'likeImage',
 	    value: function likeImage() {
 	      this.props.addLike(this.props.image.id);
+	      this.setState({ some: "idk" });
 	    }
 	  }, {
 	    key: 'unlikeImage',

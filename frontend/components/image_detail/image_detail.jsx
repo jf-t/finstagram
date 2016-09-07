@@ -43,6 +43,7 @@ class ImageDetail extends React.Component {
 
   likeImage() {
     this.props.addLike(this.props.image.id);
+    this.setState({some: "idk"})
   }
   unlikeImage() {
     this.props.removeLike(this.props.image.id);
