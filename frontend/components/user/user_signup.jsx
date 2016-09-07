@@ -37,7 +37,9 @@ class UserSignup extends React.Component {
 
   render() {
     let errors;
-    if (this.props.user) {
+    if (this.props.user.errors[0] === "Invalid username/password combination") {
+      errors = "";
+    } else {
       errors = this.props.user.errors.map(error => {
         return <li key={error}>{error}</li>
       });

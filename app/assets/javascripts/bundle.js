@@ -28820,7 +28820,9 @@
 	      var _this3 = this;
 	
 	      var errors = void 0;
-	      if (this.props.user) {
+	      if (this.props.user.errors[0] === "Invalid username/password combination") {
+	        errors = "";
+	      } else {
 	        errors = this.props.user.errors.map(function (error) {
 	          return _react2.default.createElement(
 	            'li',
@@ -29106,10 +29108,10 @@
 	      var _this3 = this;
 	
 	      var error = void 0;
-	      if (this.props.user) {
-	        error = this.props.user.errors[0];
-	      } else {
+	      if (this.props.user.errors[0] != "Invalid username/password combination") {
 	        error = "";
+	      } else {
+	        error = this.props.user.errors[0];
 	      }
 	      return _react2.default.createElement(
 	        'div',

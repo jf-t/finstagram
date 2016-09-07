@@ -44,10 +44,10 @@ class UserLogin extends React.Component {
 
   render() {
     let error;
-    if (this.props.user) {
-      error = this.props.user.errors[0];
-    } else {
+    if (this.props.user.errors[0] != "Invalid username/password combination") {
       error = "";
+    } else {
+      error = this.props.user.errors[0];
     }
     return(
       <div className="modal-form">
