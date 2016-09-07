@@ -779,3 +779,21 @@ textarea.add-comment {
     text-align: center;
   }
 }
+.edit-profile {
+  .edit-form {
+    width: 100%;
+    left: 0;
+  }
+  input, textarea {
+    width: 60%;
+  }
+  input[type=submit] {
+    width: 150px;
+    text-align: center;
+    margin-right: 17px;
+  }
+  #upload-holder {
+    width: 38%;
+    float: right;
+  }
+}

@@ -29753,12 +29753,22 @@
 	  }
 	
 	  _createClass(EditProfile, [{
-	    key: "update",
-	    value: function update(prop) {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
 	      var _this2 = this;
 	
+	      var addUrl = function addUrl(error, result) {
+	        _this2.setState({ image_url: result[0].url });
+	      };
+	      var widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
+	    }
+	  }, {
+	    key: "update",
+	    value: function update(prop) {
+	      var _this3 = this;
+	
 	      return function (e) {
-	        return _this2.setState(_defineProperty({}, prop, e.target.value));
+	        return _this3.setState(_defineProperty({}, prop, e.target.value));
 	      };
 	    }
 	  }, {
@@ -29783,10 +29793,10 @@
 	          _react2.default.createElement(
 	            "form",
 	            { onSubmit: this.updateUser },
+	            _react2.default.createElement("div", { id: "upload-holder" }),
 	            _react2.default.createElement("input", { type: "text", onChange: this.update("full_name"), defaultValue: this.state.full_name }),
 	            _react2.default.createElement("input", { type: "text", onChange: this.update("email"), defaultValue: this.state.email }),
 	            _react2.default.createElement("input", { type: "text", onChange: this.update("username"), defaultValue: this.state.username }),
-	            _react2.default.createElement("input", { type: "text", onChange: this.update("image_url"), defaultValue: this.state.image_url, placeholder: "Image Url" }),
 	            _react2.default.createElement("textarea", { onChange: this.update("bio"), placeholder: "Bio", defaultValue: this.state.bio }),
 	            _react2.default.createElement("input", { type: "submit", value: "Submit Changes" })
 	          )
