@@ -14,6 +14,7 @@ class EditImage extends React.Component {
     this.update = this.update.bind(this);
     this.updateImage = this.updateImage.bind(this);
   }
+  
 
   update(prop) {
     return (e) => this.setState({[prop]: e.target.value})

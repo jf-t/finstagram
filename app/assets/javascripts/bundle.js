@@ -45114,7 +45114,9 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      this.editForm = _react2.default.createElement(_edit_image2.default, { editImage: this.props.editImage, image: this.props.image });
+	      if (Object.keys(this.props.image).length > 0 && this.props.image.id.toString() === this.props.imageId) {
+	        this.editForm = _react2.default.createElement(_edit_image2.default, { editImage: this.props.editImage, image: this.props.image });
+	      }
 	      var image = this.props.image;
 	      var content = void 0;
 	      if (!image || Object.keys(image).length < 2) {

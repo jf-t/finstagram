@@ -50,9 +50,11 @@ class ImageDetail extends React.Component {
   }
 
   render() {
-    this.editForm = (
-      <EditImage editImage={this.props.editImage} image={this.props.image}/>
-    )
+    if ((Object.keys(this.props.image).length > 0) && (this.props.image.id.toString() === this.props.imageId)) {
+      this.editForm = (
+        <EditImage editImage={this.props.editImage} image={this.props.image}/>
+      )
+    }
     let image = this.props.image;
     let content;
     if ((!image) || (Object.keys(image).length < 2)) {
