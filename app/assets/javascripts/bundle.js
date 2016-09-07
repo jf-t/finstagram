@@ -28819,6 +28819,16 @@
 	    value: function render() {
 	      var _this3 = this;
 	
+	      var errors = void 0;
+	      if (this.props.user) {
+	        errors = this.props.user.errors.map(function (error) {
+	          return _react2.default.createElement(
+	            'li',
+	            { key: error },
+	            error
+	          );
+	        });
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'modal-form' },
@@ -28826,6 +28836,11 @@
 	          'h4',
 	          null,
 	          'Welcome to Finstagram! Sign Up here'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'error-show' },
+	          errors
 	        ),
 	        _react2.default.createElement(
 	          'form',
@@ -29090,6 +29105,12 @@
 	    value: function render() {
 	      var _this3 = this;
 	
+	      var error = void 0;
+	      if (this.props.user) {
+	        error = this.props.user.errors[0];
+	      } else {
+	        error = "";
+	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'modal-form' },
@@ -29097,6 +29118,11 @@
 	          'h4',
 	          null,
 	          'Login'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'error-show' },
+	          error
 	        ),
 	        _react2.default.createElement(
 	          'form',
@@ -29585,9 +29611,7 @@
 	      user: user
 	    },
 	    success: success,
-	    error: function error() {
-	      return console.log("not good");
-	    }
+	    error: error
 	  });
 	};
 	
@@ -29599,9 +29623,7 @@
 	      user: creds
 	    },
 	    success: success,
-	    error: function error() {
-	      return console.log("not good");
-	    }
+	    error: error
 	  });
 	};
 	
@@ -49235,7 +49257,7 @@
 	
 	      var errors = function errors(xhr) {
 	        var errorItems = xhr.responseJSON;
-	        dispatch((0, _user_actions.receiveErrors)(errors));
+	        dispatch((0, _user_actions.receiveErrors)(errorItems));
 	      };
 	
 	      var success = function success(user) {

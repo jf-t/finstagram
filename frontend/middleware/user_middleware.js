@@ -5,7 +5,7 @@ const UserMiddleware = ({getState, dispatch}) => next => action => {
 
   const errors = xhr => {
     const errorItems = xhr.responseJSON;
-    dispatch(receiveErrors(errors));
+    dispatch(receiveErrors(errorItems));
   };
 
   const success = (user) => {
