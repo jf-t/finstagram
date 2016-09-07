@@ -30706,10 +30706,19 @@
 	          var params = {
 	            id: image.id
 	          };
+	          console.log(image.id, params.id);
 	          return _react2.default.createElement(_image_detail_container2.default, { key: image.id, image: image, params: params });
 	        });
 	      } else {
-	        this.feedItems = _react2.default.createElement('div', null);
+	        this.feedItems = [_react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'loading...'
+	          )
+	        )];
 	      }
 	      return _react2.default.createElement(
 	        'div',
@@ -44877,14 +44886,18 @@
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  var updProps = void 0;
-	  if (Object.keys(state.image).length > 0) {
-	    updProps = {
-	      image: state.image
-	    };
+	  if (ownProps.image) {
+	    if (Object.keys(ownProps.image).length > 0) {
+	      updProps = {
+	        image: ownProps.image
+	      };
+	    } else {
+	      updProps = {
+	        image: state.image
+	      };
+	    }
 	  } else {
-	    updProps = {
-	      image: ownProps.image
-	    };
+	    updProps = { image: state.image };
 	  }
 	  return {
 	    image: updProps.image,
@@ -44971,7 +44984,17 @@
 	  _createClass(ImageDetail, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      if (this.props.image) {
+	        console.log(this.props.image.id, this.props.imageId);
+	      }
 	      if (!this.props.image || Object.keys(this.props.image).length === 0 || this.props.image.id !== this.props.imageId) {
+	        this.props.requestImage(this.props.imageId);
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (Object.keys(this.props.image).length === 0) {
 	        this.props.requestImage(this.props.imageId);
 	      }
 	    }
@@ -45009,7 +45032,7 @@
 	      this.editForm = _react2.default.createElement(_edit_image2.default, { editImage: this.props.editImage, image: this.props.image });
 	      var image = this.props.image;
 	      var content = void 0;
-	      if (!image || !Object.keys(image).length > 2) {
+	      if (!image || Object.keys(image).length < 2) {
 	        content = _react2.default.createElement(
 	          'div',
 	          { className: 'loading-icon' },

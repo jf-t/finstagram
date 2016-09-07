@@ -3,14 +3,18 @@ import { requestImage, editImage, addLike, addComment, removeLike } from '../../
 import ImageDetail from './image_detail';
 const mapStateToProps = (state, ownProps) => {
   let updProps;
-  if (Object.keys(state.image).length > 0) {
-    updProps = {
-      image: state.image
+  if (ownProps.image) {
+    if (Object.keys(ownProps.image).length > 0) {
+      updProps = {
+        image: ownProps.image
+      }
+    } else {
+      updProps = {
+        image: state.image
+      }
     }
   } else {
-    updProps = {
-      image: ownProps.image
-    }
+    updProps = {image: state.image}
   }
   return ({
     image: updProps.image,

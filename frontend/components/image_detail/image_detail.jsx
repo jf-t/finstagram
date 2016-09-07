@@ -17,8 +17,16 @@ class ImageDetail extends React.Component {
   }
 
   componentWillMount() {
+    if (this.props.image) {
+      console.log(this.props.image.id, this.props.imageId);
+    }
     if ((!this.props.image) || (Object.keys(this.props.image).length === 0) || (this.props.image.id !== this.props.imageId)) {
       this.props.requestImage(this.props.imageId)
+    }
+  }
+  componentDidUpdate() {
+    if (Object.keys(this.props.image).length === 0) {
+      this.props.requestImage(this.props.imageId);
     }
   }
   showEditForm() {
@@ -46,7 +54,7 @@ class ImageDetail extends React.Component {
     )
     let image = this.props.image;
     let content;
-    if ((!image) || (!Object.keys(image).length > 2)) {
+    if ((!image) || (Object.keys(image).length < 2)) {
       content = (
         <div className="loading-icon">
           <h1>loading...</h1>

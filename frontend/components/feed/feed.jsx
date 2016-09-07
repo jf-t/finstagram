@@ -47,10 +47,12 @@ class FeedIndex extends React.Component {
         let params = {
           id: image.id
         }
+        console.log(image.id, params.id);
         return <ImageDetailContainer key={image.id} image={image} params={params} />
       });
+
     } else {
-      this.feedItems = <div></div>
+      this.feedItems = [<div><h1>loading...</h1></div>]
     }
     return(
       <div className="feed">
