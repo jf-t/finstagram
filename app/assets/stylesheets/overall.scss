@@ -640,7 +640,6 @@ textarea.add-comment {
     }
     #map-sm {
       border-radius: 20px;
-      cursor: pointer;
       .gm-style {
         border-radius: 20px;
       }
@@ -650,5 +649,26 @@ textarea.add-comment {
 .latNLng {
   h3 {
     font-size: 18px;
+  }
+}
+.show-or-hide-cont {
+  float: right;
+  border: 1px solid #ccc;
+  position: relative;
+  top: -1px;
+  border-radius: 10px;
+  cursor: pointer;
+  a {
+    color: #333;
+    font-size: 13px;
+    padding: 5px 18px;
+    display: block;
+    text-decoration: none
+  }
+  &:hover {
+    background-color: $purple;
+    a {
+      text-decoration: none;
+    }
   }
 }

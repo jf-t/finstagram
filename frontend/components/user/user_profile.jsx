@@ -3,6 +3,8 @@ import { userfromId } from '../../util/user_api_util';
 import EditProfile from './edit_profile';
 import { hashHistory, Link } from 'react-router';
 import { addFollow, removeFollow } from '../../util/user_api_util';
+import _mapOptions from '../../util/map_options';
+import MarkerManager from '../../util/marker_manager';
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -10,18 +12,37 @@ class UserProfile extends React.Component {
     this.createHiddenModals = this.createHiddenModals.bind(this);
     this.followUser = this.followUser.bind(this);
     this.unfollowUser = this.unfollowUser.bind(this);
+    this.addMap = this.addMap.bind(this);
   }
 
   componentWillMount() {
     this.props.requestUser(this.props.pageUserId);
   }
 
+  componentDidMount() {
+    if (this.refs.map) {
+      this.addMap();
+    }
+  }
 
   componentDidUpdate() {
+    if (this.refs.map) {
+      this.addMap();
+    }
     if (!this.props.currentUser.user) {
       hashHistory.push("/login");
     }
+
   }
+
+  addMap() {
+    const mapDOMNode = this.refs.map;
+
+    this.map = new google.maps.Map(mapDOMNode, _mapOptions);
+    this.marker_manager = new MarkerManager(this.map);
+    this.marker_manager.updateMarkers(this.props.pageUser.images);
+  }
+
 
   createHiddenModals() {
     this.editStuff = (
@@ -188,6 +209,11 @@ class UserProfile extends React.Component {
             {this.editStuff}
             {this.followersModal}
             {this.followingModal}
+          </div>
+          <div className="map-prof-cont">
+            <div id="map-prof" ref="map">
+              Map
+            </div>
           </div>
           <div className="image-feed">
             {this.feedItems}

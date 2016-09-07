@@ -35,6 +35,7 @@ class Image < ApplicationRecord
       @user.following.each do |user|
         @images.concat(Image.all.where(user_id: user.id).order(:created_at).limit(30))
       end
+      @images.concat(Image.all.where(user_id: user_id))
       return @images
     end
 

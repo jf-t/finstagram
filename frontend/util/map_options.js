@@ -1,7 +1,7 @@
 let MY_MAPTYPE_ID: 'myymaps';
-const _mapOptions = {
+let _mapOptions = {
   center: {lat: 37.8282, lng: -98.5795}, //center of US
-  zoom: 5,
+  zoom: 3,
   mapTypeControlOptions: {
      mapTypeIds: ['roadmap', MY_MAPTYPE_ID]
   },

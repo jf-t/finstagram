@@ -16,6 +16,14 @@ class MarkerManager {
     this._toAdd().forEach(this._createMarker);
   }
 
+  fitBounds() {
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < this.markers.length; i++) {
+      bounds.extend(this.markers[i].getPosition());
+    }
+    return bounds;
+  }
+
   _toAdd(){
     const imgIds = this.markers.map( marker => marker.image_id );
     const newImgs = this.images;
