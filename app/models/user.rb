@@ -58,10 +58,10 @@ class User < ApplicationRecord
     end
     string.downcase!
     users = User.all.where("full_name LIKE ?", "#{string}%")
-    users += (User.all.where("username LIKE ?", string))
+    users += (User.all.where("username LIKE ?", "#{string}%"))
     string.capitalize!
     users += User.all.where("full_name LIKE ?", "#{string}%")
-    users += (User.all.where("username LIKE ?", string))
+    users += (User.all.where("username LIKE ?", "#{string}%"))
     users
   end
 
