@@ -9,6 +9,7 @@ class UserLogin extends React.Component {
     }
     this.submitForm.bind(this)
     this.update.bind(this);
+    this.guestUser = this.guestUser.bind(this);
   }
   componentDidUpdate() {
     this.loggedIn();
@@ -33,6 +34,14 @@ class UserLogin extends React.Component {
     }
   }
 
+  guestUser(e) {
+    this.state = {
+      user_item: "example@gmail.com",
+      password: "password"
+    };
+    this.submitForm(e);
+  }
+
   render() {
     return(
       <div className="modal-form">
@@ -40,12 +49,12 @@ class UserLogin extends React.Component {
         <form onSubmit={event => this.submitForm(event)}>
           <input type="text" onChange={this.update("user_item")} name="fullName" placeholder="Email or Username"></input>
           <input type="password" onChange={this.update("password")} name="email" placeholder="Password"></input>
-
           <input type="submit" value="submit"></input>
         </form>
-        <a onClick={this.guestUser}>Guest User</a>
-        <Link to={`/signup`} className="sign-up">Sign Up</Link>
-        <p>my guest user tab probably doesn't work... sign in manually with username: "guest_user" and password: "password"</p>
+        <div className="login-links">
+          <a className="guest-user" onClick={this.guestUser}>Guest User</a>
+          <Link to={`/signup`} className="sign-up">Sign Up</Link>
+        </div>
       </div>
     )
   }

@@ -29043,6 +29043,7 @@
 	    };
 	    _this.submitForm.bind(_this);
 	    _this.update.bind(_this);
+	    _this.guestUser = _this.guestUser.bind(_this);
 	    return _this;
 	  }
 	
@@ -29076,6 +29077,15 @@
 	      };
 	    }
 	  }, {
+	    key: 'guestUser',
+	    value: function guestUser(e) {
+	      this.state = {
+	        user_item: "example@gmail.com",
+	        password: "password"
+	      };
+	      this.submitForm(e);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
@@ -29098,19 +29108,18 @@
 	          _react2.default.createElement('input', { type: 'submit', value: 'submit' })
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { onClick: this.guestUser },
-	          'Guest User'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/signup', className: 'sign-up' },
-	          'Sign Up'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'my guest user tab probably doesn\'t work... sign in manually with username: "guest_user" and password: "password"'
+	          'div',
+	          { className: 'login-links' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'guest-user', onClick: this.guestUser },
+	            'Guest User'
+	          ),
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/signup', className: 'sign-up' },
+	            'Sign Up'
+	          )
 	        )
 	      );
 	    }

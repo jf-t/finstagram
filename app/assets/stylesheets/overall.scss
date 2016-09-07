@@ -671,3 +671,24 @@ textarea.add-comment {
     }
   }
 }
+
+.login-links {
+  display: flex;
+  margin-top: 10px;
+  a {
+    background-color: #fff;
+    border: 1px solid $gray;
+    border-radius: 10px;
+    padding: 10px;
+    display: block;
+    width: 100px;
+    text-align: center;
+    color: #333;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  a:hover {
+    background-color: $purple;
+    text-decoration: none;
+  }
+}
