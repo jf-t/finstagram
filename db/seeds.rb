@@ -20,7 +20,6 @@ User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s32
 User.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/12934972_1736519349926987_1486472382_a.jpg", username: "tayysexton", full_name: "Taylor Sexton", email: "taylorsexton@gmail.com", password: "taylorSexton", bio: "Bay Area ⇄ UC Davis ΑΧΩ");
 User.create!(username: "guest_user", full_name: "Guest", email: "example@gmail.com", password: "password", bio: "living in the clouds");
 
-
 12.times do |idx|
   user_id = idx + 1
   12.times do |idx2|
@@ -58,3 +57,22 @@ Image.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-15/s6
 Image.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-15/e35/12677237_555214531319997_284927321_n.jpg?ig_cache_key=MTIzMjMzMzIzNzQ0Mjg4MDMzMQ%3D%3D.2", user_id: 11, lat: 37.791712, lng: -122.461855);
 Image.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-15/s640x640/sh0.08/e35/13098917_1777766735843155_1517627214_n.jpg?ig_cache_key=MTIzNzk4MTA5OTkxNTIwNDI1NA%3D%3D.2", user_id: 8, lat: 37.506432, lng: -122.300268);
 Image.create!(image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-15/s640x640/sh0.08/e35/12783923_526734087507521_1632548409_n.jpg?ig_cache_key=MTIwMzg0NTk4NDg3MjI4OTkwMg%3D%3D.2", user_id: 8, lat: 35.283785, lng: -120.884666);
+
+
+# celebrities start here
+User.create!(username: "champagnepapi", full_name: "champagnepapi", email: "drake@gmail.com", password: "toronto_raptors", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/12394126_679306605505317_296747851_a.jpg", bio: "VIEWS");
+User.create!(username: "badgalriri", full_name: "badgalriri", email: "rihanna@gmail.com", password: "myAviIsWeird", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/11032926_1049846535031474_260957621_a.jpg");
+User.create!(username: "kendricklamar", full_name: "Kendrick Lamar", email: "kendricklamar@gmail.com", password: "i_spit_flames", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/12751068_506637569516241_2000216439_a.jpg");
+User.create!(username: "taylorswift", full_name: "Taylor Swift", email: "taylorswift@gmail.com", password: "complainingAboutRelationships", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/12599210_1266879739993740_674087546_a.jpg", bio: "Born in 1989");
+User.create!(username: "sethrogen", full_name: "Seth", email: "sethrogen@yahoo.com", password: "weirdassmofo", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10632075_708972962507892_788442709_a.jpg");
+User.create!(username: "channingtatum", full_name: "Channing Tatum", email: "highSchoolCop@gmail.com", password: "mrBigArms", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/11333443_1477840665860052_481869096_a.jpg");
+User.create!(username: "stephencurry30", full_name: "Wardell Curry", email: "stephcurry@gmail.com", password: "getsBuckets", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/13320117_1224086350959353_838783914_a.jpg");
+User.create!(username: "blbonds25", full_name: "Barry Bonds", email: "homeRunChamp@yahoo.com", password: "go_giants", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10607947_1469102543367529_1469511112_a.jpg");
+User.create!(username: "busterposey", full_name: "Buster Posey", email: "busterposey@gmail.com", password: "bestCatcher", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/11189160_1424701864506440_464716415_a.jpg");
+User.create!(username: "kimkardashian", full_name: "Kim Kardashian West", email: "kimmykw@gmail.com", password: "iFuckKanye", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/13108741_2006822342876893_1052882414_a.jpg");
+User.create!(username: "kendalljenner", full_name: "Kendall Jenner", email: "kendalljenner@gmail.com", password: "ilovejacktilly", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/14134951_1065808103503860_1979427572_a.jpg");
+User.create!(username: "microsoft", full_name: "Microsoft", email: "microsoft@gmail.com", password: "billgates", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10729318_654650964633655_619168277_a.jpg");
+User.create!(username: "everton", full_name: "Everton", email: "team@everton.com", password: "bestInBPL", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/11363772_1698871427066105_1385578654_a.jpg", bio: "The official home of Everton on Finstagram");
+User.create!(username: "icecube", full_name: "Ice Cube", email: "icecube@gmail.com", password: "nwaSwurve", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10554144_540773739382943_684884780_a.jpg", bio: "West Coast Warlord");
+User.create!(username: "sportscenter", full_name: "SportsCenter", email: "news@espn.com", password: "sportscenter", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10502710_138249836349999_1543736402_a.jpg");
+User.create!(username: "fuckarian", full_name: "chip macintosh mccain", email: "jackftilly@yahoo.com", password: "fuckBitches", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/14073180_316469155373909_548651062_a.jpg");
