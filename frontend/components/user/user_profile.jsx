@@ -32,7 +32,7 @@ class UserProfile extends React.Component {
     if (!this.props.currentUser.user) {
       hashHistory.push("/login");
     }
-
+    this.state = null;
   }
 
   addMap() {
@@ -85,10 +85,12 @@ class UserProfile extends React.Component {
 
   followUser() {
     addFollow(this.props.pageUserId);
+    this.setState({follow: true});
   }
 
   unfollowUser() {
     removeFollow(this.props.pageUserId);
+    this.setState({follow: false});
   }
 
   showEditForm() {
@@ -158,11 +160,21 @@ class UserProfile extends React.Component {
     } else {
       let pageUserId = this.props.pageUserId;
       let flag = false;
-      this.props.currentUser.user.following.forEach(followee => {
-        if (followee.id.toString() === pageUserId) {
+      if (this.state) {
+        if (this.state.follow) {
+          console.log("followed");
           flag = true;
+        } else {
+          console.log("un-followed");
+          flag = false
         }
-      });
+      } else {
+        this.props.currentUser.user.following.forEach(followee => {
+          if (followee.id.toString() === pageUserId) {
+            flag = true;
+          }
+        });
+      }
       if (flag) {
         editorno = (
           <div className="follow-user">

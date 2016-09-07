@@ -29287,6 +29287,7 @@
 	      if (!this.props.currentUser.user) {
 	        _reactRouter.hashHistory.push("/login");
 	      }
+	      this.state = null;
 	    }
 	  }, {
 	    key: 'addMap',
@@ -29373,11 +29374,13 @@
 	    key: 'followUser',
 	    value: function followUser() {
 	      (0, _user_api_util.addFollow)(this.props.pageUserId);
+	      this.setState({ follow: true });
 	    }
 	  }, {
 	    key: 'unfollowUser',
 	    value: function unfollowUser() {
 	      (0, _user_api_util.removeFollow)(this.props.pageUserId);
+	      this.setState({ follow: false });
 	    }
 	  }, {
 	    key: 'showEditForm',
@@ -29464,11 +29467,21 @@
 	        (function () {
 	          var pageUserId = _this2.props.pageUserId;
 	          var flag = false;
-	          _this2.props.currentUser.user.following.forEach(function (followee) {
-	            if (followee.id.toString() === pageUserId) {
+	          if (_this2.state) {
+	            if (_this2.state.follow) {
+	              console.log("followed");
 	              flag = true;
+	            } else {
+	              console.log("un-followed");
+	              flag = false;
 	            }
-	          });
+	          } else {
+	            _this2.props.currentUser.user.following.forEach(function (followee) {
+	              if (followee.id.toString() === pageUserId) {
+	                flag = true;
+	              }
+	            });
+	          }
 	          if (flag) {
 	            editorno = _react2.default.createElement(
 	              'div',
