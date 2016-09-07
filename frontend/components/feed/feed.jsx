@@ -17,16 +17,29 @@ class FeedIndex extends React.Component {
   }
   componentDidMount() {
     this.map = document.getElementById("map");
-    this.feed = document.getElementById("feed")
+    this.feed = document.getElementById("feed");
     this.map.style.display = "block";
+  }
+
+  componentDidUpdate() {
+    let feedItemHeight = window.innerHeight - 78;
+    let feedChilds = this.feed.children;
+    feedChilds = Array.from(feedChilds);
+    feedChilds.forEach(feedItem => {
+      feedItem.style.height = feedItemHeight + "px";
+      feedItem.style.width = feedItemHeight + "px"
+    });
+    this.feed = document.getElementById("feed");
+    let feedWidth = ((feedItemHeight + 40) * this.props.images.length);
+    this.feed.style.width = feedWidth + "px";
   }
 
   switchFeeds() {
     if (this.map.style.display === "block") {
       this.map.style.display = "none";
-      this.feed.style.display = "flex"
+      this.feed.style.display = "block"
     } else {
-      this.map.style.display = "flex";
+      this.map.style.display = "block";
       this.feed.style.display = "none";
     }
   }
@@ -47,8 +60,22 @@ class FeedIndex extends React.Component {
         let params = {
           id: image.id
         }
-        console.log(image.id, params.id);
-        return <ImageDetailContainer key={image.id} image={image} params={params} />
+        return <li className="feed-item-cont" key={image.id}>
+                  <img src={image.image_url} />
+                  <Link to={`/images/${image.id}`} className="hovercover">
+                    <div className="hovercover-content">
+                      <div className="prof-info">
+                        <span className="hover-username">{image.user.username}</span>
+                        <span className="hover-image"><img src={image.user.image_url} /></span>
+                      </div>
+                      <p className="hover-caption">{image.caption}</p>
+                      <span className="big-num-likes">
+                        <i className="fa fa-heart-o"></i><span className="inner-heart">{image.likes.length}</span>
+                        <i className="fa fa-comment-o"></i><span className="inner-heart">{image.comments.length}</span>
+                      </span>
+                    </div>
+                  </Link>
+               </li>
       });
 
     } else {

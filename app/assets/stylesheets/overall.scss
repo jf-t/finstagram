@@ -10,7 +10,6 @@ h1, h2, h3, h4, h5, h6, p, ul, li, div, nav, main, section, body {
   font-family: sans-serif;
   box-sizing: inherit;
   font-family: "Raleway";
-  color: #333;
   text-decoration: inherit;
 }
 body {
@@ -691,5 +690,82 @@ textarea.add-comment {
   a:hover {
     background-color: $purple;
     text-decoration: none;
+  }
+}
+
+//feed item drastic testing
+.feed {
+  list-style: none;
+  li.feed-item-cont {
+    position: relative;
+    top: 61px;
+    float: left;
+    margin: 0 20px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .hovercover {
+      display: none;
+
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      background: rgba(100, 100, 100, 0.5);
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      .hovercover-content {
+        position: absolute;
+        font-size: 27px;
+        width: 90%;
+        margin: 0 5px;
+        top: 60px;
+      }
+      .prof-info {
+        width: 80%;
+        margin: 0 20%;
+      }
+      span.hover-image {
+        border-radius: 50%;
+        overflow: hidden;
+        display: block;
+        width: 80px;
+        float: left;
+      }
+      span.hover-username {
+        margin: 17px 35px;
+        display: inline-block;
+      }
+      p.hover-caption {
+        text-align: center;
+        margin-top: 40px;
+      }
+      .big-num-likes {
+        text-align: center;
+        display: block;
+        i {
+          font-size: 80px;
+        }
+        span.inner-heart {
+          font-size: 37px;
+          width: 100px;
+          display: block;
+          margin: 0 auto;
+          margin-top: -70px;
+        }
+      }
+      .big-num-likes:last-child {
+        i {
+          margin-top: 25px;
+        }
+      }
+    }
+    &:hover {
+      .hovercover {
+        display: block;
+        text-decoration: none;
+      }
+    }
   }
 }

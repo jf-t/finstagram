@@ -30676,13 +30676,27 @@
 	      this.map.style.display = "block";
 	    }
 	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var feedItemHeight = window.innerHeight - 78;
+	      var feedChilds = this.feed.children;
+	      feedChilds = Array.from(feedChilds);
+	      feedChilds.forEach(function (feedItem) {
+	        feedItem.style.height = feedItemHeight + "px";
+	        feedItem.style.width = feedItemHeight + "px";
+	      });
+	      this.feed = document.getElementById("feed");
+	      var feedWidth = (feedItemHeight + 40) * this.props.images.length;
+	      this.feed.style.width = feedWidth + "px";
+	    }
+	  }, {
 	    key: 'switchFeeds',
 	    value: function switchFeeds() {
 	      if (this.map.style.display === "block") {
 	        this.map.style.display = "none";
-	        this.feed.style.display = "flex";
+	        this.feed.style.display = "block";
 	      } else {
-	        this.map.style.display = "flex";
+	        this.map.style.display = "block";
 	        this.feed.style.display = "none";
 	      }
 	    }
@@ -30706,8 +30720,54 @@
 	          var params = {
 	            id: image.id
 	          };
-	          console.log(image.id, params.id);
-	          return _react2.default.createElement(_image_detail_container2.default, { key: image.id, image: image, params: params });
+	          return _react2.default.createElement(
+	            'li',
+	            { className: 'feed-item-cont', key: image.id },
+	            _react2.default.createElement('img', { src: image.image_url }),
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/images/' + image.id, className: 'hovercover' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'hovercover-content' },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'prof-info' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'hover-username' },
+	                    image.user.username
+	                  ),
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'hover-image' },
+	                    _react2.default.createElement('img', { src: image.user.image_url })
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'p',
+	                  { className: 'hover-caption' },
+	                  image.caption
+	                ),
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'big-num-likes' },
+	                  _react2.default.createElement('i', { className: 'fa fa-heart-o' }),
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'inner-heart' },
+	                    image.likes.length
+	                  ),
+	                  _react2.default.createElement('i', { className: 'fa fa-comment-o' }),
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'inner-heart' },
+	                    image.comments.length
+	                  )
+	                )
+	              )
+	            )
+	          );
 	        });
 	      } else {
 	        this.feedItems = [_react2.default.createElement(
