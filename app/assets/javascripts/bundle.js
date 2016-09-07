@@ -45315,6 +45315,8 @@
 	
 	var _map_options2 = _interopRequireDefault(_map_options);
 	
+	var _reactRouter = __webpack_require__(198);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -45361,6 +45363,13 @@
 	      var widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
 	    }
 	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.state.done) {
+	        _reactRouter.hashHistory.push('profile/' + this.props.currentUser.user.id);
+	      }
+	    }
+	  }, {
 	    key: 'update',
 	    value: function update(e, prop) {
 	      this.setState(_defineProperty({}, prop, e.target.value));
@@ -45369,7 +45378,9 @@
 	    key: 'submitForm',
 	    value: function submitForm(e) {
 	      e.preventDefault();
-	      this.props.addImage(this.state);
+	      var state = this.state;
+	      this.state = { done: "yes" };
+	      this.props.addImage(state);
 	    }
 	  }, {
 	    key: 'render',

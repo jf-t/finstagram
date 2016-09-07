@@ -1,5 +1,6 @@
 import React from 'react';
 import _mapOptions from '../../util/map_options';
+import { hashHistory } from 'react-router';
 
 class UploadForm extends React.Component {
   constructor(props) {
@@ -25,13 +26,20 @@ class UploadForm extends React.Component {
     this.map.addListener('click', setPos.bind(this));
     let widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
   }
+  componentDidUpdate() {
+    if (this.state.done) {
+      hashHistory.push(`profile/${this.props.currentUser.user.id}`)
+    }
+  }
   update(e, prop) {
     this.setState({[prop]: e.target.value})
   }
 
   submitForm(e) {
     e.preventDefault();
-    this.props.addImage(this.state);
+    let state = this.state;
+    this.state = {done: "yes"};
+    this.props.addImage(state);
   }
 
   render() {
