@@ -797,3 +797,20 @@ textarea.add-comment {
     float: right;
   }
 }
+.current-location {
+  padding: 10px 20px;
+  border: 1px solid $gray;
+  margin-top: 10px;
+  display: inline-block;
+  text-align: center;
+  color: #333;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.current-location:hover {
+  background-color: $purple;
+  text-decoration: none;
+}
+.disabled {
+  pointer-events: none;
+}

@@ -45452,6 +45452,7 @@
 	    };
 	    _this.update = _this.update.bind(_this);
 	    _this.submitForm = _this.submitForm.bind(_this);
+	    _this.getLocation = _this.getLocation.bind(_this);
 	    return _this;
 	  }
 	
@@ -45492,9 +45493,25 @@
 	      this.props.addImage(state);
 	    }
 	  }, {
+	    key: 'getLocation',
+	    value: function getLocation(e) {
+	      var _this3 = this;
+	
+	      e.target.text = "Loading Current Location...";
+	      e.target.className = "current-location disabled";
+	      e.persist();
+	      var setLocationData = function setLocationData(coordObj) {
+	        var lat = coordObj.coords.latitude;
+	        var lng = coordObj.coords.longitude;
+	        _this3.setState({ lat: lat, lng: lng });
+	        e.target.text = 'Using Current Location';
+	      };
+	      navigator.geolocation.getCurrentPosition(setLocationData.bind(this));
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      if (this.state.lat !== "") {
 	        var lat = document.getElementById("lat-detail");
@@ -45511,10 +45528,10 @@
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: function onSubmit(e) {
-	              return _this3.submitForm(e);
+	              return _this4.submitForm(e);
 	            } },
 	          _react2.default.createElement('textarea', { onChange: function onChange(e) {
-	              return _this3.update(e, "caption");
+	              return _this4.update(e, "caption");
 	            }, placeholder: 'caption' }),
 	          _react2.default.createElement(
 	            'div',
@@ -45536,6 +45553,11 @@
 	              'Longitude: ',
 	              _react2.default.createElement('span', { id: 'lng-detail' })
 	            )
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'current-location', onClick: this.getLocation },
+	            'Use Current Location'
 	          ),
 	          _react2.default.createElement('input', { type: 'submit', name: 'Add Image' })
 	        )
