@@ -26,6 +26,7 @@ const ImageMiddleware = store => next => action => {
       addLike(action.id, success2);
       return next(action);
     case imageConstants.ADD_COMMENT:
+      addNotif(action.user_id, action.notification, action.url, action.image_url)
       addComment(action.comment, success2);
       return next(action);
     case imageConstants.REMOVE_LIKE:

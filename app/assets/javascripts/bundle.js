@@ -30194,10 +30194,14 @@
 	  };
 	};
 	
-	var addComment = exports.addComment = function addComment(comment) {
+	var addComment = exports.addComment = function addComment(comment, user_id, notification, url, image_url) {
 	  return {
 	    type: imageConstants.ADD_COMMENT,
-	    comment: comment
+	    comment: comment,
+	    user_id: user_id,
+	    notification: notification,
+	    image_url: image_url,
+	    url: url
 	  };
 	};
 
@@ -30421,7 +30425,11 @@
 	    value: function readNotif(e, notif) {
 	      (0, _image_api_util.readNotif)(notif.id);
 	      if (notif.read === false) {
-	        e.target.parentElement.parentElement.className = "read";
+	        if (e.target.parentElement.nodeName === "A") {
+	          e.target.parentElement.parentElement.className = "read";
+	        } else {
+	          e.target.parentElement.className = "read";
+	        }
 	        var newUnread = this.state.unreadNotifs;
 	        newUnread--;
 	        this.setState({ unreadNotifs: newUnread });
@@ -45242,8 +45250,8 @@
 	    editImage: function editImage(img) {
 	      return dispatch((0, _image_actions.editImage)(img));
 	    },
-	    addComment: function addComment(comment) {
-	      return dispatch((0, _image_actions.addComment)(comment));
+	    addComment: function addComment(comment, user_id, notification, url, image_url) {
+	      return dispatch((0, _image_actions.addComment)(comment, user_id, notification, url, image_url));
 	    },
 	    addLike: function addLike(id, user_id, notif, url, image_url) {
 	      return dispatch((0, _image_actions.addLike)(id, user_id, notif, url, image_url));
@@ -45340,7 +45348,10 @@
 	  }, {
 	    key: 'sendComment',
 	    value: function sendComment() {
-	      this.props.addComment(this.state);
+	      var notification = this.props.currentUser.user.username + ' commented:"' + this.state.body + '" on your photo!';
+	      var url = '/images/' + this.props.image.id;
+	      var image_url = this.props.image.image_url;
+	      this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
 	    }
 	  }, {
 	    key: 'likeImage',
@@ -49406,6 +49417,7 @@
 	          (0, _image_api_util.addLike)(action.id, success2);
 	          return next(action);
 	        case _image_actions.imageConstants.ADD_COMMENT:
+	          (0, _image_api_util.addNotif)(action.user_id, action.notification, action.url, action.image_url);
 	          (0, _image_api_util.addComment)(action.comment, success2);
 	          return next(action);
 	        case _image_actions.imageConstants.REMOVE_LIKE:

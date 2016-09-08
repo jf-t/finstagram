@@ -38,7 +38,10 @@ class ImageDetail extends React.Component {
   }
 
   sendComment() {
-    this.props.addComment(this.state);
+    let notification = `${this.props.currentUser.user.username} commented:\"${this.state.body}\" on your photo!`;
+    let url = `/images/${this.props.image.id}`;
+    let image_url = this.props.image.image_url;
+    this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
   }
 
   likeImage() {

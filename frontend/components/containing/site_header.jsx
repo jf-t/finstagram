@@ -37,7 +37,11 @@ class SiteHeader extends React.Component {
   readNotif(e, notif) {
     readNotif(notif.id);
     if (notif.read === false) {
-      e.target.parentElement.parentElement.className = "read"
+      if (e.target.parentElement.nodeName === "A") {
+        e.target.parentElement.parentElement.className = "read"
+      } else {
+        e.target.parentElement.className = "read"
+      }
       let newUnread = this.state.unreadNotifs;
       newUnread--;
       this.setState({unreadNotifs: newUnread})
