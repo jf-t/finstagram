@@ -42,7 +42,10 @@ class ImageDetail extends React.Component {
   }
 
   likeImage() {
-    this.props.addLike(this.props.image.id);
+    let notification = `${this.props.currentUser.user.username} liked your photo!`;
+    let url = `/images/${this.props.image.id}`;
+    let image_url = this.props.image.image_url;
+    this.props.addLike(this.props.image.id, this.props.image.user.id, notification, url, image_url);
     this.setState({some: "idk"})
   }
   unlikeImage() {

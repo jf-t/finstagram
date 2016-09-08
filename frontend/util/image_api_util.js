@@ -37,7 +37,7 @@ export const editImage = (img, success, error) => {
   });
 }
 
-export const addLike = (id, success) => {
+export const addLike = (id, success, notification) => {
   $.ajax({
     method: "POST",
     url: "api/likes",
@@ -61,7 +61,7 @@ export const removeLike = (id, success) => {
   });
 }
 
-export const addComment = (comment, success) => {
+export const addComment = (comment, success, notification) => {
   $.ajax({
     method: "POST",
     url: "api/comments/",
@@ -70,5 +70,32 @@ export const addComment = (comment, success) => {
     },
     success,
     error: () => (console.log("add comment error"))
+  });
+}
+
+export const addNotif = (id, notification, url, image_url) => {
+  $.ajax({
+    method: "POST",
+    url: "api/notification",
+    data: {
+      notif: {
+        user_id: id,
+        notification,
+        url,
+        image_url
+      }
+    },
+    success: () => console.log("add notif worked yee!"),
+    error: () => console.log("add notif didnt work")
+  });
+}
+
+export const readNotif = (id) => {
+  $.ajax({
+    method: "PATCH",
+    url: "api/notification",
+    data: {
+      id: id
+    }
   })
 }

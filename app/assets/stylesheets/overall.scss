@@ -854,3 +854,42 @@ textarea.add-comment {
     text-decoration: none;
   }
 }
+
+#notif-dropdown {
+  display: none;
+  position: absolute;
+  top: 71px;
+  width: 400px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 20px #cccccc;
+  padding: 20px 0;
+  .close-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 5px;
+  }
+  li {
+    width: 100%;
+    border: 1px solid #ccc;
+    a.notification {
+      display: inline-block;
+      width: 100%;
+      padding: 5px 20px;
+      .notification-img {
+        width: 60px;
+        height: 60px;
+        float: right;
+      }
+      span.notification-text {
+        margin-top: 20px;
+        display: inline-block;
+      }
+    }
+  }
+  li.unread {
+    background-color: red;
+  }
+}

@@ -22,6 +22,8 @@ class User < ApplicationRecord
     foreign_key: :following_id,
     class_name: :Follow
 
+  has_many :notifications
+  
   has_many :followers,
     through: :your_follows,
     source: :follower
