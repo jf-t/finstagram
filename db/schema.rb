@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831100643) do
+ActiveRecord::Schema.define(version: 20160908161509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 20160831100643) do
     t.datetime "updated_at", null: false
     t.index ["image_id"], name: "index_likes_on_image_id", using: :btree
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",                                                                                                                      null: false
+    t.string   "notification",                                                                                                                 null: false
+    t.string   "url"
+    t.boolean  "read",         default: false
+    t.string   "image_url",    default: "https://openclipart.org/image/2400px/svg_to_png/171070/tasto-2-architetto-franc-01-black-border.png"
+    t.datetime "created_at",                                                                                                                   null: false
+    t.datetime "updated_at",                                                                                                                   null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

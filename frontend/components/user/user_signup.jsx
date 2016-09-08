@@ -36,9 +36,18 @@ class UserSignup extends React.Component {
   }
 
   render() {
+    let errors;
+    if (this.props.user.errors[0] === "Invalid username/password combination") {
+      errors = "";
+    } else {
+      errors = this.props.user.errors.map(error => {
+        return <li key={error}>{error}</li>
+      });
+    }
     return(
       <div className="modal-form">
         <h4>Welcome to Finstagram! Sign Up here</h4>
+        <ul className="error-show">{errors}</ul>
         <form onSubmit={event => this.submitForm(event)}>
           <input type="text" onChange={this.update("full_name")} name="fullName" placeholder="Full Name"></input>
           <input type="text" onChange={this.update("email")} name="email" placeholder="Email"></input>

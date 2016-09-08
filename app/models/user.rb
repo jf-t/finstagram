@@ -22,6 +22,8 @@ class User < ApplicationRecord
     foreign_key: :following_id,
     class_name: :Follow
 
+  has_many :notifications
+  
   has_many :followers,
     through: :your_follows,
     source: :follower
@@ -58,10 +60,10 @@ class User < ApplicationRecord
     end
     string.downcase!
     users = User.all.where("full_name LIKE ?", "#{string}%")
-    users += (User.all.where("username LIKE ?", string))
+    users += (User.all.where("username LIKE ?", "#{string}%"))
     string.capitalize!
     users += User.all.where("full_name LIKE ?", "#{string}%")
-    users += (User.all.where("username LIKE ?", string))
+    users += (User.all.where("username LIKE ?", "#{string}%"))
     users
   end
 

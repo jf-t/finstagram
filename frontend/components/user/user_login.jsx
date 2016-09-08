@@ -43,9 +43,18 @@ class UserLogin extends React.Component {
   }
 
   render() {
+    let error;
+    if (this.props.user.errors) {
+      if (this.props.user.errors[0] != "Invalid username/password combination") {
+        error = "";
+      } else {
+        error = this.props.user.errors[0];
+      }
+    }
     return(
       <div className="modal-form">
         <h4>Login</h4>
+        <div className="error-show">{error}</div>
         <form onSubmit={event => this.submitForm(event)}>
           <input type="text" onChange={this.update("user_item")} name="fullName" placeholder="Email or Username"></input>
           <input type="password" onChange={this.update("password")} name="email" placeholder="Password"></input>

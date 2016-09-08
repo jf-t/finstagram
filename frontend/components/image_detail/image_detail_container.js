@@ -26,8 +26,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   requestImage: (id) => dispatch(requestImage(id)),
   editImage: (img) => dispatch(editImage(img)),
-  addComment: (comment) => dispatch(addComment(comment)),
-  addLike: (id) => dispatch(addLike(id)),
+  addComment: (comment, user_id, notification, url, image_url) => dispatch(addComment(comment, user_id, notification, url, image_url)),
+  addLike: (id, user_id, notif, url, image_url) => dispatch(addLike(id, user_id, notif, url, image_url)),
   removeLike: (id) => dispatch(removeLike(id))
 });
 

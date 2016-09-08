@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
   requestUser: (id) => dispatch(requestUser(id)),
   editUser: (user) => dispatch(editUser(user)),
-  addFollow: (id) => dispatch(addFollow(id)),
+  addFollow: (id, notification, url) => dispatch(addFollow(id, notification, url)),
   removeFollow: (id) => dispatch(removeFollow(id))
 });
 

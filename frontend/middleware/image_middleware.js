@@ -1,5 +1,5 @@
 import { imageConstants, receiveImages, receiveImage } from '../actions/image_actions.js';
-import { requestImages, addImage, requestImage, editImage, addLike, addComment, removeLike } from '../util/image_api_util';
+import { requestImages, addImage, requestImage, editImage, addLike, addComment, removeLike, addNotif } from '../util/image_api_util';
 import { userConstants, receiveUser } from '../actions/user_actions';
 
 const ImageMiddleware = store => next => action => {
@@ -22,9 +22,15 @@ const ImageMiddleware = store => next => action => {
       requestImage(action.image_id, success2);
       return next(action);
     case imageConstants.ADD_LIKE:
+      if (action.notification) {
+        addNotif(action.user_id, action.notification, action.url, action.image_url)
+      }
       addLike(action.id, success2);
       return next(action);
     case imageConstants.ADD_COMMENT:
+      if (action.notification) {
+        addNotif(action.user_id, action.notification, action.url, action.image_url)
+      }
       addComment(action.comment, success2);
       return next(action);
     case imageConstants.REMOVE_LIKE:

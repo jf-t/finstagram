@@ -50,9 +50,37 @@ class MarkerManager {
       image_id: img.id,
       icon: this.pin
     });
+    let caption = "";
+    if (img.caption) {
+      caption = img.caption;
+    }
+    const content = (
+      '<div class="img-tooltip">' +
+        '<div class="tooltip-content">' +
+          '<div class="img-cont">' +
+            `<img src="${img.image_url}" />` +
+          '</div>' +
+          '<div class="tooltip-text">' +
+            `<span class="tooltip-prof-name">${img.user.username}</span>` +
+            `<span class="tooltip-caption">${caption}</span>` +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    )
+
+
+    const infowindow = new google.maps.InfoWindow({
+      content: content
+    })
     marker.addListener('click',() => {
       hashHistory.push(`/images/${img.id}`);
     });
+    marker.addListener('mouseover', () => {
+      infowindow.open(this.map, marker);
+    });
+    marker.addListener('mouseout', () => {
+      infowindow.close();
+    })
     this.markers.push(marker);
   }
 

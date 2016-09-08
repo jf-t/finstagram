@@ -40,9 +40,13 @@ export const editImage = (image) => ({
   image
 });
 
-export const addLike = (id) => ({
+export const addLike = (id, user_id, notification, url, image_url) => ({
   type: imageConstants.ADD_LIKE,
-  id
+  id,
+  user_id,
+  notification,
+  image_url,
+  url
 });
 
 export const removeLike = (id) => ({
@@ -50,7 +54,11 @@ export const removeLike = (id) => ({
   id
 });
 
-export const addComment = (comment) => ({
+export const addComment = (comment, user_id, notification, url, image_url) => ({
   type: imageConstants.ADD_COMMENT,
-  comment
+  comment,
+  user_id,
+  notification,
+  image_url,
+  url
 });

@@ -6,7 +6,7 @@ export const login = (user, success, error) => {
       user: user
     },
     success,
-    error: () => console.log("not good")
+    error
   });
 };
 
@@ -18,7 +18,7 @@ export const signup = (creds, success, error) => {
       user: creds
     },
     success,
-    error: () => console.log("not good")
+    error
   });
 };
 

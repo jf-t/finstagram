@@ -38,21 +38,37 @@ class ImageDetail extends React.Component {
   }
 
   sendComment() {
+    if (this.props.currentUser.user.id !== this.props.image.user.id) {
+      let notification = `${this.props.currentUser.user.username} commented:\"${this.state.body}\" on your photo!`;
+      let url = `/images/${this.props.image.id}`;
+      let image_url = this.props.image.image_url;
+      this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
+    }
     this.props.addComment(this.state);
   }
 
   likeImage() {
-    this.props.addLike(this.props.image.id);
-    this.setState({some: "idk"})
+    if (this.props.currentUser.user.id !== this.props.image.user.id) {
+      let notification = `${this.props.currentUser.user.username} liked your photo!`;
+      let url = `/images/${this.props.image.id}`;
+      let image_url = this.props.image.image_url;
+      this.props.addLike(this.props.image.id, this.props.image.user.id, notification, url, image_url);
+      this.setState({some: "idk"})
+    } else {
+      this.props.addLike(this.props.image.id);
+      this.setState({some: "idk"})
+    }
   }
   unlikeImage() {
     this.props.removeLike(this.props.image.id);
   }
 
   render() {
-    this.editForm = (
-      <EditImage editImage={this.props.editImage} image={this.props.image}/>
-    )
+    if ((Object.keys(this.props.image).length > 0) && (this.props.image.id.toString() === this.props.imageId)) {
+      this.editForm = (
+        <EditImage editImage={this.props.editImage} image={this.props.image}/>
+      )
+    }
     let image = this.props.image;
     let content;
     if ((!image) || (Object.keys(image).length < 2)) {

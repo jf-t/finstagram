@@ -13,6 +13,7 @@ class UploadForm extends React.Component {
     }
     this.update = this.update.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.getLocation = this.getLocation.bind(this);
   }
   componentDidMount () {
     const addUrl =(error, result) => {
@@ -42,6 +43,19 @@ class UploadForm extends React.Component {
     this.props.addImage(state);
   }
 
+  getLocation(e) {
+    e.target.text = "Loading Current Location...";
+    e.target.className="current-location disabled"
+    e.persist();
+    const setLocationData = (coordObj) => {
+      let lat = coordObj.coords.latitude;
+      let lng = coordObj.coords.longitude;
+      this.setState({lat, lng});
+      e.target.text = 'Using Current Location';
+    }
+    navigator.geolocation.getCurrentPosition(setLocationData.bind(this));
+  }
+
   render() {
     if (this.state.lat !== "") {
       let lat = document.getElementById("lat-detail");
@@ -65,6 +79,7 @@ class UploadForm extends React.Component {
               <h3>Latitude: <span id="lat-detail"></span></h3>
               <h3>Longitude: <span id="lng-detail"></span></h3>
             </div>
+            <a className="current-location" onClick={this.getLocation}>Use Current Location</a>
           <input type="submit" name="Add Image"/>
         </form>
       </div>

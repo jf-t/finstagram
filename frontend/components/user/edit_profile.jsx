@@ -15,6 +15,13 @@ class EditProfile extends React.Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
+  componentDidMount() {
+    const addUrl =(error, result) => {
+      this.setState({image_url: result[0].url});
+    }
+    let widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
+  }
+
   update(prop) {
     return (e) => this.setState({[prop]: e.target.value})
   };
@@ -30,11 +37,12 @@ class EditProfile extends React.Component {
         <div className="modal-form edit-form">
           <h4>Edit Profile</h4>
           <form onSubmit={this.updateUser}>
+            <div id="upload-holder"></div>
             <input type="text" onChange={this.update("full_name")} defaultValue={this.state.full_name} />
             <input type="text" onChange={this.update("email")} defaultValue={this.state.email} />
             <input type="text" onChange={this.update("username")} defaultValue={this.state.username} />
-            <input type="text" onChange={this.update("image_url")} defaultValue={this.state.image_url} placeholder="Image Url" />
-            <textarea onChange={this.update("bio")} placeholder="Bio"defaultValue={this.state.bio}></textarea>
+            <input type="password" onChange={this.update("password")} placeholder="new password"></input>
+            <textarea onChange={this.update("bio")} placeholder="Bio" defaultValue={this.state.bio}></textarea>
             <input type="submit" value="Submit Changes"></input>
           </form>
         </div>
