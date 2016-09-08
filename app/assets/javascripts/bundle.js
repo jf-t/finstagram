@@ -30456,7 +30456,7 @@
 	          _react2.default.createElement(
 	            'a',
 	            { onClick: this.logout },
-	            'Sign Out'
+	            _react2.default.createElement('i', { className: 'fa fa-sign-out' })
 	          )
 	        );
 	      } else {
@@ -30466,7 +30466,7 @@
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: "/login" },
-	            'Sign In'
+	            _react2.default.createElement('i', { className: 'fa fa-sign-in' })
 	          )
 	        );
 	      }
@@ -30542,9 +30542,23 @@
 	                'li',
 	                null,
 	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { to: '/home' },
+	                  _react2.default.createElement('i', { className: 'fa fa-home' })
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'li',
+	                null,
+	                _react2.default.createElement(
 	                  'a',
-	                  { onClick: this.showNotifs },
-	                  this.state.unreadNotifs
+	                  { className: 'notif-button', onClick: this.showNotifs },
+	                  _react2.default.createElement('i', { className: 'fa fa-bell' }),
+	                  _react2.default.createElement(
+	                    'span',
+	                    { className: 'num-notifs' },
+	                    this.state.unreadNotifs
+	                  )
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -30553,7 +30567,7 @@
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/upload' },
-	                  'Add Image'
+	                  _react2.default.createElement('i', { className: 'fa fa-plus-circle' })
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -30562,7 +30576,7 @@
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/profile/' + currentId },
-	                  'Profile'
+	                  _react2.default.createElement('i', { className: 'fa fa-user' })
 	                )
 	              ),
 	              innout
