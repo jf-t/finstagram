@@ -813,3 +813,44 @@ textarea.add-comment {
 .disabled {
   pointer-events: none;
 }
+
+.splash {
+  width: 60%;
+  margin: 60px 20%;
+  background: #fff;
+  padding: 45px;
+  border-radius: 50px;
+  border: 1px solid $gray;
+  h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  p {
+    line-height: 2;
+  }
+  p.jackftilly {
+    font-style: italic;
+    font-size: 25px;
+    margin: 20px 0;
+    font-weight: 300
+  }
+  a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    margin: 0 auto;
+    width: 320px;
+    text-align: center;
+    color: #333;
+    cursor: pointer;
+  }
+  a:hover {
+    background: $purple;
+    text-decoration: none;
+  }
+}

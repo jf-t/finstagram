@@ -23135,17 +23135,12 @@
 	      }
 	    }
 	  }, {
-	    key: 'addHome',
-	    value: function addHome(nextState, replace) {
-	      replace("/home");
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _reactRouter.Router,
 	        { history: _reactRouter.hashHistory },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default, onEnter: this.addHome }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default }),
 	        _react2.default.createElement(
 	          _reactRouter.Route,
 	          { path: '/home', component: _home_index_container2.default },
@@ -29108,10 +29103,12 @@
 	      var _this3 = this;
 	
 	      var error = void 0;
-	      if (this.props.user.errors[0] != "Invalid username/password combination") {
-	        error = "";
-	      } else {
-	        error = this.props.user.errors[0];
+	      if (this.props.user.errors) {
+	        if (this.props.user.errors[0] != "Invalid username/password combination") {
+	          error = "";
+	        } else {
+	          error = this.props.user.errors[0];
+	        }
 	      }
 	      return _react2.default.createElement(
 	        'div',
@@ -30214,19 +30211,35 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(198);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var App = function App(_ref) {
 	  var children = _ref.children;
 	  return _react2.default.createElement(
 	    'div',
-	    null,
+	    { className: 'splash' },
 	    _react2.default.createElement(
 	      'h1',
 	      null,
 	      'Welcome to Finstagram'
 	    ),
-	    children
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'Finstagram is a social media application written as a end-of-class project. I spent two weeks writing the code behind this project, for 40 hours a week in an office. This program is written as a hybrid of Instagram and AirBnB, with the functionality of images, users, follows, comments, and likes of Instagram, with the map and map marker functionality of AirBnB. I hope you nejoy my project. To get started click the button below.'
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      { className: 'jackftilly' },
+	      '- Jack Fintan Tilly (@jackfintan)'
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/login' },
+	      'Click here to enter the app!'
+	    )
 	  );
 	};
 	exports.default = App;
