@@ -12,6 +12,12 @@ class Api::NotificationsController < ApplicationController
     render 'api/users/no'
   end
 
+  def destroy
+    @notif = Notification.find(params[:id]);
+    @notif.destroy!
+    render 'api/users/no'
+  end
+
   private
   def notif_params
     params.require(:notif).permit(:user_id, :notification, :url, :image_url)

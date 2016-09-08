@@ -84,9 +84,7 @@ export const addNotif = (id, notification, url, image_url) => {
         url,
         image_url
       }
-    },
-    success: () => console.log("add notif worked yee!"),
-    error: () => console.log("add notif didnt work")
+    }
   });
 }
 
@@ -98,4 +96,14 @@ export const readNotif = (id) => {
       id: id
     }
   })
+}
+
+export const removeNotif = (id) => {
+  $.ajax({
+    method: "DELETE",
+    url: 'api/notification',
+    data: {
+      id
+    }
+  });
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, hashHistory } from 'react-router';
 import SearchContainer from '../search/search_container';
-import { readNotif } from '../../util/image_api_util';
+import { readNotif, removeNotif, addNotif } from '../../util/image_api_util';
+import { addFollow } from '../../util/user_api_util';
 
 class SiteHeader extends React.Component {
   constructor(props) {
@@ -20,6 +21,8 @@ class SiteHeader extends React.Component {
     }
     this.logout = this.logout.bind(this)
     this.readNotif = this.readNotif.bind(this);
+    this.acceptRequest = this.acceptRequest.bind(this);
+    this.denyRequest = this.denyRequest.bind(this);
   }
 
   logout() {
@@ -48,6 +51,18 @@ class SiteHeader extends React.Component {
     }
     hashHistory.push(notif.url);
   }
+  acceptRequest(notif) {
+    let id = notif.url.split("/")[2];
+    let userNotif = notif.notification.split(" ")[0];
+    let notification = `${userNotif} followed you!`;
+    addFollow(this.props.currentUser.id, id);
+    removeNotif(notif.id);
+    addNotif(this.props.currentUser.id, notification, notif.url);
+  }
+  denyRequest(notif) {
+    removeNotif(notif.id);
+  }
+
 
   render () {
     let innout;
@@ -67,11 +82,21 @@ class SiteHeader extends React.Component {
         } else {
           listItemClass = "read"
         }
+        let followReq = "";
+        if (notif.notification.includes("would")) {
+          followReq = (
+            <div className="follow-request">
+              <a onClick={() => this.acceptRequest(notif)}>Accept</a>
+              <a onClick={() => this.denyRequest(notif)}>Deny</a>
+            </div>
+          )
+        }
         return (<li key={notif.id} className={listItemClass}>
                 <a onClick={(e) => this.readNotif(e, notif)} className="notification">
                   <span className="notification-text">{notif.notification}</span>
                   <div className="notification-img"><img src={notif.image_url} /></div>
                 </a>
+                {followReq}
               </li>)
       });
       notifications = <ul id="notif-dropdown"><a className="close-modal" onClick={this.hideNotifs}>X</a>{notificationKids}</ul>

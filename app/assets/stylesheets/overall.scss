@@ -317,7 +317,7 @@ span.moment-ago {
   top: 20px;
   display: flex;
 }
-.follow-info span {
+.follow-info a {
   background-color: #fff;
   padding: 10px;
   display: block;
@@ -326,10 +326,12 @@ span.moment-ago {
   border-radius: 7%;
   text-align: center;
   font-size: 12px;
+  color: #333;
   cursor: pointer;
 }
-.follow-info span:hover {
-  background-color: $purple
+.follow-info a:hover {
+  background-color: $purple;
+  text-decoration: none;
 }
 #followers-modal, #following-modal {
   display: none;
@@ -820,6 +822,7 @@ textarea.add-comment {
 }
 .disabled {
   pointer-events: none;
+  color: #888;
 }
 
 .splash {

@@ -34,6 +34,7 @@ class UserProfile extends React.Component {
       hashHistory.push("/login");
     }
     this.state = null;
+    this.createHiddenModals();
   }
 
   addMap() {
@@ -82,19 +83,35 @@ class UserProfile extends React.Component {
       </div>
     );
 
+    let privateItem = document.getElementById('private-tester');
+    if (privateItem) {
+      let link1 = document.getElementById('followers-disable');
+      let link2 = document.getElementById('following-disable');
+      link1.className = "followers disabled"
+      link2.className = "following disabled"
+    }
   }
 
   followUser() {
-    let notification = `${this.props.currentUser.user.username} followed you!`
-    let url = `/profile/${this.props.currentUser.user.id}`;
-    addNotif(this.props.pageUserId, notification, url);
-    addFollow(this.props.pageUserId);
-    this.setState({follow: true});
+    let notification;
+    let url;
+    if (this.props.pageUser.private) {
+      notification = `${this.props.currentUser.user.username} would like to follow you`
+      url = `/profile/${this.props.currentUser.user.id}`;
+      addNotif(this.props.pageUserId, notification, url);
+      this.setState({follow: "requested"});
+    } else {
+      notification = `${this.props.currentUser.user.username} followed you!`
+      url = `/profile/${this.props.currentUser.user.id}`;
+      addNotif(this.props.pageUserId, notification, url);
+      addFollow(this.props.pageUserId);
+      this.setState({follow: "yes"});
+    }
   }
 
   unfollowUser() {
     removeFollow(this.props.pageUserId);
-    this.setState({follow: false});
+    this.setState({follow: "no"});
   }
 
   showEditForm() {
@@ -131,13 +148,62 @@ class UserProfile extends React.Component {
       this.pageUser = this.props.pageUser
     }
 
-    if (this.pageUser) {
-      if (!this.pageUser) {
-        this.pageUser = this.props.pageUser
+    let editorno;
+    if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
+      editorno = (
+      <div className="edit-profile-link">
+        <a onClick={this.showEditForm}>Edit Profile</a>
+      </div>
+      )
+    } else {
+      let pageUserId = this.props.pageUserId;
+      let flag = "no";
+      if (!this.state) {
+        this.props.currentUser.user.following.forEach(followee => {
+          if (followee.id.toString() === pageUserId) {
+            flag = "yes";
+          }
+        });
+      } else {
+        flag = this.state.follow;
       }
-      if (this.pageUser.images.length > 0) {
+      if (flag === "yes") {
+        editorno = (
+          <div className="follow-user">
+            <a onClick={this.unfollowUser}>Unfollow</a>
+          </div>
+        )
+      } else if (flag === "no") {
+        editorno = (
+          <div className="follow-user">
+            <a onClick={this.followUser}>Follow</a>
+          </div>
+        )
+      } else {
+        editorno = (
+          <div className="follow-user disabled">
+            <a>Requested</a>
+          </div>
+        )
+      }
+    }
+    if (this.pageUser) {
+      if ((this.pageUser.private) && ((editorno.props.children._shadowChildren === "Follow")||(editorno.props.children._shadowChildren === "Requested"))) {
+        this.feedItems = <div id="private-tester"><i className="fa fa-lock private-lock"></i></div>
+        } else if (this.pageUser.images.length === 0) {
+          this.feedItems = (
+            <div>
+              <div className="map-prof-cont">
+                <div id="map-prof" ref="map">
+                  Map
+                </div>
+              </div>
+            </div>
+          )
+        }
+      else {
         let images = this.pageUser.images
-        this.feedItems = images.map((img) => {
+        let feedChildren = images.map((img) => {
           return (
             <Link key={img.id} to={`/images/${img.id}`}>
               <div className="feed-item">
@@ -148,50 +214,19 @@ class UserProfile extends React.Component {
             </Link>
           )
         })
-      } else {
-        this.feedItems = <div></div>
+        this.feedItems =(
+          <div>
+            <div className="map-prof-cont">
+              <div id="map-prof" ref="map">
+                Map
+              </div>
+            </div>
+            {feedChildren}
+          </div>
+        )
       }
     } else {
       this.pageUser = {following: {}, followers: {}, images: []}
-    }
-    let editorno;
-    if (this.props.currentUser.user.id.toString() === this.props.pageUserId) {
-      editorno = (
-      <div className="edit-profile-link">
-        <a onClick={this.showEditForm}>Edit Profile</a>
-      </div>
-      )
-    } else {
-      let pageUserId = this.props.pageUserId;
-      let flag = false;
-      if (this.state) {
-        if (this.state.follow) {
-          console.log("followed");
-          flag = true;
-        } else {
-          console.log("un-followed");
-          flag = false
-        }
-      } else {
-        this.props.currentUser.user.following.forEach(followee => {
-          if (followee.id.toString() === pageUserId) {
-            flag = true;
-          }
-        });
-      }
-      if (flag) {
-        editorno = (
-          <div className="follow-user">
-            <a onClick={this.unfollowUser}>Unfollow</a>
-          </div>
-        )
-      } else {
-        editorno = (
-          <div className="follow-user">
-            <a onClick={this.followUser}>Follow</a>
-          </div>
-        )
-      }
     }
     let content;
     if ((this.props.pageUser.loading === true) || (this.props.pageUser.id.toString() !== this.props.pageUserId)) {
@@ -213,9 +248,9 @@ class UserProfile extends React.Component {
               <h1>{this.pageUser.full_name}</h1>
               <h4>@{this.pageUser.username}</h4>
               <div className="follow-info">
-                <span onClick={this.showFollowers} className="followers">{this.pageUser.followers.length} followers</span>
-                <span onClick={this.showFollowing} className="following">{this.pageUser.following.length} following</span>
-                <span className="posts">{this.pageUser.images.length} posts</span>
+                <a id="followers-disable" onClick={this.showFollowers} className="followers">{this.pageUser.followers.length} followers</a>
+                <a id="following-disable" onClick={this.showFollowing} className="following">{this.pageUser.following.length} following</a>
+                <a className="posts">{this.pageUser.images.length} posts</a>
               </div>
               <div className="bio-container">
                 <p className="bio">{this.pageUser.bio}</p>
@@ -225,11 +260,6 @@ class UserProfile extends React.Component {
             {this.editStuff}
             {this.followersModal}
             {this.followingModal}
-          </div>
-          <div className="map-prof-cont">
-            <div id="map-prof" ref="map">
-              Map
-            </div>
           </div>
           <div className="image-feed">
             {this.feedItems}
