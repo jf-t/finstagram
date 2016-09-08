@@ -5,6 +5,7 @@ import { hashHistory, Link } from 'react-router';
 import { addFollow, removeFollow } from '../../util/user_api_util';
 import _mapOptions from '../../util/map_options';
 import MarkerManager from '../../util/marker_manager';
+import { addNotif } from '../../util/image_api_util';
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -84,6 +85,9 @@ class UserProfile extends React.Component {
   }
 
   followUser() {
+    let notification = `${this.props.currentUser.user.username} followed you!`
+    let url = `/profile/${this.props.currentUser.user.id}`;
+    addNotif(this.props.pageUserId, notification, url);
     addFollow(this.props.pageUserId);
     this.setState({follow: true});
   }

@@ -28963,10 +28963,12 @@
 	  };
 	};
 	
-	var addFollow = exports.addFollow = function addFollow(id) {
+	var addFollow = exports.addFollow = function addFollow(id, notification, url) {
 	  return {
 	    type: userConstnats.ADD_FOLLOW,
-	    following_id: id
+	    following_id: id,
+	    notification: notification,
+	    url: url
 	  };
 	};
 	
@@ -29197,8 +29199,8 @@
 	    editUser: function editUser(user) {
 	      return dispatch((0, _user_actions.editUser)(user));
 	    },
-	    addFollow: function addFollow(id) {
-	      return dispatch((0, _user_actions.addFollow)(id));
+	    addFollow: function addFollow(id, notification, url) {
+	      return dispatch((0, _user_actions.addFollow)(id, notification, url));
 	    },
 	    removeFollow: function removeFollow(id) {
 	      return dispatch((0, _user_actions.removeFollow)(id));
@@ -29239,6 +29241,8 @@
 	var _marker_manager = __webpack_require__(269);
 	
 	var _marker_manager2 = _interopRequireDefault(_marker_manager);
+	
+	var _image_api_util = __webpack_require__(278);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29370,6 +29374,9 @@
 	  }, {
 	    key: 'followUser',
 	    value: function followUser() {
+	      var notification = this.props.currentUser.user.username + ' followed you!';
+	      var url = '/profile/' + this.props.currentUser.user.id;
+	      (0, _image_api_util.addNotif)(this.props.pageUserId, notification, url);
 	      (0, _user_api_util.addFollow)(this.props.pageUserId);
 	      this.setState({ follow: true });
 	    }

@@ -1,6 +1,7 @@
 import { userConstants, receiveUser, receivePageUser, receiveErrors, loggedOutRender, receiveUsers } from '../actions/user_actions';
 import { login, signup, logout, editUser, userfromId, requestUsers} from '../util/user_api_util';
 
+
 const UserMiddleware = ({getState, dispatch}) => next => action => {
 
   const errors = xhr => {

@@ -889,7 +889,10 @@ textarea.add-comment {
       }
     }
   }
+  li:hover {
+    background-color: $gray;
+  }
   li.unread {
-    background-color: red;
+    background-color: $purple;
   }
 }

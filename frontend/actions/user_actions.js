@@ -69,9 +69,11 @@ export const loggedOutRender = () => ({
 });
 
 
-export const addFollow = (id) => ({
+export const addFollow = (id, notification, url) => ({
   type: userConstnats.ADD_FOLLOW,
-  following_id: id
+  following_id: id,
+  notification,
+  url
 });
 
 export const removeFollow = (id) => ({
