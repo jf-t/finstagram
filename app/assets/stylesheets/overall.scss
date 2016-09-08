@@ -376,12 +376,12 @@ border-top-right-radius: 4px;
 }
 .change-feeds {
   position: fixed;
-  top: 16px;
-  right: 70px;
+  top: 70px;
+  left: 7px;
   z-index: 12;
   background-color: #fff;
-  padding: 4px 12px;
-  border: 1px solid $gray;
+  padding: 5px 12px;
+  border: 1px solid #cccccc;
   border-radius: 5px;
 }
 
@@ -390,8 +390,6 @@ border-top-right-radius: 4px;
   background-color: $purple;
 }
 
-.search-bar {
-}
 .search-bar input {
   padding: 10px 25px;
   width: 212px;
@@ -455,6 +453,7 @@ border-top-right-radius: 4px;
 }
 .search-bar {
   position: relative;
+  left: 27px;
 }
 .close-search {
   position: absolute;
