@@ -904,3 +904,18 @@ textarea.add-comment {
     background-color: $purple;
   }
 }
+// mini image when google maps mouseover
+.img-tooltip {
+  width: 200px;
+  .img-cont {
+    overflow: hidden;
+    border-radius: 10px;
+    width: 200px;
+    height: 200px;
+  }
+  span.tooltip-caption {
+    display: block;
+    font-size: 16px;
+  }
+
+}

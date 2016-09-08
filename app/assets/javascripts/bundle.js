@@ -30028,7 +30028,7 @@
 /* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30053,13 +30053,13 @@
 	  }
 	
 	  _createClass(MarkerManager, [{
-	    key: 'updateMarkers',
+	    key: "updateMarkers",
 	    value: function updateMarkers(images) {
 	      this.images = images;
 	      this._toAdd().forEach(this._createMarker);
 	    }
 	  }, {
-	    key: 'fitBounds',
+	    key: "fitBounds",
 	    value: function fitBounds() {
 	      var bounds = new google.maps.LatLngBounds();
 	      for (var i = 0; i < this.markers.length; i++) {
@@ -30068,7 +30068,7 @@
 	      return bounds;
 	    }
 	  }, {
-	    key: '_toAdd',
+	    key: "_toAdd",
 	    value: function _toAdd() {
 	      var imgIds = this.markers.map(function (marker) {
 	        return marker.image_id;
@@ -30083,7 +30083,7 @@
 	      }, []);
 	    }
 	  }, {
-	    key: '_markersToRemove',
+	    key: "_markersToRemove",
 	    value: function _markersToRemove() {
 	      var _this = this;
 	
@@ -30092,8 +30092,10 @@
 	      });
 	    }
 	  }, {
-	    key: '_createMarker',
+	    key: "_createMarker",
 	    value: function _createMarker(img) {
+	      var _this2 = this;
+	
 	      var pos = new google.maps.LatLng(img.lat, img.lng);
 	      var marker = new google.maps.Marker({
 	        position: pos,
@@ -30101,13 +30103,28 @@
 	        image_id: img.id,
 	        icon: this.pin
 	      });
+	      var caption = "";
+	      if (img.caption) {
+	        caption = img.caption;
+	      }
+	      var content = '<div class="img-tooltip">' + '<div class="tooltip-content">' + '<div class="img-cont">' + ("<img src=\"" + img.image_url + "\" />") + '</div>' + '<div class="tooltip-text">' + ("<span class=\"tooltip-prof-name\">" + img.user.username + "</span>") + ("<span class=\"tooltip-caption\">" + caption + "</span>") + '</div>' + '</div>' + '</div>';
+	
+	      var infowindow = new google.maps.InfoWindow({
+	        content: content
+	      });
 	      marker.addListener('click', function () {
-	        _reactRouter.hashHistory.push('/images/' + img.id);
+	        _reactRouter.hashHistory.push("/images/" + img.id);
+	      });
+	      marker.addListener('mouseover', function () {
+	        infowindow.open(_this2.map, marker);
+	      });
+	      marker.addListener('mouseout', function () {
+	        infowindow.close();
 	      });
 	      this.markers.push(marker);
 	    }
 	  }, {
-	    key: '_removeMarker',
+	    key: "_removeMarker",
 	    value: function _removeMarker(marker) {
 	      var idx = this.markers.indexOf(marker);
 	      this.markers[idx].setMap(null);
