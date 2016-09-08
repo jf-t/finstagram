@@ -29797,6 +29797,7 @@
 	            _react2.default.createElement("input", { type: "text", onChange: this.update("full_name"), defaultValue: this.state.full_name }),
 	            _react2.default.createElement("input", { type: "text", onChange: this.update("email"), defaultValue: this.state.email }),
 	            _react2.default.createElement("input", { type: "text", onChange: this.update("username"), defaultValue: this.state.username }),
+	            _react2.default.createElement("input", { type: "password", onChange: this.update("password"), placeholder: "new password" }),
 	            _react2.default.createElement("textarea", { onChange: this.update("bio"), placeholder: "Bio", defaultValue: this.state.bio }),
 	            _react2.default.createElement("input", { type: "submit", value: "Submit Changes" })
 	          )
@@ -30439,7 +30440,7 @@
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/upload' },
-	                  'Add Memory'
+	                  'Add Image'
 	                )
 	              ),
 	              _react2.default.createElement(

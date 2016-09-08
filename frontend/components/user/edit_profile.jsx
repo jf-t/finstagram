@@ -41,7 +41,8 @@ class EditProfile extends React.Component {
             <input type="text" onChange={this.update("full_name")} defaultValue={this.state.full_name} />
             <input type="text" onChange={this.update("email")} defaultValue={this.state.email} />
             <input type="text" onChange={this.update("username")} defaultValue={this.state.username} />
-            <textarea onChange={this.update("bio")} placeholder="Bio"defaultValue={this.state.bio}></textarea>
+            <input type="password" onChange={this.update("password")} placeholder="new password"></input>
+            <textarea onChange={this.update("bio")} placeholder="Bio" defaultValue={this.state.bio}></textarea>
             <input type="submit" value="Submit Changes"></input>
           </form>
         </div>
