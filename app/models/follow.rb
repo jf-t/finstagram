@@ -11,7 +11,7 @@
 
 class Follow < ApplicationRecord
   validates :user_id, :following_id, presence: true
-
+  validates :user_id, uniqueness: { scope: :following_id }
   validate :cant_follow_yourself
 
 

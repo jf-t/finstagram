@@ -29,6 +29,11 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:user][:id])
+    if params[:user][:private] == "Private"
+      @user.update(private: true)
+    else
+      @user.update(private: false)
+    end
     if @user.update(user_params_update)
       render 'api/users/show'
     else

@@ -9,7 +9,8 @@ class EditProfile extends React.Component {
       username: props.user.user.username,
       bio: props.user.user.bio,
       email: props.user.user.email,
-      id: props.user.user.id
+      id: props.user.user.id,
+      private: props.user.user.private
     };
     this.update = this.update.bind(this);
     this.updateUser = this.updateUser.bind(this);
@@ -30,8 +31,9 @@ class EditProfile extends React.Component {
     this.props.editUser(this.state);
   }
 
-
   render() {
+    let checkPrivate = "";
+    let checkPublic = "";
     return(
       <div className="edit-profile">
         <div className="modal-form edit-form">
@@ -43,6 +45,8 @@ class EditProfile extends React.Component {
             <input type="text" onChange={this.update("username")} defaultValue={this.state.username} />
             <input type="password" onChange={this.update("password")} placeholder="new password"></input>
             <textarea onChange={this.update("bio")} placeholder="Bio" defaultValue={this.state.bio}></textarea>
+            <input type="radio" id="private-prof" onChange={this.update("private")} value="Private"/> Private
+            <input type="radio" id="public-prof" onChange={this.update("private")} value="Public"/> Public
             <input type="submit" value="Submit Changes"></input>
           </form>
         </div>

@@ -61,12 +61,13 @@ export const requestUsers = (str, success, error) => {
   });
 }
 
-export const addFollow = (id, success) => {
+export const addFollow = (id, currentId, success) => {
   $.ajax({
     method: "POST",
     url: "api/follow",
     data: {
-      following_id: id
+      following_id: id,
+      followee_id: currentId
     },
     success
   });
