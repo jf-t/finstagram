@@ -45348,19 +45348,27 @@
 	  }, {
 	    key: 'sendComment',
 	    value: function sendComment() {
-	      var notification = this.props.currentUser.user.username + ' commented:"' + this.state.body + '" on your photo!';
-	      var url = '/images/' + this.props.image.id;
-	      var image_url = this.props.image.image_url;
-	      this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
+	      if (this.props.currentUser.user.id !== this.props.image.user.id) {
+	        var notification = this.props.currentUser.user.username + ' commented:"' + this.state.body + '" on your photo!';
+	        var url = '/images/' + this.props.image.id;
+	        var image_url = this.props.image.image_url;
+	        this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
+	      }
+	      this.props.addComment(this.state);
 	    }
 	  }, {
 	    key: 'likeImage',
 	    value: function likeImage() {
-	      var notification = this.props.currentUser.user.username + ' liked your photo!';
-	      var url = '/images/' + this.props.image.id;
-	      var image_url = this.props.image.image_url;
-	      this.props.addLike(this.props.image.id, this.props.image.user.id, notification, url, image_url);
-	      this.setState({ some: "idk" });
+	      if (this.props.currentUser.user.id !== this.props.image.user.id) {
+	        var notification = this.props.currentUser.user.username + ' liked your photo!';
+	        var url = '/images/' + this.props.image.id;
+	        var image_url = this.props.image.image_url;
+	        this.props.addLike(this.props.image.id, this.props.image.user.id, notification, url, image_url);
+	        this.setState({ some: "idk" });
+	      } else {
+	        this.props.addLike(this.props.image.id);
+	        this.setState({ some: "idk" });
+	      }
 	    }
 	  }, {
 	    key: 'unlikeImage',
@@ -49413,11 +49421,15 @@
 	          (0, _image_api_util.requestImage)(action.image_id, success2);
 	          return next(action);
 	        case _image_actions.imageConstants.ADD_LIKE:
-	          (0, _image_api_util.addNotif)(action.user_id, action.notification, action.url, action.image_url);
+	          if (action.notification) {
+	            (0, _image_api_util.addNotif)(action.user_id, action.notification, action.url, action.image_url);
+	          }
 	          (0, _image_api_util.addLike)(action.id, success2);
 	          return next(action);
 	        case _image_actions.imageConstants.ADD_COMMENT:
-	          (0, _image_api_util.addNotif)(action.user_id, action.notification, action.url, action.image_url);
+	          if (action.notification) {
+	            (0, _image_api_util.addNotif)(action.user_id, action.notification, action.url, action.image_url);
+	          }
 	          (0, _image_api_util.addComment)(action.comment, success2);
 	          return next(action);
 	        case _image_actions.imageConstants.REMOVE_LIKE:

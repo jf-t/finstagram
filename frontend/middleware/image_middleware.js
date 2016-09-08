@@ -22,11 +22,15 @@ const ImageMiddleware = store => next => action => {
       requestImage(action.image_id, success2);
       return next(action);
     case imageConstants.ADD_LIKE:
-      addNotif(action.user_id, action.notification, action.url, action.image_url)
+      if (action.notification) {
+        addNotif(action.user_id, action.notification, action.url, action.image_url)
+      }
       addLike(action.id, success2);
       return next(action);
     case imageConstants.ADD_COMMENT:
-      addNotif(action.user_id, action.notification, action.url, action.image_url)
+      if (action.notification) {
+        addNotif(action.user_id, action.notification, action.url, action.image_url)
+      }
       addComment(action.comment, success2);
       return next(action);
     case imageConstants.REMOVE_LIKE:
