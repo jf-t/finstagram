@@ -922,3 +922,20 @@ textarea.add-comment {
   }
 
 }
+
+
+.follow-request {
+  margin-left: 20px;
+  a {
+    padding: 5px 10px !important;
+    background: #fff;
+    border: 1px solid #ccc;
+    width: 79px;
+    display: inline-block !important;
+    text-align: center;
+    border-radius: 10px;
+  }
+  a:hover {
+    background: $gray;
+  }
+}
