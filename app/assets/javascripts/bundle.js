@@ -23129,7 +23129,10 @@
 	  function AppRouter(props) {
 	    _classCallCheck(this, AppRouter);
 	
-	    return _possibleConstructorReturn(this, (AppRouter.__proto__ || Object.getPrototypeOf(AppRouter)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (AppRouter.__proto__ || Object.getPrototypeOf(AppRouter)).call(this, props));
+	
+	    _this.redirectIfNotLoggedIn = _this.redirectIfNotLoggedIn.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(AppRouter, [{
@@ -23137,6 +23140,52 @@
 	    value: function redirectIfNotLoggedIn(nextState, replace) {
 	      if (nextState.params.id === "0") {
 	        replace("/login");
+	      } else {
+	        this.addHighlight(nextState);
+	      }
+	    }
+	  }, {
+	    key: 'addHighlight',
+	    value: function addHighlight(nextState) {
+	      var path = nextState.location.pathname.split("/")[1];
+	      switch (path) {
+	        case 'home':
+	          if (document.getElementById('home-link')) {
+	            document.getElementById('home-link').className = "active-nav";
+	            document.getElementById('upload-link').className = "";
+	            document.getElementById('user-link').className = "";
+	            document.getElementById('logout-link').className = "";
+	          }
+	          break;
+	        case 'upload':
+	          if (document.getElementById('home-link')) {
+	            document.getElementById('home-link').className = "";
+	            document.getElementById('upload-link').className = "active-nav";
+	            document.getElementById('user-link').className = "";
+	            document.getElementById('logout-link').className = "";
+	          }
+	          break;
+	        case 'profile':
+	          if (document.getElementById('home-link')) {
+	            document.getElementById('home-link').className = "";
+	            document.getElementById('upload-link').className = "";
+	            document.getElementById('user-link').className = "active-nav";
+	            document.getElementById('logout-link').className = "";
+	          }
+	          break;
+	        case 'login':
+	          if (document.getElementById('home-link')) {
+	            document.getElementById('home-link').className = "";
+	            document.getElementById('upload-link').className = "";
+	            document.getElementById('user-link').className = "";
+	            document.getElementById('login-link').className = "active-nav";
+	          }
+	        default:
+	          if (document.getElementById('home-link')) {
+	            document.getElementById('home-link').className = "";
+	            document.getElementById('upload-link').className = "";
+	            document.getElementById('user-link').className = "";
+	          }
 	      }
 	    }
 	  }, {
@@ -23148,13 +23197,13 @@
 	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default }),
 	        _react2.default.createElement(
 	          _reactRouter.Route,
-	          { path: '/home', component: _home_index_container2.default },
-	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _feed_container2.default }),
+	          { path: '/home', component: _home_index_container2.default, onEnter: this.addHighlight },
+	          _react2.default.createElement(_reactRouter.IndexRoute, { component: _feed_container2.default, onEnter: this.addHighlight }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/upload', component: _upload_container2.default, onEnter: this.redirectIfNotLoggedIn }),
 	          _react2.default.createElement(_reactRouter.Route, { path: '/profile/:id', component: _user_profile_container2.default, onEnter: this.redirectIfNotLoggedIn }),
-	          _react2.default.createElement(_reactRouter.Route, { path: '/images/:id', component: _image_detail_container2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _user_signup_container2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _user_login_container2.default })
+	          _react2.default.createElement(_reactRouter.Route, { path: '/images/:id', component: _image_detail_container2.default, onEnter: this.addHighlight }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _user_signup_container2.default, onEnter: this.addHighlight }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _user_login_container2.default, onEnter: this.addHighlight })
 	        )
 	      );
 	    }
@@ -29828,12 +29877,12 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      if (this.state.private) {
-	        document.getElementById('public-prof').checked = true;
-	        document.getElementById('private-prof').checked = false;
-	      } else {
+	      if (this.state.private === "Private") {
 	        document.getElementById('public-prof').checked = false;
 	        document.getElementById('private-prof').checked = true;
+	      } else {
+	        document.getElementById('public-prof').checked = true;
+	        document.getElementById('private-prof').checked = false;
 	      }
 	    }
 	  }, {
@@ -30679,11 +30728,13 @@
 	      (0, _user_api_util.addFollow)(this.props.currentUser.id, id);
 	      (0, _image_api_util.removeNotif)(notif.id);
 	      (0, _image_api_util.addNotif)(this.props.currentUser.id, notification, notif.url);
+	      this.forceUpdate();
 	    }
 	  }, {
 	    key: 'denyRequest',
 	    value: function denyRequest(notif) {
 	      (0, _image_api_util.removeNotif)(notif.id);
+	      this.forceUpdate();
 	    }
 	  }, {
 	    key: 'render',
@@ -30694,7 +30745,7 @@
 	      if (this.props.currentUser) {
 	        innout = _react2.default.createElement(
 	          'li',
-	          null,
+	          { id: 'logout-link' },
 	          _react2.default.createElement(
 	            'a',
 	            { onClick: this.logout },
@@ -30704,7 +30755,7 @@
 	      } else {
 	        innout = _react2.default.createElement(
 	          'li',
-	          null,
+	          { id: 'login-link' },
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: "/login" },
@@ -30804,7 +30855,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'li',
-	                null,
+	                { id: 'home-link' },
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/home' },
@@ -30813,7 +30864,7 @@
 	              ),
 	              _react2.default.createElement(
 	                'li',
-	                null,
+	                { id: 'notif-link' },
 	                _react2.default.createElement(
 	                  'a',
 	                  { className: 'notif-button', onClick: this.showNotifs },
@@ -30827,7 +30878,7 @@
 	              ),
 	              _react2.default.createElement(
 	                'li',
-	                null,
+	                { id: 'upload-link' },
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/upload' },
@@ -30836,7 +30887,7 @@
 	              ),
 	              _react2.default.createElement(
 	                'li',
-	                null,
+	                { id: 'user-link' },
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
 	                  { to: '/profile/' + currentId },

@@ -58,18 +58,20 @@ class SiteHeader extends React.Component {
     addFollow(this.props.currentUser.id, id);
     removeNotif(notif.id);
     addNotif(this.props.currentUser.id, notification, notif.url);
+    this.forceUpdate();
   }
   denyRequest(notif) {
     removeNotif(notif.id);
+    this.forceUpdate();
   }
 
 
   render () {
     let innout;
     if (this.props.currentUser) {
-      innout = <li><a onClick={this.logout}><i className="fa fa-sign-out"></i></a></li>
+      innout = <li id="logout-link"><a onClick={this.logout}><i className="fa fa-sign-out"></i></a></li>
     } else {
-      innout = <li><Link to={"/login"}><i className="fa fa-sign-in"></i></Link></li>
+      innout = <li id="login-link"><Link to={"/login"}><i className="fa fa-sign-in"></i></Link></li>
     }
     let currentId;
     let notifications;
@@ -111,10 +113,10 @@ class SiteHeader extends React.Component {
           <SearchContainer />
           <nav className="header-nav">
             <ul>
-              <li><Link to={'/home'}><i className="fa fa-home"></i></Link></li>
-              <li><a className="notif-button" onClick={this.showNotifs}><i className="fa fa-bell"></i><span className="num-notifs">{this.state.unreadNotifs}</span></a></li>
-              <li><Link to={'/upload'}><i className="fa fa-plus-circle"></i></Link></li>
-              <li><Link to={`/profile/${currentId}`}><i className="fa fa-user"></i></Link></li>
+              <li id="home-link" ><Link to={'/home'}><i className="fa fa-home"></i></Link></li>
+              <li id="notif-link"><a className="notif-button" onClick={this.showNotifs}><i className="fa fa-bell"></i><span className="num-notifs">{this.state.unreadNotifs}</span></a></li>
+              <li id="upload-link"><Link to={'/upload'}><i className="fa fa-plus-circle"></i></Link></li>
+              <li id="user-link"><Link to={`/profile/${currentId}`}><i className="fa fa-user"></i></Link></li>
               {innout}
             </ul>
             {notifications}

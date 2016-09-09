@@ -12,11 +12,57 @@ import ImageDetailContainer from '../image_detail/image_detail_container';
 
 class AppRouter extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.redirectIfNotLoggedIn = this.redirectIfNotLoggedIn.bind(this);
   }
   redirectIfNotLoggedIn(nextState, replace) {
     if (nextState.params.id === "0") {
       replace("/login");
+    } else {
+      this.addHighlight(nextState);
+    }
+  }
+
+  addHighlight(nextState) {
+    let path = nextState.location.pathname.split("/")[1];
+    switch(path) {
+      case 'home':
+        if (document.getElementById('home-link')) {
+          document.getElementById('home-link').className="active-nav";
+          document.getElementById('upload-link').className="";
+          document.getElementById('user-link').className=""
+          document.getElementById('logout-link').className="";
+        }
+        break;
+      case 'upload':
+        if (document.getElementById('home-link')) {
+          document.getElementById('home-link').className="";
+          document.getElementById('upload-link').className="active-nav";
+          document.getElementById('user-link').className=""
+          document.getElementById('logout-link').className="";
+        }
+        break;
+      case 'profile':
+        if (document.getElementById('home-link')) {
+          document.getElementById('home-link').className="";
+          document.getElementById('upload-link').className="";
+          document.getElementById('user-link').className="active-nav"
+          document.getElementById('logout-link').className="";
+        }
+        break;
+      case 'login':
+        if (document.getElementById('home-link')) {
+          document.getElementById('home-link').className="";
+          document.getElementById('upload-link').className="";
+          document.getElementById('user-link').className="";
+          document.getElementById('login-link').className="active-nav";
+        }
+      default:
+        if (document.getElementById('home-link')) {
+          document.getElementById('home-link').className="";
+          document.getElementById('upload-link').className="";
+          document.getElementById('user-link').className="";
+        }
     }
   }
 
@@ -25,13 +71,13 @@ class AppRouter extends React.Component {
     return (
       <Router history={hashHistory} >
         <Route path="/" component={ App }></Route>
-        <Route path="/home" component={ HomeIndexContainer }>
-          <IndexRoute component={ FeedContainer } />
+        <Route path="/home" component={ HomeIndexContainer } onEnter={this.addHighlight}>
+          <IndexRoute component={ FeedContainer } onEnter={this.addHighlight} />
           <Route path="/upload" component={UploadFormContainer} onEnter={this.redirectIfNotLoggedIn}/>
           <Route path="/profile/:id" component={ UserProfileContainer } onEnter={this.redirectIfNotLoggedIn} />
-          <Route path="/images/:id" component={ ImageDetailContainer }/>
-          <Route path="/signup" component={ UserSignupContainer } />
-          <Route path="/login" component={ UserLoginContainer } />
+          <Route path="/images/:id" component={ ImageDetailContainer } onEnter={this.addHighlight}/>
+          <Route path="/signup" component={ UserSignupContainer } onEnter={this.addHighlight}/>
+          <Route path="/login" component={ UserLoginContainer } onEnter={this.addHighlight}/>
         </Route>
       </Router>
     )

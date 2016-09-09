@@ -28,12 +28,12 @@ class EditProfile extends React.Component {
     }
   }
   componentDidUpdate() {
-    if (this.state.private) {
-      document.getElementById('public-prof').checked = true;
-      document.getElementById('private-prof').checked = false;
-    } else {
+    if (this.state.private === "Private") {
       document.getElementById('public-prof').checked = false;
       document.getElementById('private-prof').checked = true;
+    } else {
+      document.getElementById('public-prof').checked = true;
+      document.getElementById('private-prof').checked = false;
     }
   }
 

@@ -967,3 +967,13 @@ textarea.add-comment {
   background: none !important;
   color: $gray;
 }
+.header {
+  li {
+    padding-bottom: 3px;
+    border-bottom: 0;
+  }
+  li.active-nav {
+    border-bottom: 3px solid $purple;
+    padding-bottom: 0;
+  }
+}
