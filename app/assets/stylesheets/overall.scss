@@ -29,7 +29,6 @@ body {
   justify-content: space-between;
   width: 900px;
   margin: 0 auto;
-  border-left: 1px solid $purple;
 }
 .header h1 {
   padding: 5px 10px;
@@ -404,8 +403,6 @@ border-top-right-radius: 4px;
   padding: 10px 25px;
   width: 212px;
   border: none;
-  border-left: 1px solid $purple;
-  border-right: 1px solid $purple;
   height: 100%;
   line-height: 100%;
   font-size: 15px;
