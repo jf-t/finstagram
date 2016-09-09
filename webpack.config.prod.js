@@ -1,14 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
+var webpack = require("webpack");
 
 module.exports = {
   context: __dirname,
   entry: "./frontend/finstagram.jsx",
   output: {
-    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
-    filename: "bundle.js",
-    devtoolModuleFilenameTemplate: '[resourcePath]',
-    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
+    path: "./app/assets/javascripts",
+    filename: "bundle.js"
   },
   plugins:[
     new webpack.DefinePlugin({
@@ -18,24 +15,24 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress:{
-        warnings: false
+        warnings: true
       }
     })
   ],
   module: {
     loaders: [
       {
-        test: [/\.jsx?$/, /\.js?$/],
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ["es2015","react"]
+          presets: ['react', 'es2015']
         }
       }
     ]
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ["", ".js", ".jsx"]
   }
 };
