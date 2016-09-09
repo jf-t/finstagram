@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack"
+    "heroku-postbuild": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,5 @@
   "engines": {
     "node": "6.3.0",
     "npm": "3.10.3"
-  },
-  "heroku-postbuild": "webpack --config webpack.config.prod.js"
+  }
 }
