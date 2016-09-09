@@ -17,9 +17,6 @@ class ImageDetail extends React.Component {
   }
 
   componentWillMount() {
-    if (this.props.image) {
-      console.log(this.props.image.id, this.props.imageId);
-    }
     if ((!this.props.image) || (Object.keys(this.props.image).length === 0) || (this.props.image.id !== this.props.imageId)) {
       this.props.requestImage(this.props.imageId)
     }
