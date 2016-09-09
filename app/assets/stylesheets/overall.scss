@@ -84,36 +84,41 @@ body {
   padding: 10px 40px 40px;
   border: 1px solid $gray;
   z-index: 1;
-}
-.modal-form h4 {
-  margin: 10px 0;
-  text-align: center;
-}
-.modal-form input {
-  width: 100%;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: 1px solid $gray;
-}
-.modal-form input[type=submit] {
-  width: 100px;
-  float: right;
-  background-color: #fff;
-  border: 1px solid $gray;
-  border-radius: 5px;
-}
-.modal-form input[type=submit]:hover {
-  background-color: $purple;
-}
-.modal-form textarea {
-  width: 100%;
-  resize: none;
-  border: 1px solid $gray;
-  border-radius: 5px;
-  height: 100px;
-  padding: 10px 20px;
+  h4 {
+    margin: 10px 0;
+    text-align: center;
+  }
+  input {
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid $gray;
+  }
+  input[type=submit] {
+    width: 100px;
+    float: right;
+    background-color: #fff;
+    border: 1px solid $gray;
+    border-radius: 5px;
+  }
+  input[type=submit]:hover {
+    background-color: $purple;
+  }
+  textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid $gray;
+    border-radius: 5px;
+    height: 100px;
+    padding: 10px 20px;
+  }
+  input[type=radio] {
+    display: inline;
+    width: auto;
+    margin: 0 10px;
+  }
 }
 
 .edit-form {

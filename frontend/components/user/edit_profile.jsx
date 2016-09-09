@@ -21,6 +21,20 @@ class EditProfile extends React.Component {
       this.setState({image_url: result[0].url});
     }
     let widget = cloudinary.openUploadWidget(CLOUDINARY_OPTIONS, addUrl.bind(this));
+    if (this.props.user.user.private) {
+      document.getElementById('private-prof').checked = true;
+    } else {
+      document.getElementById('public-prof').checked = true;
+    }
+  }
+  componentDidUpdate() {
+    if (this.state.private) {
+      document.getElementById('public-prof').checked = true;
+      document.getElementById('private-prof').checked = false;
+    } else {
+      document.getElementById('public-prof').checked = false;
+      document.getElementById('private-prof').checked = true;
+    }
   }
 
   update(prop) {
