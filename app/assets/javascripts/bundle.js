@@ -29394,7 +29394,7 @@
 	        notification = this.props.currentUser.user.username + ' followed you!';
 	        url = '/profile/' + this.props.currentUser.user.id;
 	        (0, _image_api_util.addNotif)(this.props.pageUserId, notification, url);
-	        (0, _user_api_util.addFollow)(this.props.pageUserId);
+	        (0, _user_api_util.addFollow)(this.props.pageUserId, this.props.currentUser.user.id);
 	        this.setState({ follow: "yes" });
 	      }
 	    }

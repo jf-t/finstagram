@@ -104,7 +104,7 @@ class UserProfile extends React.Component {
       notification = `${this.props.currentUser.user.username} followed you!`
       url = `/profile/${this.props.currentUser.user.id}`;
       addNotif(this.props.pageUserId, notification, url);
-      addFollow(this.props.pageUserId);
+      addFollow(this.props.pageUserId, this.props.currentUser.user.id);
       this.setState({follow: "yes"});
     }
   }
