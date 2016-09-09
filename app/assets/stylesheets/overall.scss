@@ -923,6 +923,20 @@ textarea.add-comment {
 
 }
 
+.private-text {
+  display: block;
+  text-align: center;
+  color: $gray;
+  font-size: 40px;
+}
+
+.private-lock {
+  font-size: 100px;
+  color: $gray;
+  text-align: center;
+  display: block;
+}
+
 
 .follow-request {
   margin-left: 20px;

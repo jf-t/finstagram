@@ -189,7 +189,7 @@ class UserProfile extends React.Component {
     }
     if (this.pageUser) {
       if ((this.pageUser.private) && ((editorno.props.children._shadowChildren === "Follow")||(editorno.props.children._shadowChildren === "Requested"))) {
-        this.feedItems = <div id="private-tester"><i className="fa fa-lock private-lock"></i></div>
+        this.feedItems = <div id="private-tester"><span className="private-text">User is private</span><i className="fa fa-lock private-lock"></i></div>
         } else if (this.pageUser.images.length === 0) {
           this.feedItems = (
             <div>

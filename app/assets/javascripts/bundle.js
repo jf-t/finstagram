@@ -29509,6 +29509,11 @@
 	          this.feedItems = _react2.default.createElement(
 	            'div',
 	            { id: 'private-tester' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'private-text' },
+	              'User is private'
+	            ),
 	            _react2.default.createElement('i', { className: 'fa fa-lock private-lock' })
 	          );
 	        } else if (this.pageUser.images.length === 0) {
