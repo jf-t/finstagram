@@ -29,11 +29,6 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:user][:id])
-    if params[:user][:private] == "Private"
-      @user.update(private: true)
-    else
-      @user.update(private: false)
-    end
     if @user.update(user_params_update)
       render 'api/users/show'
     else
@@ -46,6 +41,6 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(:username, :full_name, :email, :password)
   end
   def user_params_update
-    params.require(:user).permit(:username, :full_name, :email, :bio, :image_url)
+    params.require(:user).permit(:username, :full_name, :email, :bio, :image_url, :private)
   end
 end

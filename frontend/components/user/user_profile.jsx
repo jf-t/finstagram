@@ -42,7 +42,7 @@ class UserProfile extends React.Component {
 
     this.map = new google.maps.Map(mapDOMNode, _mapOptions);
     this.marker_manager = new MarkerManager(this.map);
-    this.marker_manager.updateMarkers(this.props.pageUser.images);
+    this.marker_manager.updateMarkers(this.props.pageUser.images, false);
   }
 
 

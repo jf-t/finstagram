@@ -29352,7 +29352,7 @@
 	
 	      this.map = new google.maps.Map(mapDOMNode, _map_options2.default);
 	      this.marker_manager = new _marker_manager2.default(this.map);
-	      this.marker_manager.updateMarkers(this.props.pageUser.images);
+	      this.marker_manager.updateMarkers(this.props.pageUser.images, false);
 	    }
 	  }, {
 	    key: 'createHiddenModals',
@@ -29856,6 +29856,7 @@
 	    };
 	    _this.update = _this.update.bind(_this);
 	    _this.updateUser = _this.updateUser.bind(_this);
+	    _this.updateRadio = _this.updateRadio.bind(_this);
 	    return _this;
 	  }
 	
@@ -29877,7 +29878,7 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      if (this.state.private === "Private") {
+	      if (this.state.private) {
 	        document.getElementById('public-prof').checked = false;
 	        document.getElementById('private-prof').checked = true;
 	      } else {
@@ -29892,6 +29893,15 @@
 	
 	      return function (e) {
 	        return _this3.setState(_defineProperty({}, prop, e.target.value));
+	      };
+	    }
+	  }, {
+	    key: 'updateRadio',
+	    value: function updateRadio(prop) {
+	      var _this4 = this;
+	
+	      return function (e) {
+	        return _this4.setState({ private: prop });
 	      };
 	    }
 	  }, {
@@ -29924,9 +29934,9 @@
 	            _react2.default.createElement('input', { type: 'text', onChange: this.update("username"), defaultValue: this.state.username }),
 	            _react2.default.createElement('input', { type: 'password', onChange: this.update("password"), placeholder: 'new password' }),
 	            _react2.default.createElement('textarea', { onChange: this.update("bio"), placeholder: 'Bio', defaultValue: this.state.bio }),
-	            _react2.default.createElement('input', { type: 'radio', id: 'private-prof', onChange: this.update("private"), value: 'Private' }),
+	            _react2.default.createElement('input', { type: 'radio', id: 'private-prof', onChange: this.updateRadio(true), value: 'Private' }),
 	            ' Private',
-	            _react2.default.createElement('input', { type: 'radio', id: 'public-prof', onChange: this.update("private"), value: 'Public' }),
+	            _react2.default.createElement('input', { type: 'radio', id: 'public-prof', onChange: this.updateRadio(false), value: 'Public' }),
 	            ' Public',
 	            _react2.default.createElement('input', { type: 'submit', value: 'Submit Changes' })
 	          )
@@ -30179,9 +30189,13 @@
 	
 	  _createClass(MarkerManager, [{
 	    key: "updateMarkers",
-	    value: function updateMarkers(images) {
+	    value: function updateMarkers(images, hovers) {
+	      var _this = this;
+	
 	      this.images = images;
-	      this._toAdd().forEach(this._createMarker);
+	      this._toAdd().forEach(function (img) {
+	        return _this._createMarker(img, hovers);
+	      });
 	    }
 	  }, {
 	    key: "fitBounds",
@@ -30210,16 +30224,16 @@
 	  }, {
 	    key: "_markersToRemove",
 	    value: function _markersToRemove() {
-	      var _this = this;
+	      var _this2 = this;
 	
 	      return this.markers.filter(function (marker) {
-	        return !_this.images.hasOwnProperty(marker.image_id);
+	        return !_this2.images.hasOwnProperty(marker.image_id);
 	      });
 	    }
 	  }, {
 	    key: "_createMarker",
-	    value: function _createMarker(img) {
-	      var _this2 = this;
+	    value: function _createMarker(img, hovers) {
+	      var _this3 = this;
 	
 	      var pos = new google.maps.LatLng(img.lat, img.lng);
 	      var marker = new google.maps.Marker({
@@ -30228,25 +30242,30 @@
 	        image_id: img.id,
 	        icon: this.pin
 	      });
-	      var caption = "";
-	      if (img.caption) {
-	        caption = img.caption;
-	      }
-	      var content = '<div class="img-tooltip">' + '<div class="tooltip-content">' + '<div class="img-cont">' + ("<img src=\"" + img.image_url + "\" />") + '</div>' + '<div class="tooltip-text">' + ("<span class=\"tooltip-prof-name\">" + img.user.username + "</span>") + ("<span class=\"tooltip-caption\">" + caption + "</span>") + '</div>' + '</div>' + '</div>';
 	
-	      var infowindow = new google.maps.InfoWindow({
-	        content: content
-	      });
+	      if (hovers) {
+	        (function () {
+	          var caption = "";
+	          if (img.caption) {
+	            caption = img.caption;
+	          }
+	          var content = '<div class="img-tooltip">' + '<div class="tooltip-content">' + '<div class="img-cont">' + ("<img src=\"" + img.image_url + "\" />") + '</div>' + '<div class="tooltip-text">' + ("<span class=\"tooltip-prof-name\">" + img.user.username + "</span>") + ("<span class=\"tooltip-caption\">" + caption + "</span>") + '</div>' + '</div>' + '</div>';
+	
+	          var infowindow = new google.maps.InfoWindow({
+	            content: content
+	          });
+	          marker.addListener('mouseover', function () {
+	            infowindow.open(_this3.map, marker);
+	          });
+	          marker.addListener('mouseout', function () {
+	            infowindow.close();
+	          });
+	          _this3.markers.push(marker);
+	        })();
+	      }
 	      marker.addListener('click', function () {
 	        _reactRouter.hashHistory.push("/images/" + img.id);
 	      });
-	      marker.addListener('mouseover', function () {
-	        infowindow.open(_this2.map, marker);
-	      });
-	      marker.addListener('mouseout', function () {
-	        infowindow.close();
-	      });
-	      this.markers.push(marker);
 	    }
 	  }, {
 	    key: "_removeMarker",
@@ -30820,6 +30839,11 @@
 	        notifications = _react2.default.createElement(
 	          'ul',
 	          { id: 'notif-dropdown' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'notif-head' },
+	            'Notifications'
+	          ),
 	          _react2.default.createElement(
 	            'a',
 	            { className: 'close-modal', onClick: this.hideNotifs },
@@ -45393,7 +45417,7 @@
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
-	      this.markermanager.updateMarkers(this.props.images);
+	      this.markermanager.updateMarkers(this.props.images, true);
 	    }
 	  }, {
 	    key: 'render',
@@ -45565,8 +45589,9 @@
 	        var url = '/images/' + this.props.image.id;
 	        var image_url = this.props.image.image_url;
 	        this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
+	      } else {
+	        this.props.addComment(this.state);
 	      }
-	      this.props.addComment(this.state);
 	    }
 	  }, {
 	    key: 'likeImage',

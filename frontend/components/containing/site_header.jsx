@@ -101,7 +101,7 @@ class SiteHeader extends React.Component {
                 {followReq}
               </li>)
       });
-      notifications = <ul id="notif-dropdown"><a className="close-modal" onClick={this.hideNotifs}>X</a>{notificationKids}</ul>
+      notifications = <ul id="notif-dropdown"><span className="notif-head">Notifications</span><a className="close-modal" onClick={this.hideNotifs}>X</a>{notificationKids}</ul>
     } else {
       currentId = 0;
       notifications = <div></div>

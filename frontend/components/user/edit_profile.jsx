@@ -14,6 +14,7 @@ class EditProfile extends React.Component {
     };
     this.update = this.update.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.updateRadio = this.updateRadio.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +29,7 @@ class EditProfile extends React.Component {
     }
   }
   componentDidUpdate() {
-    if (this.state.private === "Private") {
+    if (this.state.private) {
       document.getElementById('public-prof').checked = false;
       document.getElementById('private-prof').checked = true;
     } else {
@@ -40,6 +41,10 @@ class EditProfile extends React.Component {
   update(prop) {
     return (e) => this.setState({[prop]: e.target.value})
   };
+
+  updateRadio(prop) {
+    return (e) => this.setState({private: prop});
+  }
 
   updateUser () {
     this.props.editUser(this.state);
@@ -59,8 +64,8 @@ class EditProfile extends React.Component {
             <input type="text" onChange={this.update("username")} defaultValue={this.state.username} />
             <input type="password" onChange={this.update("password")} placeholder="new password"></input>
             <textarea onChange={this.update("bio")} placeholder="Bio" defaultValue={this.state.bio}></textarea>
-            <input type="radio" id="private-prof" onChange={this.update("private")} value="Private"/> Private
-            <input type="radio" id="public-prof" onChange={this.update("private")} value="Public"/> Public
+            <input type="radio" id="private-prof" onChange={this.updateRadio(true)} value="Private"/> Private
+            <input type="radio" id="public-prof" onChange={this.updateRadio(false)} value="Public"/> Public
             <input type="submit" value="Submit Changes"></input>
           </form>
         </div>

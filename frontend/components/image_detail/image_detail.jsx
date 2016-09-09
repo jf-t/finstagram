@@ -40,8 +40,9 @@ class ImageDetail extends React.Component {
       let url = `/images/${this.props.image.id}`;
       let image_url = this.props.image.image_url;
       this.props.addComment(this.state, this.props.image.user.id, notification, url, image_url);
+    } else {
+      this.props.addComment(this.state);
     }
-    this.props.addComment(this.state);
   }
 
   likeImage() {

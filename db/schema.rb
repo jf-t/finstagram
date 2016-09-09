@@ -56,13 +56,13 @@ ActiveRecord::Schema.define(version: 20160908161509) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer  "user_id",                                                                                                                      null: false
-    t.string   "notification",                                                                                                                 null: false
+    t.integer  "user_id",                                                                                                     null: false
+    t.string   "notification",                                                                                                null: false
     t.string   "url"
     t.boolean  "read",         default: false
-    t.string   "image_url",    default: "https://openclipart.org/image/2400px/svg_to_png/171070/tasto-2-architetto-franc-01-black-border.png"
-    t.datetime "created_at",                                                                                                                   null: false
-    t.datetime "updated_at",                                                                                                                   null: false
+    t.string   "image_url",    default: "http://icons.veryicon.com/ico/System/Icons8%20Metro%20Style/Mathematic%20Plus2.ico"
+    t.datetime "created_at",                                                                                                  null: false
+    t.datetime "updated_at",                                                                                                  null: false
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 

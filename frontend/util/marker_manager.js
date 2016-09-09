@@ -11,9 +11,9 @@ class MarkerManager {
   }
 
 
-  updateMarkers(images) {
+  updateMarkers(images, hovers) {
     this.images = images;
-    this._toAdd().forEach(this._createMarker);
+    this._toAdd().forEach((img) => this._createMarker(img, hovers));
   }
 
   fitBounds() {
@@ -42,7 +42,7 @@ class MarkerManager {
     });
   }
 
-  _createMarker(img) {
+  _createMarker(img, hovers) {
     const pos = new google.maps.LatLng(img.lat, img.lng);
     const marker = new google.maps.Marker({
       position: pos,
@@ -50,38 +50,41 @@ class MarkerManager {
       image_id: img.id,
       icon: this.pin
     });
-    let caption = "";
-    if (img.caption) {
-      caption = img.caption;
-    }
-    const content = (
-      '<div class="img-tooltip">' +
+
+    if (hovers) {
+      let caption = "";
+      if (img.caption) {
+        caption = img.caption;
+      }
+      const content = (
+        '<div class="img-tooltip">' +
         '<div class="tooltip-content">' +
-          '<div class="img-cont">' +
-            `<img src="${img.image_url}" />` +
-          '</div>' +
-          '<div class="tooltip-text">' +
-            `<span class="tooltip-prof-name">${img.user.username}</span>` +
-            `<span class="tooltip-caption">${caption}</span>` +
-          '</div>' +
+        '<div class="img-cont">' +
+        `<img src="${img.image_url}" />` +
         '</div>' +
-      '</div>'
-    )
+        '<div class="tooltip-text">' +
+        `<span class="tooltip-prof-name">${img.user.username}</span>` +
+        `<span class="tooltip-caption">${caption}</span>` +
+        '</div>' +
+        '</div>' +
+        '</div>'
+      )
 
 
-    const infowindow = new google.maps.InfoWindow({
-      content: content
-    })
+      const infowindow = new google.maps.InfoWindow({
+        content: content
+      })
+      marker.addListener('mouseover', () => {
+        infowindow.open(this.map, marker);
+      });
+      marker.addListener('mouseout', () => {
+        infowindow.close();
+      })
+      this.markers.push(marker);
+    }
     marker.addListener('click',() => {
       hashHistory.push(`/images/${img.id}`);
     });
-    marker.addListener('mouseover', () => {
-      infowindow.open(this.map, marker);
-    });
-    marker.addListener('mouseout', () => {
-      infowindow.close();
-    })
-    this.markers.push(marker);
   }
 
   _removeMarker(marker) {

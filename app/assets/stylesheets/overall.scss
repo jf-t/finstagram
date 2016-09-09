@@ -877,12 +877,13 @@ textarea.add-comment {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 20px #cccccc;
-  padding: 20px 0;
+  height: 400px;
+  overflow: scroll;
   .close-modal {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 0 5px;
+    padding: 5px 10px;
   }
   li {
     width: 100%;
@@ -892,12 +893,12 @@ textarea.add-comment {
       width: 100%;
       padding: 5px 20px;
       .notification-img {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         float: right;
       }
       span.notification-text {
-        margin-top: 20px;
+        margin-top: 12px;
         display: inline-block;
       }
     }
@@ -976,4 +977,14 @@ textarea.add-comment {
     border-bottom: 3px solid $purple;
     padding-bottom: 0;
   }
+}
+
+.notif-head {
+  width: 100%;
+  padding: 0;
+  display: block;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 1.5px;
 }

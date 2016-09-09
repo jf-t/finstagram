@@ -5,7 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[5.0]
       t.string :notification, null: false
       t.string :url
       t.boolean :read, default: false
-      t.string :image_url, default: "https://openclipart.org/image/2400px/svg_to_png/171070/tasto-2-architetto-franc-01-black-border.png"
+      t.string :image_url, default: "http://icons.veryicon.com/ico/System/Icons8%20Metro%20Style/Mathematic%20Plus2.ico"
       t.timestamps
     end
   end

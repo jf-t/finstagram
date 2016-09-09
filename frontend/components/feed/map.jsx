@@ -11,7 +11,7 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    this.markermanager.updateMarkers(this.props.images);
+    this.markermanager.updateMarkers(this.props.images, true);
   }
 
   render() {
