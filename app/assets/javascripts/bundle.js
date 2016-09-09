@@ -30443,6 +30443,11 @@
 	      'Finstagram is a social media application written as a end-of-class project. I spent two weeks writing the code behind this project, for 40 hours a week in an office. This program is written as a hybrid of Instagram and AirBnB, with the functionality of images, users, follows, comments, and likes of Instagram, with the map and map marker functionality of AirBnB. I wrote this application entirely by myself, without any external resources, including the styling. I hope you nejoy my project. To get started click the button below.'
 	    ),
 	    _react2.default.createElement(
+	      'a',
+	      { className: 'github-link', target: '_blank', href: 'https://github.com/jackftilly/finstagram' },
+	      _react2.default.createElement('i', { className: 'fa fa-github-square' })
+	    ),
+	    _react2.default.createElement(
 	      'p',
 	      { className: 'jackftilly' },
 	      '- Jack Fintan Tilly (@jackfintan)'

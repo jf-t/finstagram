@@ -950,3 +950,15 @@ textarea.add-comment {
     background: $gray;
   }
 }
+
+.github-link {
+  width: auto !important;
+  display: auto !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 30px;
+}
+.github-link:hover {
+  background: none !important;
+  color: $gray;
+}
