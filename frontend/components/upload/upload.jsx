@@ -84,7 +84,7 @@ class UploadForm extends React.Component {
             </div>
             <a className="current-location" onClick={this.getLocation}>Use Current Location</a>
           <input type="submit" name="Add Image"/>
-          <p className="floatLeft">Note: If you are using Google Chrome version 50 or newer, 'Use Current Location' will not work. This is because Google removed the funtionality of location on insecure web pages, such as Heroku. If you would like to use the Use Current Location functionality, switch do a different browser or older version of Chrome.</p>
+          <p className="floatLeft">Note: If you are using Google Chrome version 50 or newer, 'Use Current Location' will not work. This is because Google removed the funtionality of location on insecure web pages, such as Heroku. If you would like to use the Use Current Location functionality, switch to a different browser or older version of Chrome.</p>
         </form>
       </div>
     )
