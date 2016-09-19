@@ -10,6 +10,8 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  image_url       :string
+#  bio             :text
 #
 
 class User < ApplicationRecord
@@ -23,7 +25,7 @@ class User < ApplicationRecord
     class_name: :Follow
 
   has_many :notifications
-  
+
   has_many :followers,
     through: :your_follows,
     source: :follower

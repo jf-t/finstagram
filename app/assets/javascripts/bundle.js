@@ -46000,6 +46000,9 @@
 	        var lng = document.getElementById("lng-detail");
 	        var roundedLng = Math.floor(this.state.lng * 10000) / 10000;
 	        lng.innerHTML = roundedLng;
+	      } else {
+	        this.state.lat = "37.4993";
+	        this.state.lng = "-122.2909";
 	      }
 	      return _react2.default.createElement(
 	        'div',
@@ -46039,7 +46042,12 @@
 	            { className: 'current-location', onClick: this.getLocation },
 	            'Use Current Location'
 	          ),
-	          _react2.default.createElement('input', { type: 'submit', name: 'Add Image' })
+	          _react2.default.createElement('input', { type: 'submit', name: 'Add Image' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'floatLeft' },
+	            'Note: If you are using Google Chrome version 50 or newer, \'Use Current Location\' will not work. This is because Google removed the funtionality of location on insecure web pages, such as Heroku. If you would like to use the Use Current Location functionality, switch do a different browser or older version of Chrome.'
+	          )
 	        )
 	      );
 	    }
