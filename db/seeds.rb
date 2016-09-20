@@ -76,3 +76,9 @@ User.create!(username: "everton", full_name: "Everton", email: "team@everton.com
 User.create!(username: "icecube", full_name: "Ice Cube", email: "icecube@gmail.com", password: "nwaSwurve", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10554144_540773739382943_684884780_a.jpg", bio: "West Coast Warlord");
 User.create!(username: "sportscenter", full_name: "SportsCenter", email: "news@espn.com", password: "sportscenter", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/10502710_138249836349999_1543736402_a.jpg");
 User.create!(username: "fuckarian", full_name: "chip macintosh mccain", email: "jackftilly@yahoo.com", password: "fuckBitches", image_url: "https://instagram.fsnc1-3.fna.fbcdn.net/t51.2885-19/s320x320/14073180_316469155373909_548651062_a.jpg");
+
+
+Follow.create!(user_id: 13, following_id: 1);
+Follow.create!(user_id: 13, following_id: 2);
+Follow.create!(user_id: 13, following_id: 3);
+Follow.create!(user_id: 13, following_id: 4);
