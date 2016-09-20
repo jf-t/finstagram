@@ -14,12 +14,12 @@
         window.current_user = null
       '<% end %>'
     </script>
-    <SCRIPT language="JavaScript">
-      <!--
-      function silentErrorHandler() {return true;}
-      window.onerror=silentErrorHandler;
-      //-->
-    </SCRIPT>
+    <script type="text/javascript">
+        window.onerror = function(message, url, lineNumber) {  
+            // code to execute on an error
+            return true; // prevents browser error messages
+        };
+    </script>
     <script type="text/javascript">
       window.CLOUDINARY_OPTIONS = {
         cloud_name: "finstagram",
