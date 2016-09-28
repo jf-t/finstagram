@@ -33,7 +33,7 @@ class Search extends React.Component {
     return(
       <div className="search-bar">
         <i className="fa fa-search"></i>
-        <input id="search-input" type="text" onChange={this.searchQuery} placeholder="Search..."/>
+        <input id="search-input" type="text" onChange={this.searchQuery} placeholder="Search by user..."/>
         <div className="search-results">
           <ul>
             {searchItems}

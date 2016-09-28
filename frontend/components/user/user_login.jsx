@@ -18,7 +18,7 @@ class UserLogin extends React.Component {
   loggedIn() {
     let user = this.props.user.user
     if (user) {
-      hashHistory.push(`/profile/${user.id}`)
+      hashHistory.push(`/home`)
     }
   }
 

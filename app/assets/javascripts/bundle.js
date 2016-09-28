@@ -29125,7 +29125,7 @@
 	    value: function loggedIn() {
 	      var user = this.props.user.user;
 	      if (user) {
-	        _reactRouter.hashHistory.push('/profile/' + user.id);
+	        _reactRouter.hashHistory.push('/home');
 	      }
 	    }
 	  }, {
@@ -31054,7 +31054,7 @@
 	        'div',
 	        { className: 'search-bar' },
 	        _react2.default.createElement('i', { className: 'fa fa-search' }),
-	        _react2.default.createElement('input', { id: 'search-input', type: 'text', onChange: this.searchQuery, placeholder: 'Search...' }),
+	        _react2.default.createElement('input', { id: 'search-input', type: 'text', onChange: this.searchQuery, placeholder: 'Search by user...' }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'search-results' },
