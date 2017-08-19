@@ -1,5 +1,6 @@
 # Finstagram
-http://jft-finstagram.herokuapp.com
+http://jft-finstagram.herokuapp.com 
+[//]: <> (This is also a comment.)
 
 Finstagram is a fake Instagram/AirBnB hybrid application. It takes the functionality of images, comments, and likes from instagram and adds it to the front end google maps interface with markers of AirBnB. This is a simple functioning application with authentication.
 
